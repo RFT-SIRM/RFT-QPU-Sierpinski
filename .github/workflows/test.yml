@@ -5,6 +5,8 @@ on:
   pull_request:
 
 jobs:
+  env:
+    PYTHONPATH: .
   test:
     runs-on: ubuntu-latest
     steps:
