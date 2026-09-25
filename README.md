@@ -2,6 +2,7 @@
 
 > **A research architecture for a gauge-covariant fractal SU(2) quantum-processing element.**
 
+[![Website](https://img.shields.io/badge/website-live%20demo-ef4444?style=for-the-badge)](https://rft-sirm.github.io/RFT-QPU-Sierpinski/)
 [![Research Status](https://img.shields.io/badge/status-research%20prototype-111827?style=for-the-badge)](#research-status)
 [![Geometry](https://img.shields.io/badge/geometry-Sierpi%C5%84ski%20gasket-2563eb?style=for-the-badge)](#architecture)
 [![Internal Degree](https://img.shields.io/badge/internal%20degree-SU%282%29-7c3aed?style=for-the-badge)](#architecture)
