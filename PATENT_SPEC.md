@@ -45,7 +45,7 @@ where `D` is the graph degree operator and each `U_ab ∈ SU(2)`.
 
 A logical projector `P` satisfies
 
-$$P^2=P,\qquad \operatorname{Tr}(P)=2.$$
+$$P^2=P,\qquad \mathrm{Tr}(P)=2.$$
 
 The logical operators are obtained by projection:
 
