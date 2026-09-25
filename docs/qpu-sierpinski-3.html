@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RFT-QPU-Sierpinski — Gauge-Covariant Fractal SU(2) Qubit</title>
+<meta name="description" content="Research architecture for a gauge-covariant fractal SU(2) qubit: Sierpinski-gasket graph, non-Abelian connection, 2D low-energy logical subspace. Evidence-disciplined: math anchored in Evgeny-Theorem, engineering honestly Level-C.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04060d; --bg-2:#080b16; --bg-3:#0c1020;
+  --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.12);
+  --ink:#e9ecf7; --ink-dim:#9aa0c3; --ink-mute:#5b6084;
+  --cyan:#22e5ff; --cyan-soft:#8ff3ff;
+  --pink:#ff2d9a; --pink-soft:#ff7ec0;
+  --violet:#9a6bff; --violet-soft:#c9b3ff;
+  --lime:#b8ff3c; --gold:#ffc247; --amber:#ffb020; --red:#ff5c5c; --green:#5ef2a0;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"Space Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--cyan);color:#03141a}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#16233a;border-radius:8px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--cyan)}
+.mono{font-family:var(--mono)}
+.noise{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.scanlines{position:fixed;inset:0;z-index:59;pointer-events:none;opacity:.35;
+  background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,0,0,.14) 3px 4px)}
+.grid-overlay{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(rgba(34,229,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(34,229,255,.03) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 25%,#000 25%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 25%,#000 25%,transparent 100%)}
+.aurora{position:fixed;z-index:0;pointer-events:none;border-radius:50%;filter:blur(130px);opacity:.15}
+.aurora-a{width:700px;height:700px;top:-240px;left:-180px;background:#0b4b5e}
+.aurora-b{width:560px;height:560px;top:34%;right:-220px;background:#5b2d8a}
+.aurora-c{width:480px;height:480px;bottom:-200px;left:28%;background:#7a1040}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+section{padding:110px 0;position:relative}
+.section-head{margin-bottom:56px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--cyan);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--cyan))}
+.sec-title{font-size:clamp(30px,4.6vw,52px);line-height:1.08;margin:18px 0 14px;font-weight:700;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#fff 30%,#aeb6dd 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sec-sub{color:var(--ink-dim);max-width:760px;font-size:17px}
+.grad-cyan{background:linear-gradient(92deg,var(--cyan) 5%,var(--violet) 55%,var(--pink) 110%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hr-fade{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--line-2),transparent)}
+
+/* ---------- header ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(4,6,13,.75);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:var(--line)}
+.nav{max-width:1240px;margin:0 auto;padding:14px 32px 12px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.nav-toprow{width:100%;display:flex;justify-content:center}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--lime);font-family:var(--mono);font-weight:700;letter-spacing:.14em;font-size:16px;text-shadow:0 0 22px rgba(184,255,60,.5)}
+.brand-core{width:16px;height:16px;border-radius:50%;position:relative;
+  background:radial-gradient(circle at 35% 30%,#eaffb0,var(--lime) 45%,#3d6b00);
+  box-shadow:0 0 20px rgba(184,255,60,.8),0 0 46px rgba(184,255,60,.35);animation:corePulse 3s ease-in-out infinite}
+.brand-core::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(184,255,60,.5);animation:coreRing 3s ease-in-out infinite}
+@keyframes corePulse{50%{box-shadow:0 0 30px rgba(184,255,60,1),0 0 70px rgba(184,255,60,.5)}}
+@keyframes coreRing{0%{transform:scale(.7);opacity:1}100%{transform:scale(1.7);opacity:0}}
+.brand small{display:block;font-size:9px;letter-spacing:.3em;color:var(--ink-mute);font-weight:400;white-space:nowrap}
+.nav-links{display:flex;flex-wrap:nowrap;gap:2px;align-items:center;justify-content:center;width:100%;overflow-x:auto;scrollbar-width:none;padding:2px 0}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;padding:9px 10px;border-radius:8px;transition:color .25s,background .25s;white-space:nowrap;flex:0 0 auto}
+.nav-links a:hover{color:var(--cyan);background:rgba(34,229,255,.07)}
+.burger{display:none}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:150px 0 90px;overflow:hidden}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;display:block}
+.hero-inner{position:relative;z-index:3;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line-2);border-radius:999px;padding:8px 18px;font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--ink-dim);background:rgba(8,11,22,.55);backdrop-filter:blur(8px)}
+.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.hero h1{font-size:clamp(40px,6.8vw,88px);line-height:1.02;margin:26px 0 10px;letter-spacing:-.03em;font-weight:700}
+.hero h1 .thin{font-weight:400;color:var(--ink-dim)}
+.hero-desc{color:var(--ink-dim);max-width:660px;font-size:17.5px;margin:16px 0 30px}
+.hero-formula{display:inline-block;position:relative;font-family:var(--mono);font-size:clamp(14px,1.9vw,19px);padding:20px 30px;border-radius:14px;color:var(--ink);background:rgba(12,16,32,.6);border:1px solid var(--line-2);backdrop-filter:blur(10px);box-shadow:0 24px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden}
+.hero-formula::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(34,229,255,.13) 50%,transparent 60%);transform:translateX(-100%);animation:sheen 5.5s ease-in-out infinite}
+@keyframes sheen{0%,60%{transform:translateX(-110%)}90%,100%{transform:translateX(110%)}}
+.hero-formula .boxed{display:inline-block;border:1px solid rgba(34,229,255,.55);border-radius:8px;padding:6px 14px;color:#d8f9ff;box-shadow:inset 0 0 22px rgba(34,229,255,.12)}
+.hero-badges{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.hbadge{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:8px 16px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-dim);background:rgba(8,11,22,.6)}
+.hbadge.g{color:var(--green);border-color:rgba(94,242,160,.4);background:rgba(94,242,160,.07)}
+.hbadge.c{color:var(--amber);border-color:rgba(255,176,32,.4);background:rgba(255,176,32,.07)}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:4;font-family:var(--mono);font-size:10px;letter-spacing:.4em;color:var(--ink-mute);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-hint::after{content:"";width:1px;height:44px;background:linear-gradient(180deg,var(--cyan),transparent);animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- stat strip ---------- */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{position:relative;padding:26px 22px;border-radius:14px;text-align:center;background:linear-gradient(180deg,rgba(12,16,32,.85),rgba(8,11,22,.85));border:1px solid var(--line);overflow:hidden;transition:border-color .3s,transform .3s}
+.stat:hover{border-color:rgba(34,229,255,.4);transform:translateY(-4px)}
+.stat::before{content:"";position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,rgba(34,229,255,.6),transparent)}
+.stat .val{font-family:var(--mono);font-size:clamp(22px,2.4vw,32px);font-weight:700;color:var(--ink)}
+.stat .val em{font-style:normal;color:var(--cyan)}
+.stat .cap{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);margin-top:10px;line-height:1.7}
+
+/* ---------- formula board ---------- */
+.board{border-radius:22px;border:1px solid rgba(34,229,255,.25);position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(34,229,255,.07),transparent 60%),linear-gradient(180deg,rgba(12,16,32,.9),rgba(6,8,16,.95));
+  padding:clamp(28px,4.5vw,54px);box-shadow:0 40px 100px rgba(0,0,0,.5)}
+.board .corner{position:absolute;width:26px;height:26px;border-color:var(--cyan);border-style:solid;opacity:.7}
+.corner.tl{top:12px;left:12px;border-width:2px 0 0 2px}.corner.tr{top:12px;right:12px;border-width:2px 2px 0 0}
+.corner.bl{bottom:12px;left:12px;border-width:0 0 2px 2px}.corner.br{bottom:12px;right:12px;border-width:0 2px 2px 0}
+.board-label{font-family:var(--mono);font-size:11px;letter-spacing:.34em;color:var(--cyan-soft);text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.board-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(34,229,255,.5),transparent)}
+.eq{font-family:var(--mono);text-align:center;font-size:clamp(16px,2.6vw,26px);line-height:1.6;color:#fff;margin:24px 0}
+.eq .boxed{display:inline-block;padding:14px 26px;border-radius:14px;border:1.5px solid var(--cyan);background:rgba(34,229,255,.06);box-shadow:0 0 46px rgba(34,229,255,.2),inset 0 0 30px rgba(34,229,255,.07);animation:boxGlow 3.6s ease-in-out infinite}
+@keyframes boxGlow{50%{box-shadow:0 0 72px rgba(34,229,255,.36),inset 0 0 40px rgba(34,229,255,.13)}}
+.eq-sub{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.eq-card{padding:18px 20px;border-radius:12px;border:1px solid var(--line-2);background:rgba(4,6,13,.55);font-family:var(--mono);font-size:12.5px;color:var(--ink-dim);text-align:left}
+.eq-card b{color:var(--cyan);font-weight:500;display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.eq-card .ff{display:block;color:#e9ecf7;font-size:14.5px;margin-top:4px}
+
+/* ---------- chip stage ---------- */
+.chip-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:26px;align-items:stretch}
+.chip-stage{position:relative;height:560px;border-radius:22px;border:1px solid rgba(184,255,60,.25);overflow:hidden;
+  background:radial-gradient(ellipse 90% 80% at 50% 50%,rgba(12,16,32,.35),rgba(4,6,13,.95));
+  box-shadow:0 40px 100px rgba(0,0,0,.55),inset 0 0 90px rgba(184,255,60,.05)}
+#chipCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.chip-hud{position:absolute;left:22px;right:22px;bottom:18px;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim)}
+.chip-hud .core{color:var(--lime);font-weight:700;text-shadow:0 0 16px rgba(184,255,60,.8)}
+.side-panel{display:flex;flex-direction:column;gap:14px}
+.panel-card{position:relative;border-radius:14px;padding:20px 22px;border:1px solid var(--line-2);background:linear-gradient(180deg,rgba(12,16,32,.9),rgba(8,11,22,.92));overflow:hidden;transition:transform .3s,box-shadow .3s}
+.panel-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.panel-card.c1::before{background:linear-gradient(180deg,var(--cyan),transparent);box-shadow:0 0 14px rgba(34,229,255,.6)}
+.panel-card.c2::before{background:linear-gradient(180deg,var(--violet),transparent);box-shadow:0 0 14px rgba(154,107,255,.6)}
+.panel-card.c3::before{background:linear-gradient(180deg,var(--lime),transparent);box-shadow:0 0 14px rgba(184,255,60,.6)}
+.panel-card:hover{transform:translateY(-3px)}
+.panel-card h4{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
+.panel-card.c1 h4{color:var(--cyan)}.panel-card.c2 h4{color:var(--violet-soft)}.panel-card.c3 h4{color:var(--lime)}
+.panel-card p{font-size:13px;color:var(--ink-dim);line-height:1.65}
+.panel-card p b{color:var(--ink);font-weight:600}
+.panel-card code{font-family:var(--mono);font-size:12px;color:var(--cyan-soft);background:rgba(34,229,255,.07);padding:1px 7px;border-radius:5px;border:1px solid rgba(34,229,255,.2)}
+
+/* ---------- passport table ---------- */
+.ptable{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px;background:rgba(8,11,22,.7);border:1px solid var(--line-2);border-radius:14px;overflow:hidden;display:block;overflow-x:auto}
+.ptable thead th{text-align:left;padding:14px 18px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);background:rgba(34,229,255,.05);border-bottom:1px solid var(--line-2);white-space:nowrap}
+.ptable tbody td{padding:12px 18px;color:var(--ink-dim);border-bottom:1px solid var(--line);white-space:nowrap}
+.ptable tbody td:first-child{color:var(--ink)}
+.ptable tbody tr{transition:background .2s}
+.ptable tbody tr:hover{background:rgba(34,229,255,.05)}
+.warn{margin-top:16px;font-size:12.5px;color:var(--ink-mute);font-family:var(--mono);padding:14px 18px;border-left:2px solid var(--amber);background:rgba(255,176,32,.05);border-radius:0 10px 10px 0}
+.warn b{color:var(--amber);font-weight:500}
+
+/* ---------- evidence levels ---------- */
+.evi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.evi{position:relative;border-radius:14px;padding:26px 24px;border:1px solid var(--line-2);background:linear-gradient(180deg,rgba(12,16,32,.88),rgba(8,11,22,.92));overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.evi:hover{transform:translateY(-5px)}
+.evi .lvl{font-family:var(--mono);font-size:44px;font-weight:700;line-height:1}
+.evi.a .lvl{color:var(--green);text-shadow:0 0 26px rgba(94,242,160,.5)}
+.evi.b .lvl{color:var(--cyan);text-shadow:0 0 26px rgba(34,229,255,.5)}
+.evi.c .lvl{color:var(--amber);text-shadow:0 0 26px rgba(255,176,32,.5)}
+.evi.d .lvl{color:var(--pink-soft);text-shadow:0 0 26px rgba(255,45,154,.5)}
+.evi.a:hover{border-color:rgba(94,242,160,.45);box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 34px rgba(94,242,160,.1)}
+.evi.b:hover{border-color:rgba(34,229,255,.45);box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 34px rgba(34,229,255,.1)}
+.evi.c:hover{border-color:rgba(255,176,32,.45);box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 34px rgba(255,176,32,.1)}
+.evi.d:hover{border-color:rgba(255,45,154,.45);box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 34px rgba(255,45,154,.1)}
+.evi h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim);margin:12px 0 10px}
+.evi p{font-size:13px;color:var(--ink-dim);line-height:1.65}
+.evi .tag{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:9px;letter-spacing:.2em;padding:5px 12px;border-radius:6px}
+.evi.a .tag{color:var(--green);background:rgba(94,242,160,.1);border:1px solid rgba(94,242,160,.4)}
+.evi.b .tag{color:var(--cyan);background:rgba(34,229,255,.08);border:1px solid rgba(34,229,255,.35)}
+.evi.c .tag{color:var(--amber);background:rgba(255,176,32,.08);border:1px solid rgba(255,176,32,.35)}
+.evi.d .tag{color:var(--pink-soft);background:rgba(255,45,154,.08);border:1px solid rgba(255,45,154,.35)}
+.evi-note{margin-top:20px;font-size:13px;color:var(--ink-dim);max-width:820px}
+.evi-note b{color:var(--ink)}
+
+/* ---------- scope ---------- */
+.scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.scope-card{border-radius:var(--radius);padding:32px;border:1px solid var(--line-2);background:linear-gradient(180deg,rgba(12,16,32,.88),rgba(8,11,22,.92))}
+.scope-card.in{border-color:rgba(94,242,160,.3)}
+.scope-card.out{border-color:rgba(255,92,92,.3)}
+.scope-card h3{font-size:17px;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.scope-card ul{list-style:none}
+.scope-card li{position:relative;padding:10px 0 10px 26px;color:var(--ink-dim);font-size:14px;border-bottom:1px dashed var(--line)}
+.scope-card li:last-child{border-bottom:0}
+.scope-card.in li::before{content:"◆";position:absolute;left:0;color:var(--green);font-size:11px;top:14px}
+.scope-card.out li::before{content:"◇";position:absolute;left:0;color:var(--red);font-size:11px;top:14px}
+.scope-card li b{color:var(--ink);font-weight:600}
+
+/* ---------- speed control ---------- */
+.speed-ctl{ margin-top:30px; max-width:380px; padding:18px 22px; border-radius:14px; border:1px solid rgba(184,255,60,.25); background:rgba(8,11,22,.6); backdrop-filter:blur(10px); }
+.sp-label{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-dim); margin-bottom:12px; }
+.sp-label output{ color:var(--lime); font-weight:700; }
+.speed-ctl input[type=range]{ width:100%; appearance:none; -webkit-appearance:none; height:4px; border-radius:4px; background:linear-gradient(90deg,var(--lime) var(--fill,30%),#1a2b12 var(--fill,30%)); outline:none; cursor:pointer; }
+.speed-ctl input[type=range]::-webkit-slider-thumb{ appearance:none; -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background:#fff; border:3px solid var(--lime); box-shadow:0 0 16px rgba(184,255,60,.7); }
+.speed-ctl input[type=range]::-moz-range-thumb{ width:18px; height:18px; border-radius:50%; background:#fff; border:3px solid var(--lime); box-shadow:0 0 16px rgba(184,255,60,.7); }
+.sp-hint{ margin-top:10px; font-family:var(--mono); font-size:10.5px; color:var(--ink-mute); }
+
+/* ---------- speed row under gasket ---------- */
+.speed-row{ display:flex; justify-content:center; margin-top:24px; }
+.speed-row .speed-ctl{ max-width:460px; width:100%; }
+
+/* ---------- chip legend ---------- */
+.chip-legend{
+  position:absolute; top:18px; left:20px; z-index:3;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--ink-dim);
+  background:rgba(4,6,13,.72); border:1px solid var(--line-2); border-radius:10px;
+  padding:12px 16px; display:flex; flex-direction:column; gap:7px; backdrop-filter:blur(8px);
+}
+.chip-legend .cl-title{ color:var(--lime); font-size:9px; letter-spacing:.26em; margin-bottom:2px; }
+.chip-legend div{ display:flex; align-items:center; gap:9px; }
+.chip-legend i{ width:9px; height:9px; border-radius:50%; display:inline-block; box-shadow:0 0 9px currentColor; }
+.chip-legend i.core{ background:radial-gradient(circle at 35% 30%,#fff,var(--lime) 55%,#3d6b00); box-shadow:0 0 12px rgba(184,255,60,.9); }
+
+/* ---------- living gasket stage ---------- */
+.gasket-stage{
+  position:relative; height:min(92vh,1100px); border-radius:22px; overflow:hidden;
+  border:1px solid rgba(34,229,255,.3);
+  background:radial-gradient(ellipse 90% 80% at 50% 50%,rgba(12,16,32,.3),rgba(4,6,13,.95));
+  box-shadow:0 40px 100px rgba(0,0,0,.55),inset 0 0 100px rgba(34,229,255,.06);
+}
+#gasketCanvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+.gasket-hud{
+  position:absolute; left:24px; right:24px; bottom:20px; z-index:3;
+  display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-dim);
+}
+.gasket-hud .core{ color:var(--cyan); font-weight:700; text-shadow:0 0 16px rgba(34,229,255,.85); }
+
+/* ---------- patent ---------- */
+.patent-banner{
+  font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-align:center;
+  color:var(--amber); padding:14px 20px; border-radius:12px; margin-bottom:26px;
+  border:1px solid rgba(255,176,32,.4); background:rgba(255,176,32,.06);
+  box-shadow:0 0 30px rgba(255,176,32,.1); text-transform:uppercase;
+}
+.claims-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.claim{
+  position:relative; border-radius:14px; padding:24px 22px; border:1px solid var(--line-2);
+  background:linear-gradient(180deg,rgba(12,16,32,.9),rgba(8,11,22,.92));
+  overflow:hidden; transition:transform .3s,border-color .3s,box-shadow .3s;
+}
+.claim::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--violet),transparent); box-shadow:0 0 14px rgba(154,107,255,.55); }
+.claim:hover{ transform:translateY(-4px); border-color:rgba(154,107,255,.45); box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 34px rgba(154,107,255,.12); }
+.claim .c-num{ font-family:var(--mono); font-size:10px; letter-spacing:.28em; color:var(--violet-soft); margin-bottom:10px; }
+.claim h4{ font-size:15px; color:#fff; margin-bottom:8px; }
+.claim p{ font-size:12.8px; color:var(--ink-dim); line-height:1.65; }
+.duo-pat{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+.pat-card{
+  border-radius:var(--radius); padding:30px 32px; border:1px solid var(--line-2);
+  background:linear-gradient(180deg,rgba(12,16,32,.88),rgba(8,11,22,.92));
+}
+.pat-card h4{ font-family:var(--mono); font-size:11px; letter-spacing:.24em; color:var(--cyan); margin-bottom:10px; }
+.pat-card p{ font-size:13.5px; color:var(--ink-dim); line-height:1.7; }
+.pat-card.qual{ border-color:rgba(255,176,32,.3); }
+.pat-card.qual h4{ color:var(--amber); }
+.qual-list{ list-style:none; column-count:2; column-gap:26px; margin:6px 0 16px; }
+.qual-list li{
+  position:relative; font-family:var(--mono); font-size:12.3px; color:var(--ink-dim);
+  padding:7px 0 7px 24px; break-inside:avoid; border-bottom:1px dashed var(--line);
+}
+.qual-list li::before{ content:"◇"; position:absolute; left:2px; color:var(--amber); }
+.qual-note{ font-size:12.5px !important; color:var(--ink-mute) !important; font-family:var(--mono); }
+.qual-note b{ color:var(--amber); font-weight:600; }
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+/* ---------- footer ---------- */
+footer{position:relative;z-index:2;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(34,229,255,.03));padding:80px 0 42px;text-align:center;overflow:hidden}
+.foot-title{font-size:clamp(26px,4vw,44px);font-weight:700;letter-spacing:-.02em;margin:14px 0 12px;background:linear-gradient(180deg,#fff 40%,var(--cyan-soft));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.foot-sub{color:var(--ink-dim);max-width:600px;margin:0 auto 26px;font-size:14.5px}
+.link-row{display:flex;justify-content:center;gap:14px;margin-top:26px;flex-wrap:wrap}
+.link-chip{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--ink-dim);text-decoration:none;padding:10px 20px;border-radius:999px;border:1px solid var(--line-2);transition:all .25s}
+.link-chip:hover{color:var(--cyan-soft);border-color:rgba(34,229,255,.5);background:rgba(34,229,255,.06)}
+.disclaimer{margin:36px auto 0;max-width:780px;font-size:12px;color:var(--ink-mute);line-height:1.85;font-family:var(--mono)}
+.foot-bottom{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase}
+
+/* ---------- responsive ---------- */
+@media (max-width:1024px){
+  .stats-grid,.evi-grid{grid-template-columns:repeat(2,1fr)}
+  .chip-grid,.scope-grid,.eq-sub,.duo-pat{grid-template-columns:1fr}
+  .claims-grid{grid-template-columns:repeat(2,1fr)}
+  .chip-stage{height:64vh}
+  .gasket-stage{height:70vh}
+}
+@media (max-width:680px){
+  .nav-links{display:none}
+  .burger{display:flex;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+  .burger i{width:22px;height:2px;background:var(--ink);display:block;border-radius:2px}
+  .stats-grid,.evi-grid,.claims-grid{grid-template-columns:1fr}
+  .qual-list{column-count:1}
+  .chip-legend{position:static;margin:14px;align-self:flex-start;}
+  section{padding:76px 0}
+  .wrap{padding:0 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="scanlines"></div>
+<div class="grid-overlay"></div>
+<div class="aurora aurora-a"></div>
+<div class="aurora aurora-b"></div>
+<div class="aurora aurora-c"></div>
+<canvas id="heroCanvas"></canvas>
+
+<!-- ================= HEADER ================= -->
+<header id="siteHeader">
+  <nav class="nav">
+    <div class="nav-toprow">
+      <a class="brand" href="#top">
+        <span class="brand-core"></span>
+        <span>RFT-QPU-SIERPINSKI<small>GAUGE-COVARIANT FRACTAL SU(2) QUBIT</small></span>
+      </a>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#architecture">Architecture</a>
+      <a href="#gasket">Gasket</a>
+      <a href="#chip">The Chip</a>
+      <a href="#passport">Qubit Passport</a>
+      <a href="#anchor">Math Anchor</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#patent">Patent</a>
+      <a href="#scope">Scope</a>
+      <a href="#ip">IP</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <div class="hero-tag"><span class="dot"></span>RESEARCH PROTOTYPE · EVIDENCE-DISCIPLINED · 2026</div>
+    <h1>A Gauge-Covariant<br><span class="grad-cyan">Fractal SU(2) Qubit</span></h1>
+    <p class="hero-desc">
+      A quantum-processing architecture where a self-similar <b>Sierpiński-gasket graph</b> carries a
+      <b>non-Abelian SU(2) connection</b>. The logical qubit lives in a two-dimensional low-energy
+      subspace of the magnetic graph operator — mathematically anchored, engineering honestly open.
+    </p>
+    <div class="hero-formula">
+      H = D⊗I<sub>2</sub> − Σ<sub>(a,b)</sub> |a⟩⟨b| ⊗ U<sub>ab</sub> + h.c.&ensp;·&ensp;
+      <span class="boxed">U<sub>ab</sub> = e<sup>−iθσ<sub>α</sub>/2</sup>,&ensp;θ = π/2</span>
+    </div>
+    <div class="hero-badges">
+      <span class="hbadge g">MATH: LEVEL A/B — EVGENY-THEOREM</span>
+      <span class="hbadge c">ENGINEERING: LEVEL C — NOT VALIDATED</span>
+      <span class="hbadge">LICENSE: BUSINESS 1.0</span>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- ================= LIVING GASKET ================= -->
+<section id="gasket">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">THE GEOMETRY</span>
+      <h2 class="sec-title">The living gasket</h2>
+      <p class="sec-sub">Recursive Sierpiński connectivity — the substrate of the whole architecture. Self-similar down four levels: 123 vertices, 243 edges, 81 triangular cells. Every pulse you see is an SU(2) transport on an edge; axes cycle x → y → z by triangle index.</p>
+    </div>
+    <div class="gasket-stage reveal">
+      <canvas id="gasketCanvas"></canvas>
+      <div class="gasket-hud">
+        <span>SG(4) · 123 VERTICES · 243 EDGES</span>
+        <span class="core">◈ SELF-SIMILAR · 3^(m) CELLS</span>
+        <span>AXIS CYCLE x→y→z · θ = π/2</span>
+      </div>
+    </div>
+    <div class="speed-row reveal">
+      <div class="speed-ctl">
+        <div class="sp-label"><span>SIMULATION SPEED</span><output id="speedOut">1.0×</output></div>
+        <input type="range" id="speedSlider" min="0.2" max="3" step="0.1" value="1">
+        <div class="sp-hint">// heartbeat of the page — gasket, chip, holonomies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-fade">
+
+<!-- ================= ARCHITECTURE ================= -->
+<section id="architecture">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">ARCHITECTURE</span>
+      <h2 class="sec-title">Fractal geometry,<br>non-Abelian heartbeat</h2>
+      <p class="sec-sub">The qubit is not drawn on a chip first — it is derived from an operator. Graph Laplacian for the Sierpiński gasket, lifted to a spinor bundle by SU(2) edge transports. Flux axis cycles by triangle; holonomies between neighbouring triangles genuinely do not commute.</p>
+    </div>
+
+    <div class="stats-grid reveal" style="margin-bottom:26px;">
+      <div class="stat"><div class="val"><em>SG(m)</em></div><div class="cap">Self-similar<br>gasket graph</div></div>
+      <div class="stat"><div class="val">SU(2)</div><div class="cap">Non-Abelian<br>edge transports</div></div>
+      <div class="stat"><div class="val"><em>θ = π/2</em></div><div class="cap">Nominal<br>research point</div></div>
+      <div class="stat"><div class="val">2D</div><div class="cap">Low-energy<br>logical subspace</div></div>
+    </div>
+
+    <div class="board reveal">
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+      <div class="board-label">THE OPERATOR</div>
+      <div class="eq"><span class="boxed">H = D ⊗ I<sub>2</sub> − Σ<sub>(a,b)</sub> |a⟩⟨b| ⊗ U<sub>ab</sub> + h.c.</span></div>
+      <div class="eq-sub">
+        <div class="eq-card"><b>TRANSPORTS</b>Selected per edge:<span class="ff">U_ab = exp(−i θ σ_α / 2), α ∈ {x,y,z}</span></div>
+        <div class="eq-card"><b>LOGICAL PROJECTOR</b>P onto selected 2D low-energy subspace:<span class="ff">X_L = P S_x P&ensp;·&ensp;Y_L = P S_y P&ensp;·&ensp;Z_L = P S_z P</span></div>
+        <div class="eq-card"><b>GAUGE COVARIANCE</b>Verified in the numerical core:<span class="ff">‖H_g − G H G†‖ ≤ 1e−10 · spec Δ ≤ 1e−10</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-fade">
+
+<!-- ================= CHIP ================= -->
+<section id="chip">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">THE CHIP — CONCEPT STAGE</span>
+      <h2 class="sec-title">One gasket.<br>One protected doublet.</h2>
+      <p class="sec-sub">Visual research model: the gasket lattice hosts spinors on vertices, SU(2) holonomies along edges, and the logical doublet at the core. Control pulses address the projected operators; readout distinguishes the doublet from the leakage gap. Concept only — fabrication is Level C.</p>
+    </div>
+    <div class="chip-grid">
+      <div class="chip-stage reveal">
+        <canvas id="chipCanvas"></canvas>
+        <div class="chip-legend">
+          <div class="cl-title">// SIGNAL MAP</div>
+          <div><i style="background:#22e5ff"></i>SU(2) holonomy · axis x</div>
+          <div><i style="background:#ff2d9a"></i>SU(2) holonomy · axis y</div>
+          <div><i style="background:#9a6bff"></i>SU(2) holonomy · axis z</div>
+          <div><i style="background:#b8ff3c"></i>Spinor arrow |ψ⟩ per vertex</div>
+          <div><i class="core"></i>Logical doublet |0_L⟩ · |1_L⟩</div>
+        </div>
+        <div class="chip-hud">
+          <span>SG(4) LATTICE · SPINOR NODES</span>
+          <span class="core">◈ LOGICAL DOUBLET — 2D SUBSPACE</span>
+          <span>θ = π/2 · SU(2) HOLONOMY</span>
+        </div>
+      </div>
+      <div class="side-panel">
+        <div class="panel-card c1 reveal"><h4>◈ ENCODING</h4><p>The logical qubit is the projector <b>P</b> onto a selected two-dimensional low-energy subspace. Candidate logical controls are the projected spins <code>P S_x P</code>, <code>P S_y P</code>, <code>P S_z P</code>.</p></div>
+        <div class="panel-card c2 reveal d1"><h4>◈ GAUGE PROTECTION</h4><p>All physical content is gauge-covariant: spectra and the moment invariants are unchanged under local SU(2) basis rotation. Gauge invariance is a <b>symmetry property, not noise immunity</b> — non-gauge noise is quantified separately.</p></div>
+        <div class="panel-card c3 reveal d2"><h4>◈ WHAT MUST BE RECOMPUTED</h4><p>The <b>leakage gap</b> is not a fixed number: it must be recomputed for each refinement level m and each normalization. The quoted <code>g_eff ≈ 0.015085</code> is model-dependent, not universal.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-fade">
+
+<!-- ================= PASSPORT ================= -->
+<section id="passport">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">QUBIT PASSPORT</span>
+      <h2 class="sec-title">Identity card,<br>no inflated specs</h2>
+    </div>
+    <div class="reveal">
+      <table class="ptable">
+        <thead><tr><th>Parameter</th><th>Current research definition</th></tr></thead>
+        <tbody>
+          <tr><td>Geometry</td><td>Sierpiński-gasket graph</td></tr>
+          <tr><td>Internal degree</td><td>SU(2) spinor / pseudospin</td></tr>
+          <tr><td>Nominal point</td><td>θ = π/2</td></tr>
+          <tr><td>Logical encoding</td><td>2D selected low-energy subspace</td></tr>
+          <tr><td>Logical operators</td><td>P S_x P · P S_y P · P S_z P</td></tr>
+          <tr><td>RFT invariant</td><td>I∞(π/2) = −8/9 (normalized fourth moment)</td></tr>
+          <tr><td>Effective-control scale</td><td>g_eff ≈ 0.015085 — referenced model only</td></tr>
+          <tr><td>Leakage gap</td><td>Must be recomputed per refinement &amp; normalization</td></tr>
+          <tr><td>Validation</td><td>Numerical research model — not experimentally validated</td></tr>
+        </tbody>
+      </table>
+      <div class="warn"><b>NOTE →</b> −8/9 is a normalized fourth-moment invariant, not an energy gap. The quoted g_eff is model-dependent, not a universal constant.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-fade">
+
+<!-- ================= MATH ANCHOR ================= -->
+<section id="anchor">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">MATHEMATICAL ANCHOR</span>
+      <h2 class="sec-title">Bolted to<br>Evgeny-Theorem</h2>
+      <p class="sec-sub">The qubit concept borrows its exact mathematical floor from the companion repository: a gauge-invariant closed form for the fourth spectral moment of this very operator, verified to 1e−13 and machine-checked at graph level in Lean 4.</p>
+    </div>
+    <div class="board reveal">
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+      <div class="board-label">EVGENY THEOREM — INHERITED IDENTITY</div>
+      <div class="eq"><span class="boxed">Δ<sub>m</sub>(H<sup>4</sup>, θ) = −16 · (3<sup>m−1</sup> + 1) · sin<sup>2</sup>(θ/2)&ensp;⟹&ensp;lim<sub>m→∞</sub> I<sub>m</sub>(π/2) = −8/9</span></div>
+      <div class="eq-sub">
+        <div class="eq-card"><b>WHY IT MATTERS HERE</b>The same magnetic graph operator defines the qubit. Its spectral statistics are known in closed form at moment four.</div>
+        <div class="eq-card"><b>EVIDENCE STACK</b>Closed-form agreement ≤ 1e−11 on held-out parameters · gauge invariance ≤ 8e−15 · Lean graph layer kernel-checked.</div>
+        <div class="eq-card"><b>REPOSITORY</b><span class="ff">github.com/RFT-SIRM/Evgeny-Theorem</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-fade">
+
+<!-- ================= EVIDENCE ================= -->
+<section id="evidence">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">EVIDENCE DISCIPLINE</span>
+      <h2 class="sec-title">Four levels.<br>Zero mixing.</h2>
+      <p class="sec-sub">Every claim in this project wears its level openly. Established mathematics is never blended with proposed engineering — investor and patent materials are stronger for it.</p>
+    </div>
+    <div class="evi-grid">
+      <div class="evi a reveal"><div class="lvl">A</div><h4>Exact analytic</h4><p>The fourth spectral-moment closed form and its limit — exact identities, reproduced in the companion repository.</p><span class="tag">EVGENY-THEOREM</span></div>
+      <div class="evi b reveal d1"><div class="lvl">B</div><h4>Numerically reproduced</h4><p>Gauge covariance of the graph operator, low-energy doublet construction, projected spin controls in the numerical core.</p><span class="tag">QPU_CORE.PY</span></div>
+      <div class="evi c reveal d2"><div class="lvl">C</div><h4>Proposed engineering</h4><p>Qubit encoding on hardware, control electronics, fabrication process, fault-tolerance performance — until independently validated.</p><span class="tag">THIS REPO — OPEN</span></div>
+      <div class="evi d reveal d3"><div class="lvl">D</div><h4>Experimental</h4><p>Lab measurements on a physical device. None exist yet — no experimental claim is made anywhere in this project.</p><span class="tag">NOT CLAIMED</span></div>
+    </div>
+    <p class="evi-note reveal">The qubit encoding, projected-control model, hardware platform, fabrication process and fault-tolerance performance remain <b>Level C until independently validated</b>. This discipline is intentional.</p>
+  </div>
+</section>
+
+<hr class="hr-fade">
+
+<!-- ================= SCOPE ================= -->
+<section id="scope">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">HONEST SCOPE</span>
+      <h2 class="sec-title">What this project<br>does not claim</h2>
+    </div>
+    <div class="scope-grid">
+      <div class="scope-card in reveal">
+        <h3><span style="color:var(--green)">◆</span> Established</h3>
+        <ul>
+          <li><b>Gauge covariance</b> of the fractal SU(2) graph operator — spectral content invariant under local SU(2) rotations.</li>
+          <li><b>Mathematical anchor</b> — fourth spectral moment in closed form, limit −8/9, verification chain to 1e−13.</li>
+          <li><b>Numerical qubit model</b> — 2D low-energy subspace and projected spin operators, reproducible in <span class="mono" style="color:var(--cyan)">qpu_core.py</span>.</li>
+          <li><b>Evidence discipline</b> — every statement levelled A through D, in the open.</li>
+        </ul>
+      </div>
+      <div class="scope-card out reveal d1">
+        <h3><span style="color:var(--red)">◇</span> Explicitly not claimed</h3>
+        <ul>
+          <li><b>No noise immunity</b> — gauge invariance alone is not a proof of immunity to arbitrary physical noise.</li>
+          <li><b>No fabricated device</b> — control, fabrication, readout and two-qubit coupling remain unvalidated engineering.</li>
+          <li><b>No fault-tolerance numbers</b> — gate fidelity, leakage, thermal excitation, drift: all must be quantified separately.</li>
+          <li><b>No scalable QPU</b> — scalability is an open program, not a stated capability.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-fade">
+
+<!-- ================= PATENT ================= -->
+<section id="patent">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">PATENT-ORIENTED DISCLOSURE</span>
+      <h2 class="sec-title">Nine claims,<br>zero overreach</h2>
+      <p class="sec-sub">Draft technical disclosure for review by qualified patent counsel — not legal advice, not a granted patent. Each claim is stated exactly at the level the evidence supports: the architecture is claimed, fault-tolerance is not.</p>
+    </div>
+    <div class="patent-banner reveal">DRAFT DISCLOSURE · SEPARATES ESTABLISHED MATHEMATICS FROM PROPOSED HARDWARE · REQUIRES PROFESSIONAL PRIOR-ART / ENABLEMENT / FTO REVIEW BEFORE FILING</div>
+    <div class="claims-grid">
+      <div class="claim reveal"><div class="c-num">CLAIM 1</div><h4>Quantum processing element</h4><p>Self-similar graph connectivity, a two-component internal quantum degree of freedom, non-Abelian SU(2) edge transport, and a selected two-dimensional spectral subspace configured as a logical qubit.</p></div>
+      <div class="claim reveal d1"><div class="c-num">CLAIM 2</div><h4>Fractal connectivity</h4><p>The element of Claim 1 wherein the graph comprises recursive Sierpiński-gasket connectivity.</p></div>
+      <div class="claim reveal d2"><div class="c-num">CLAIM 3</div><h4>Non-Abelian transport</h4><p>The element of Claim 1 wherein selected edges implement U<sub>ab</sub> = exp(−i θ σ<sub>α</sub>/2) for at least two noncommuting axes α.</p></div>
+      <div class="claim reveal"><div class="c-num">CLAIM 4</div><h4>Cyclic axis assignment</h4><p>The element of Claim 3 wherein selected triangular cells receive axes according to a cyclic rule involving x, y, and z.</p></div>
+      <div class="claim reveal d1"><div class="c-num">CLAIM 5</div><h4>Ground-doublet encoding</h4><p>The element of Claim 1 wherein the logical qubit is encoded in a two-dimensional low-energy spectral subspace.</p></div>
+      <div class="claim reveal d2"><div class="c-num">CLAIM 6</div><h4>Projected control</h4><p>The element of Claim 5 wherein physical local operators are projected into the logical subspace to implement one or more logical Pauli generators.</p></div>
+      <div class="claim reveal"><div class="c-num">CLAIM 7</div><h4>Gauge-covariant implementation</h4><p>The element of Claim 1 wherein local SU(2) transformations act as a unitary change of representation on the full graph Hilbert space while preserving selected spectral invariants.</p></div>
+      <div class="claim reveal d1"><div class="c-num">CLAIM 8</div><h4>Method</h4><p>Preparing a state in the two-dimensional spectral subspace, applying a physical control operator whose restriction generates a desired logical operation, and measuring the resulting logical state.</p></div>
+      <div class="claim reveal d2"><div class="c-num">CLAIM 9</div><h4>Spectral certification</h4><p>The method of Claim 8 wherein a fourth spectral-moment defect is evaluated as a characterization observable for the noncommutative connection.</p></div>
+    </div>
+    <div class="duo-pat reveal" style="margin-top:26px;">
+      <div class="pat-card">
+        <h4>◈ FIELD OF THE INVENTION</h4>
+        <p>Quantum information processing using self-similar graph structures carrying non-Abelian SU(2) connections and encoding information in low-dimensional spectral subspaces.</p>
+        <h4 style="margin-top:22px;">◈ ALTERNATIVE EMBODIMENTS</h4>
+        <p>The internal two-level degree of freedom may be implemented by spin, pseudospin, polarization, orbital states, superconducting-circuit degrees of freedom, photonic modes, or equivalent two-component quantum systems.</p>
+        <h4 style="margin-top:22px;">◈ FILING DISCIPLINE</h4>
+        <p>Patentability must be assessed for the complete claimed combination rather than broad labels such as &ldquo;fractal qubit&rdquo;. Inventorship, ownership, enablement and freedom-to-operate review required before filing.</p>
+      </div>
+      <div class="pat-card qual">
+        <h4>◈ EXPERIMENTAL QUALIFICATION — BEFORE ANY HARDWARE CLAIM</h4>
+        <ul class="qual-list">
+          <li>Spectral splitting of the logical doublet</li>
+          <li>Leakage out of the 2D subspace</li>
+          <li>T1 / T2 coherence times</li>
+          <li>Gate fidelity · leakage per gate</li>
+          <li>Control sensitivity · pulse error</li>
+          <li>Disorder sensitivity · drift</li>
+          <li>Temperature dependence</li>
+          <li>Readout fidelity</li>
+          <li>Two-qubit coupling</li>
+          <li>Device-to-device reproducibility</li>
+        </ul>
+        <p class="qual-note">Every item on this list is <b>unmeasured</b>. The specification says so openly — this is what Level C means.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IP / FOOTER ================= -->
+<footer id="ip">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center;">IP POSITION</span>
+    <div class="foot-title">Proprietary Research License</div>
+    <p class="foot-sub">This repository is published under a Business License 1.0. Publication does not grant a patent license or a right to manufacture a QPU. See LICENSE.md and PATENT_SPEC.md.</p>
+    <div class="link-row">
+      <a class="link-chip" href="https://github.com/RFT-SIRM/Evgeny-Theorem" target="_blank" rel="noopener">github.com/RFT-SIRM/Evgeny-Theorem</a>
+      <a class="link-chip" href="https://github.com/RFT-SIRM" target="_blank" rel="noopener">github.com/RFT-SIRM</a>
+      <a class="link-chip" href="#top">RFT-QPU-Sierpinski</a>
+    </div>
+    <p class="disclaimer">
+      RFT-QPU-Sierpinski is a research architecture, not a product announcement. All engineering claims are Level C
+      (proposed model) until independently validated. The mathematical anchor is Level A/B via the Evgeny-Theorem
+      companion repository. Nothing on this page constitutes investment advice or a performance guarantee.
+    </p>
+    <div class="foot-bottom">
+      <span>© 2026 RFT-SIRM — Gauge-Covariant Fractal Qubit Research</span>
+      <span>H = D⊗I₂ − Σ |a⟩⟨b| ⊗ U_ab + h.c.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- boot block: define speed + reveal FIRST so nothing can break content ---- */
+window.SIM_SPEED = 1;
+(function(){
+  const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}},{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // safety net: if anything below throws, content still appears
+  window.addEventListener('load',()=>setTimeout(()=>{
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el=>el.classList.add('visible'));
+  },2500));
+})();
+
+/* ============================================================
+   1. HERO CANVAS — rotating gasket + Bloch vector + gauge arcs
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('heroCanvas');
+  const ctx = cv.getContext('2d');
+  let W=0,H=0,DPR=1,t=0,mx=0,my=0,smx=0,smy=0;
+  const stars=[];
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=W*DPR;cv.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    stars.length=0;
+    const n=Math.max(50,Math.floor(W*H/8000));
+    for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.3,p:Math.random()*6.28,s:.4+Math.random()});
+  }
+  window.addEventListener('resize',resize);
+  window.addEventListener('mousemove',e=>{mx=e.clientX/window.innerWidth-.5;my=e.clientY/window.innerHeight-.5});
+  resize();
+
+  function gasket(x,y,s,depth,pts){
+    if(depth===0){pts.push([x,y,s]);return}
+    const h=s*Math.sqrt(3)/2;
+    gasket(x,y,s/2,depth-1,pts);
+    gasket(x+s/2,y,s/2,depth-1,pts);
+    gasket(x+s/4,y-h/2,s/2,depth-1,pts);
+  }
+  const tri=[];
+  gasket(-4.6,3.4,9.2,4,tri);
+
+  function rot(p,ax,ay){
+    let[x,y,z]=p;
+    let c=Math.cos(ay),s=Math.sin(ay);
+    const x1=x*c+z*s,z1=-x*s+z*c;
+    c=Math.cos(ax);s=Math.sin(ax);
+    return[x1,y*c-z1*s,y*s+z1*c];
+  }
+  function proj(p,scale,cx,cy){
+    const f=7.2,k=f/(f+p[2]);
+    return[cx+p[0]*scale*k,cy+p[1]*scale*k,k];
+  }
+
+  function draw(){
+    t+=0.0045*window.SIM_SPEED;
+    smx+=(mx-smx)*.045;smy+=(my-smy)*.045;
+    ctx.clearRect(0,0,W,H);
+    for(const st of stars){
+      st.p+=0.02*st.s;
+      const a=0.22+0.5*Math.abs(Math.sin(st.p));
+      ctx.fillStyle='rgba(190,220,255,'+a.toFixed(3)+')';
+      ctx.beginPath();ctx.arc(st.x,st.y,st.r,0,7);ctx.fill();
+    }
+    const wide=W>1024;
+    const cx=wide?W*0.64:W*0.5, cy=H*0.5;
+    const base=Math.min(W,H)/7.8;
+    const breathe=1+0.05*Math.sin(t*1.3);
+    const gbase=base*breathe;
+    const ay=t*0.55+smx*1.3, ax=0.55+smy*0.8;
+
+    // gasket wireframe on tilted back plane
+    for(const[x,y,s]of tri){
+      const h=s*Math.sqrt(3)/2;
+      const p=[[x,y],[x+s,y],[x+s/2,y-h],[x,y]];
+      ctx.beginPath();
+      for(let i=0;i<4;i++){
+        const q=proj(rot([p[i][0],p[i][1],-3.4],ax*0.6,ay*0.5),gbase,cx,cy);
+        if(i===0)ctx.moveTo(q[0],q[1]);else ctx.lineTo(q[0],q[1]);
+      }
+      ctx.strokeStyle='rgba(34,229,255,0.16)';ctx.lineWidth=0.8;ctx.stroke();
+      for(let i=0;i<3;i++){
+        const q=proj(rot([p[i][0],p[i][1],-3.4],ax*0.6,ay*0.5),gbase,cx,cy);
+        ctx.fillStyle='rgba(34,229,255,0.35)';
+        ctx.beginPath();ctx.arc(q[0],q[1],1.5*q[2],0,7);ctx.fill();
+      }
+    }
+
+    // gauge arcs around the core
+    const orbits=[
+      {r:2.3,col:'rgba(34,229,255,',dot:'#22e5ff',sp:0.5,ph:0,tilt:0.4},
+      {r:2.9,col:'rgba(255,45,154,',dot:'#ff2d9a',sp:0.34,ph:2.2,tilt:-0.3},
+      {r:3.5,col:'rgba(154,107,255,',dot:'#9a6bff',sp:0.24,ph:4.4,tilt:0.15},
+    ];
+    for(const o of orbits){
+      ctx.beginPath();
+      for(let i=0;i<=120;i++){
+        const a=i/120*Math.PI*2;
+        let p=[Math.cos(a)*o.r,0,Math.sin(a)*o.r];
+        p=rot(p,o.tilt,0.2);p=rot(p,ax,ay);
+        const q=proj(p,base,cx,cy);
+        if(i===0)ctx.moveTo(q[0],q[1]);else ctx.lineTo(q[0],q[1]);
+      }
+      ctx.strokeStyle=o.col+'0.28)';ctx.lineWidth=1;ctx.stroke();
+      const a=t*o.sp*2+o.ph;
+      let p=[Math.cos(a)*o.r,0,Math.sin(a)*o.r];
+      p=rot(p,o.tilt,0.2);p=rot(p,ax,ay);
+      const q=proj(p,base,cx,cy);
+      const pr=4*q[2];
+      const g=ctx.createRadialGradient(q[0],q[1],0,q[0],q[1],pr*4);
+      g.addColorStop(0,o.dot);g.addColorStop(0.4,o.dot+'88');g.addColorStop(1,'transparent');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(q[0],q[1],pr*4,0,7);ctx.fill();
+      ctx.fillStyle=o.dot;ctx.beginPath();ctx.arc(q[0],q[1],pr,0,7);ctx.fill();
+    }
+
+    // Bloch sphere — the logical qubit
+    const R=base*0.85;
+    const sc=proj(rot([0,0,0],ax,ay),base,cx,cy);
+    // halo
+    let g=ctx.createRadialGradient(sc[0],sc[1],R*0.2,sc[0],sc[1],R*3.2);
+    g.addColorStop(0,'rgba(184,255,60,0.20)');g.addColorStop(0.5,'rgba(184,255,60,0.06)');g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(sc[0],sc[1],R*3.2,0,7);ctx.fill();
+    // wireframe sphere
+    ctx.strokeStyle='rgba(184,255,60,0.4)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.arc(sc[0],sc[1],R,0,7);ctx.stroke();
+    ctx.save();ctx.translate(sc[0],sc[1]);ctx.scale(1,0.32);ctx.rotate(t*0.4);
+    ctx.strokeStyle='rgba(184,255,60,0.25)';
+    ctx.beginPath();ctx.arc(0,0,R,0,7);ctx.stroke();ctx.restore();
+    ctx.save();ctx.translate(sc[0],sc[1]);ctx.scale(0.32,1);ctx.rotate(-t*0.3);
+    ctx.beginPath();ctx.arc(0,0,R,0,7);ctx.stroke();ctx.restore();
+    // precessing state vector
+    const th=0.42+0.14*Math.sin(t*0.9), ph=t*1.6;
+    const bv=[Math.sin(th)*Math.cos(ph),Math.cos(th),Math.sin(th)*Math.sin(ph)];
+    let bp=rot([bv[0]*R,bv[1]*R,bv[2]*R],ax,ay);
+    const bq=proj(bp,base,cx,cy);
+    ctx.strokeStyle='rgba(184,255,60,0.85)';ctx.lineWidth=1.6;
+    ctx.beginPath();ctx.moveTo(sc[0],sc[1]);ctx.lineTo(bq[0],bq[1]);ctx.stroke();
+    g=ctx.createRadialGradient(bq[0],bq[1],0,bq[0],bq[1],10);
+    g.addColorStop(0,'#eaffb0');g.addColorStop(0.4,'#b8ff3c');g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(bq[0],bq[1],10,0,7);ctx.fill();
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ============================================================
+   2. CHIP CANVAS — gasket lattice, spinor arrows, control pulse
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('chipCanvas');
+  const ctx=cv.getContext('2d');
+  let W=0,H=0,DPR=1,t=0;
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=W*DPR;cv.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  window.addEventListener('resize',resize);resize();
+
+  const LEVEL=4, SQ3=Math.sqrt(3);
+  // build node/edge lists once, normalized to unit height
+  let nodes=[],edges=[];
+  (function build(x,y,s,d,id){
+    if(d===0){
+      const idx=nodes.length;
+      nodes.push({x,y,id});
+      return idx;
+    }
+    const h=s*SQ3/2;
+    const a=build(x,y,s/2,d-1), b=build(x+s/2,y,s/2,d-1), c=build(x+s/4,y-h/2,s/2,d-1);
+    edges.push([a,b],[b,c],[c,a]);
+    return a;
+  })(0,0,1,LEVEL);
+
+  function layout(){
+    // fit
+    let mnx=1e9,mny=1e9,mxx=-1e9,mxy=-1e9;
+    for(const n of nodes){mnx=Math.min(mnx,n.x);mxx=Math.max(mxx,n.x);mny=Math.min(mny,n.y);mxy=Math.max(mxy,n.y);}
+    const pad=70;
+    const s=Math.min((W-pad*2)/(mxx-mnx),(H-pad*2-50)/(mxy-mny));
+    const ox=(W-(mxx-mnx)*s)/2-mnx*s, oy=(H-(mxy-mny)*s)/2-mny*s+14;
+    for(const n of nodes){n.px=n.x*s+ox;n.py=n.y*s+oy;}
+  }
+
+  function spinor(n,i){
+    // local rotation direction per node, animated
+    const a=t*1.4+n.x*9+n.y*7;
+    const r=9+5*Math.sin(a*0.7+i);
+    return[Math.cos(a)*r,Math.sin(a)*r];
+  }
+
+  function draw(){
+    t+=0.008*window.SIM_SPEED;
+    ctx.clearRect(0,0,W,H);
+    layout();
+
+    // edges with traveling holonomy pulses
+    for(let i=0;i<edges.length;i++){
+      const[a,b]=edges[i];
+      const A=nodes[a],B=nodes[b];
+      const g=ctx.createLinearGradient(A.px,A.py,B.px,B.py);
+      const hue=i%3;
+      const col=hue===0?'rgba(34,229,255,':hue===1?'rgba(255,45,154,':'rgba(154,107,255,';
+      g.addColorStop(0,col+'0.35)');g.addColorStop(1,col+'0.12)');
+      ctx.strokeStyle=g;ctx.lineWidth=1.1;
+      ctx.beginPath();ctx.moveTo(A.px,A.py);ctx.lineTo(B.px,B.py);ctx.stroke();
+      // pulse
+      const p=(t*0.35+i*0.13)%1;
+      const px=A.px+(B.px-A.px)*p, py=A.py+(B.py-A.py)*p;
+      ctx.fillStyle=col+'0.95)';
+      ctx.beginPath();ctx.arc(px,py,2.1,0,7);ctx.fill();
+    }
+
+    // nodes: spinor arrows
+    for(const n of nodes){
+      const[ax,ay]=spinor(n,n.id);
+      // arrow
+      ctx.strokeStyle='rgba(184,255,60,0.75)';ctx.lineWidth=1.3;
+      ctx.beginPath();ctx.moveTo(n.px-ax,n.py-ay);ctx.lineTo(n.px+ax,n.py+ay);ctx.stroke();
+      // arrowhead
+      const ang=Math.atan2(ay,ax);
+      ctx.fillStyle='rgba(184,255,60,0.9)';
+      ctx.beginPath();
+      ctx.moveTo(n.px+ax,n.py+ay);
+      ctx.lineTo(n.px+ax-5*Math.cos(ang-0.45),n.py+ay-5*Math.sin(ang-0.45));
+      ctx.lineTo(n.px+ax-5*Math.cos(ang+0.45),n.py+ay-5*Math.sin(ang+0.45));
+      ctx.closePath();ctx.fill();
+      // node dot
+      ctx.fillStyle='#0c1020';
+      ctx.beginPath();ctx.arc(n.px,n.py,4.4,0,7);ctx.fill();
+      ctx.strokeStyle='rgba(34,229,255,0.8)';ctx.lineWidth=1.2;
+      ctx.beginPath();ctx.arc(n.px,n.py,4.4,0,7);ctx.stroke();
+    }
+
+    // logical doublet core — pulsing center
+    let cx=0,cy=0;
+    for(const n of nodes){cx+=n.px;cy+=n.py;}
+    cx/=nodes.length;cy/=nodes.length;
+    // central triangle of level-1 core
+    const pulse=1+0.12*Math.sin(t*2.6);
+    const cr=26*pulse;
+    let g=ctx.createRadialGradient(cx,cy,0,cx,cy,cr*3.6);
+    g.addColorStop(0,'rgba(184,255,60,0.5)');
+    g.addColorStop(0.4,'rgba(184,255,60,0.15)');
+    g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,cr*3.6,0,7);ctx.fill();
+    g=ctx.createRadialGradient(cx-cr*0.3,cy-cr*0.3,cr*0.1,cx,cy,cr);
+    g.addColorStop(0,'#ffffff');g.addColorStop(0.3,'#eaffb0');g.addColorStop(0.65,'#b8ff3c');g.addColorStop(1,'rgba(70,110,10,0.95)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,cr,0,7);ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.arc(cx,cy,cr,0,7);ctx.stroke();
+    // orbiting doublet states |0L> |1L>
+    for(let k=0;k<2;k++){
+      const a=t*1.1+k*Math.PI;
+      const qx=cx+Math.cos(a)*cr*1.75, qy=cy+Math.sin(a)*cr*0.62;
+      ctx.fillStyle=k===0?'#22e5ff':'#ff2d9a';
+      ctx.beginPath();ctx.arc(qx,qy,3.4,0,7);ctx.fill();
+    }
+    ctx.font='700 10px JetBrains Mono, monospace';
+    ctx.textAlign='center';
+    ctx.fillStyle='rgba(234,255,176,0.95)';
+    ctx.shadowColor='rgba(0,0,0,0.9)';ctx.shadowBlur=6;
+    ctx.fillText('|0_L⟩   |1_L⟩', cx, cy+cr*2.5);
+    ctx.shadowBlur=0;ctx.textAlign='left';
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ============================================================
+   3. HEADER / BURGER / REVEAL
+   ============================================================ */
+(function(){
+  const h=document.getElementById('siteHeader');
+  const onScroll=()=>h.classList.toggle('scrolled',window.scrollY>30);
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  const burger=document.getElementById('burger'),links=document.getElementById('navLinks');
+  burger.addEventListener('click',()=>{
+    const open=links.style.display==='flex';
+    links.style.display=open?'':'flex';
+    if(!open){
+      links.style.position='fixed';links.style.top=document.getElementById('siteHeader').offsetHeight+'px';
+      links.style.left='0';links.style.right='0';links.style.flexDirection='column';
+      links.style.background='rgba(4,6,13,.97)';links.style.padding='18px';
+      links.style.borderBottom='1px solid rgba(255,255,255,.1)';links.style.zIndex='49';
+    }else{
+      links.style.position='';links.style.top='';links.style.left='';links.style.right='';
+      links.style.flexDirection='';links.style.background='';links.style.padding='';links.style.borderBottom='';
+    }
+  });
+})();
+
+/* ============================================================
+   4. SIMULATION SPEED — one slider drives every canvas
+   ============================================================ */
+(function(){
+  const s=document.getElementById('speedSlider');
+  const o=document.getElementById('speedOut');
+  function fill(){
+    const p=(s.value-s.min)/(s.max-s.min)*100;
+    s.style.setProperty('--fill',p+'%');
+    o.textContent=(+s.value).toFixed(1)+'×';
+  }
+  s.addEventListener('input',()=>{window.SIM_SPEED=+s.value;fill();});
+  fill();
+})();
+
+/* ============================================================
+   5. LIVING GASKET — full-stage breathing, rotating SG(4)
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('gasketCanvas');
+  if(!cv) return;
+  const ctx=cv.getContext('2d');
+  let W=0,H=0,DPR=1,t=0;
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=W*DPR;cv.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  window.addEventListener('resize',resize);resize();
+
+  // build SG(4): nodes + edges, axis cycles by triangle index mod 3
+  const SQ3=Math.sqrt(3);
+  let nodes=[],edges=[];
+  (function build(x,y,s,d){
+    if(d===0){
+      const idx=nodes.length;
+      nodes.push({x,y});
+      return idx;
+    }
+    const h=s*SQ3/2;
+    const a=build(x,y,s/2,d-1), b=build(x+s/2,y,s/2,d-1), c=build(x+s/4,y-h/2,s/2,d-1);
+    edges.push({a:a,b:b,ax:0},{a:b,b:c,ax:1},{a:c,b:a,ax:2});
+    return a;
+  })(0,0,1,4);
+
+  // centroid
+  let cx=0,cy=0;
+  for(const n of nodes){cx+=n.x;cy+=n.y;}
+  cx/=nodes.length;cy/=nodes.length;
+
+  const AXIS_COL=['#22e5ff','#ff2d9a','#9a6bff'];
+  const parts=[];
+  for(let i=0;i<60;i++)parts.push({x:Math.random(),y:Math.random(),r:Math.random()*1.6+.4,p:Math.random()*6.28,s:.3+Math.random()*.8});
+
+  function draw(){
+    t+=0.006*window.SIM_SPEED;
+    ctx.clearRect(0,0,W,H);
+
+    // ambient particles
+    for(const q of parts){
+      q.p+=0.015*q.s*window.SIM_SPEED;
+      const a=0.15+0.4*Math.abs(Math.sin(q.p));
+      ctx.fillStyle='rgba(160,210,255,'+a.toFixed(3)+')';
+      ctx.beginPath();ctx.arc(q.x*W,q.y*H,q.r,0,7);ctx.fill();
+    }
+
+    const breathe=1+0.035*Math.sin(t*1.4);
+    const fitS=Math.min(W,H)*0.86*breathe;
+    const rot=t*0.12;
+
+    ctx.save();
+    ctx.translate(W/2,H/2);
+    ctx.rotate(rot);
+    ctx.scale(fitS,fitS);
+    ctx.translate(-cx,-(cy+0.02));
+
+    // edges — axis colors, subtle shimmer
+    for(let i=0;i<edges.length;i++){
+      const e=edges[i],A=nodes[e.a],B=nodes[e.b];
+      const col=AXIS_COL[e.ax];
+      const shim=0.30+0.18*Math.sin(t*2+i*0.7);
+      ctx.strokeStyle=col;
+      ctx.globalAlpha=shim;
+      ctx.lineWidth=0.0016;
+      ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke();
+      // holonomy pulse
+      const p=(t*0.30+i*0.061)%1;
+      const px=A.x+(B.x-A.x)*p, py=A.y+(B.y-A.y)*p;
+      ctx.globalAlpha=1;
+      ctx.fillStyle=col;
+      ctx.beginPath();ctx.arc(px,py,0.0035,0,7);ctx.fill();
+      ctx.globalAlpha=0.35;
+      ctx.beginPath();ctx.arc(px,py,0.009,0,7);ctx.fill();
+    }
+    ctx.globalAlpha=1;
+
+    // vertices — breathing glow
+    for(let i=0;i<nodes.length;i++){
+      const n=nodes[i];
+      const pl=0.6+0.4*Math.sin(t*2.2+i*1.7);
+      ctx.fillStyle='rgba(34,229,255,'+(0.25*pl).toFixed(3)+')';
+      ctx.beginPath();ctx.arc(n.x,n.y,0.010*pl+0.004,0,7);ctx.fill();
+      ctx.fillStyle='rgba(220,245,255,'+(0.5+0.4*pl).toFixed(3)+')';
+      ctx.beginPath();ctx.arc(n.x,n.y,0.0038,0,7);ctx.fill();
+    }
+    ctx.restore();
+
+    // core doublet at center
+    const pulse=1+0.14*Math.sin(t*2.6);
+    const cr=Math.min(W,H)*0.055*pulse;
+    const ccx=W/2,ccy=H/2;
+    let g=ctx.createRadialGradient(ccx,ccy,0,ccx,ccy,cr*4);
+    g.addColorStop(0,'rgba(184,255,60,0.4)');
+    g.addColorStop(0.45,'rgba(184,255,60,0.12)');
+    g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(ccx,ccy,cr*4,0,7);ctx.fill();
+    g=ctx.createRadialGradient(ccx-cr*0.3,ccy-cr*0.3,cr*0.1,ccx,ccy,cr);
+    g.addColorStop(0,'#ffffff');g.addColorStop(0.3,'#eaffb0');g.addColorStop(0.65,'#b8ff3c');g.addColorStop(1,'rgba(70,110,10,0.95)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(ccx,ccy,cr,0,7);ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.arc(ccx,ccy,cr,0,7);ctx.stroke();
+    for(let k=0;k<2;k++){
+      const a=t*1.2+k*Math.PI;
+      const qx=ccx+Math.cos(a)*cr*1.9, qy=ccy+Math.sin(a)*cr*0.6;
+      ctx.fillStyle=k===0?'#22e5ff':'#ff2d9a';
+      ctx.beginPath();ctx.arc(qx,qy,4,0,7);ctx.fill();
+      ctx.fillStyle=k===0?'rgba(34,229,255,.9)':'rgba(255,45,154,.9)';
+      ctx.font='700 11px JetBrains Mono, monospace';ctx.textAlign='center';
+      ctx.fillText(k===0?'|0_L⟩':'|1_L⟩',qx,qy-12);
+    }
+    ctx.textAlign='left';
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
