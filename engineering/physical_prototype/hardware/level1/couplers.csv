@@ -1,0 +1,23 @@
+edge_id,vertex_a,vertex_b,mode_a,mode_b,face_index,axis,U_real,U_imag,coupling_amplitude_MHz,coupling_phase_deg,site_detuning_MHz_signed,pump_frequency_MHz,drive_implementation_note,J_over_2pi_MHz
+e000,0,1,q00_up,q01_up,0,x,0.7071067811865476,0.0,7.0710678118654755,-180.0,-20.0,20.0,parametric exchange: phase set by pump,10.0
+e000,0,1,q00_up,q01_dn,0,x,0.0,-0.7071067811865475,7.071067811865475,90.0,-20.0,20.0,parametric exchange: phase set by pump,10.0
+e000,0,1,q00_dn,q01_up,0,x,0.0,-0.7071067811865475,7.071067811865475,90.0,-20.0,20.0,parametric exchange: phase set by pump,10.0
+e000,0,1,q00_dn,q01_dn,0,x,0.7071067811865476,0.0,7.0710678118654755,-180.0,-20.0,20.0,parametric exchange: phase set by pump,10.0
+e001,0,2,q00_up,q02_up,,identity,1.0,0.0,10.0,-180.0,-20.0,20.0,parametric exchange: phase set by pump,10.0
+e001,0,2,q00_dn,q02_dn,,identity,1.0,0.0,10.0,-180.0,-20.0,20.0,parametric exchange: phase set by pump,10.0
+e002,1,2,q01_up,q02_up,,identity,1.0,0.0,10.0,-180.0,0.0,0.0,real static/on-resonance exchange,10.0
+e002,1,2,q01_dn,q02_dn,,identity,1.0,0.0,10.0,-180.0,0.0,0.0,real static/on-resonance exchange,10.0
+e003,1,3,q01_up,q03_up,1,y,0.7071067811865476,0.0,7.0710678118654755,-180.0,20.0,20.0,parametric exchange: phase set by pump,10.0
+e003,1,3,q01_up,q03_dn,1,y,-0.7071067811865475,0.0,7.071067811865475,-0.0,20.0,20.0,parametric exchange: phase set by pump,10.0
+e003,1,3,q01_dn,q03_up,1,y,0.7071067811865475,0.0,7.071067811865475,-180.0,20.0,20.0,parametric exchange: phase set by pump,10.0
+e003,1,3,q01_dn,q03_dn,1,y,0.7071067811865476,0.0,7.0710678118654755,-180.0,20.0,20.0,parametric exchange: phase set by pump,10.0
+e004,1,4,q01_up,q04_up,,identity,1.0,0.0,10.0,-180.0,0.0,0.0,real static/on-resonance exchange,10.0
+e004,1,4,q01_dn,q04_dn,,identity,1.0,0.0,10.0,-180.0,0.0,0.0,real static/on-resonance exchange,10.0
+e005,2,4,q02_up,q04_up,2,z,0.7071067811865476,-0.7071067811865475,10.0,135.0,0.0,0.0,complex resonant link needs multi-path/static-flux or auxiliary Floquet phase engineering,10.0
+e005,2,4,q02_dn,q04_dn,2,z,0.7071067811865476,0.7071067811865475,10.0,-135.0,0.0,0.0,complex resonant link needs multi-path/static-flux or auxiliary Floquet phase engineering,10.0
+e006,2,5,q02_up,q05_up,,identity,1.0,0.0,10.0,-180.0,20.0,20.0,parametric exchange: phase set by pump,10.0
+e006,2,5,q02_dn,q05_dn,,identity,1.0,0.0,10.0,-180.0,20.0,20.0,parametric exchange: phase set by pump,10.0
+e007,3,4,q03_up,q04_up,,identity,1.0,0.0,10.0,-180.0,-20.0,20.0,parametric exchange: phase set by pump,10.0
+e007,3,4,q03_dn,q04_dn,,identity,1.0,0.0,10.0,-180.0,-20.0,20.0,parametric exchange: phase set by pump,10.0
+e008,4,5,q04_up,q05_up,,identity,1.0,0.0,10.0,-180.0,20.0,20.0,parametric exchange: phase set by pump,10.0
+e008,4,5,q04_dn,q05_dn,,identity,1.0,0.0,10.0,-180.0,20.0,20.0,parametric exchange: phase set by pump,10.0

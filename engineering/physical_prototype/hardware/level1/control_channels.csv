@@ -1,0 +1,7 @@
+vertex,mode_up,mode_down,X_control,Y_control,Z_control,illustrative_drive_Rabi_MHz,comment
+0,q00_up,q00_dn,"parametric beam-splitter, pump phase 0 deg","same beam-splitter, pump phase +90 deg",differential flux bias / frequency detuning,5.0,phase/sign convention requires cryogenic calibration
+1,q01_up,q01_dn,"parametric beam-splitter, pump phase 0 deg","same beam-splitter, pump phase +90 deg",differential flux bias / frequency detuning,5.0,phase/sign convention requires cryogenic calibration
+2,q02_up,q02_dn,"parametric beam-splitter, pump phase 0 deg","same beam-splitter, pump phase +90 deg",differential flux bias / frequency detuning,5.0,phase/sign convention requires cryogenic calibration
+3,q03_up,q03_dn,"parametric beam-splitter, pump phase 0 deg","same beam-splitter, pump phase +90 deg",differential flux bias / frequency detuning,5.0,phase/sign convention requires cryogenic calibration
+4,q04_up,q04_dn,"parametric beam-splitter, pump phase 0 deg","same beam-splitter, pump phase +90 deg",differential flux bias / frequency detuning,5.0,phase/sign convention requires cryogenic calibration
+5,q05_up,q05_dn,"parametric beam-splitter, pump phase 0 deg","same beam-splitter, pump phase +90 deg",differential flux bias / frequency detuning,5.0,phase/sign convention requires cryogenic calibration

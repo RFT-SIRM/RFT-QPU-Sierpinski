@@ -1,0 +1,9 @@
+item,quantity,purpose
+Data transmons,24,two independent SG level-1 cells
+Readout resonators,24,one per transmon before multiplexing optimization
+Internal effective exchange channels,44,22 per cell
+Intra-site X/Y control couplers,12,6 per cell
+Differential Z-bias controls,12,6 per cell
+Inter-cell cross-Kerr terms,4,realize chi/4 (nA_up-nA_dn)(nB_up-nB_dn)
+Cryogenic microwave feedlines,TBD,readout and control distribution
+Phase-coherent parametric pump channels,TBD,frequency multiplexing and crosstalk must be validated

@@ -1,0 +1,10 @@
+item,quantity,purpose
+Transmon data modes,12,one spinor pair per SG graph vertex
+Readout resonators,12,dispersive occupation/state readout; multiplexing to be engineered
+Effective inter-site exchange channels,22,nonzero matrix elements of SU(2) edge transports
+Intra-site spin-mixing couplers,6,number-conserving X/Y logical-control drive; phase sets quadrature
+Differential Z-bias channels,6,relative up/down frequency control at each graph site
+Flux-tunable coupler bias channels,22,per-link calibration or multiplexed pump grouping; routing not finalized
+Cryogenic microwave feedline(s),TBD,readout multiplexing and control distribution
+Parametric pump channels,TBD,phase-coherent edge drives; multiplexing must be validated
+Entangling inter-cell coupler module,0,not included in one-logical-qubit demonstrator; required for universal processor

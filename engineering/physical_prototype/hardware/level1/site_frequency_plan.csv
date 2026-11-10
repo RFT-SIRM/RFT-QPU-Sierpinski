@@ -1,0 +1,7 @@
+vertex,coordinate_x,coordinate_y,degree,up_transmon,down_transmon,relative_detuning_MHz,nominal_common_frequency_GHz,illustrative_frequency_GHz
+0,0.0,0.0,2,q00_up,q00_dn,20.0,5.0,5.02
+1,0.5,0.0,4,q01_up,q01_dn,40.0,5.0,5.04
+2,0.0,0.5,4,q02_up,q02_dn,40.0,5.0,5.04
+3,1.0,0.0,2,q03_up,q03_dn,20.0,5.0,5.02
+4,0.5,0.5,4,q04_up,q04_dn,40.0,5.0,5.04
+5,0.0,1.0,2,q05_up,q05_dn,20.0,5.0,5.02

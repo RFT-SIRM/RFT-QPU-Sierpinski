@@ -2,7 +2,12 @@ name: test
 
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -11,8 +16,27 @@ jobs:
       PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python -m pip install -r requirements.txt
-      - run: pytest -q
+
+      - name: Install repository requirements
+        run: python -m pip install -r requirements.txt
+
+      - name: Install physical prototype
+        run: python -m pip install -e 'engineering/physical_prototype[test]'
+
+      - name: Run repository and prototype tests
+        run: python -m pytest -q tests engineering/physical_prototype/tests
+
+      - name: Reproduce level-1 device calculation
+        working-directory: engineering/physical_prototype
+        run: |
+          python -m rft_qpu.cli \
+            --level 1 \
+            --J-MHz 10 \
+            --temperature-mK 10 \
+            --disorder-samples 250 \
+            --output "$RUNNER_TEMP/level1.json" \
+            --hardware-dir "$RUNNER_TEMP/hardware"
