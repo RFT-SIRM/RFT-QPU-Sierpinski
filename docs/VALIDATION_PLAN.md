@@ -1,86 +1,46 @@
-# Validation Plan
+# Validation plan
 
-## Current baseline
+## Gate 0 — numerical software
 
-The repository now contains the level-1 numerical and hardware-mapping prototype in `engineering/physical_prototype/`. Its package test suite reported 20 passing tests locally on 10 November 2026. The post-merge GitHub Actions run on `main` completed successfully and reproduced the configured level-1 calculation.
+- [x] Finite graph and SU(2) transport regressions.
+- [x] Hermiticity, spectrum and projected-control checks.
+- [x] Two-cell projected interaction calculation.
+- [x] Reduced qutrit and concurrent phase-conjugate Z-link simulations.
+- [x] Deterministic first-order nine-tone collision screen.
 
-A green numerical test suite verifies the implemented model and code paths. It does not validate a fabricated device.
+## Gate 1 — frequency and control feasibility
 
-## Gate 0 — Mathematical reference
+**Current result: FAIL / redesign required.**
 
-**Status: documented in the companion project.**
+- Current plan: six sites, nine pump references, 22 effective exchange channels.
+- Isolated 245 MHz Z-link candidate: reduced four-qutrit process overlap 0.999609.
+- Full schedule primary collision margin: 0 MHz.
+- Primary warnings within 10 MHz: 73.
+- Conditional harmonic/intermodulation warnings: 653.
 
-- reproduce the fourth spectral-moment formula and stated normalization;
-- record the exact graph, face ordering, edge orientation and axis assignment;
-- preserve the boundary between the graph-level Lean infrastructure and any still-open operator-level formalization.
+The isolated-link result does not authorize simultaneous nine-tone operation.
 
-## Gate 1 — Finite-level numerical model
+Required next work:
+1. redesign the six rotating-frame offsets while preserving the graph onsite term;
+2. define a primary collision guard band and rerun the audit;
+3. measure/extract the complex 22×22 pump-channel transfer matrix;
+4. include the actual coupler flux-to-exchange/ZZ transfer function;
+5. run multitone Floquet and open-system simulations.
 
-**Status: implemented for SG levels 1–5.**
+## Gate 2 — physical circuit
 
-- construct the finite Sierpiński graph using the reference recursion;
-- build the SU(2)-transport Hamiltonian;
-- compute spectra, candidate doublets and leakage gaps;
-- compute local/global projected controls;
-- test graph, Hamiltonian, hardware mapping, disorder/thermal analysis and two-cell projection.
+- [ ] Explicit data–coupler–data circuit Hamiltonian with extracted capacitance and Josephson parameters.
+- [ ] Coupler modes, anharmonicities, loss and flux dependence.
+- [ ] Residual static/dynamic ZZ, Stark shifts and higher sidebands.
+- [ ] Spectator transitions and all 22 effective channels.
+- [ ] EM/package extraction and control/readout layout.
 
-Acceptance for future changes: exact regression checks on graph counts, link assignments, Hermiticity, matrix dimensions and benchmark outputs.
+## Gate 3 — fabricated one-cell demonstrator
 
-## Gate 2 — Hardware coefficient export
+- [ ] Fabricate and spectroscopically identify the 12 modes.
+- [ ] Calibrate complex amplitudes and phases with uncertainty bars.
+- [ ] Measure the spectrum and candidate doublet.
+- [ ] Reconstruct projected controls and measure leakage/coherence.
+- [ ] Repeat across cooldowns and quantify drift.
 
-**Status: generated; one critical phase-realization issue remains open.**
-
-- export the 22 level-1 effective exchange channels;
-- preserve complex amplitudes and the sign/orientation convention;
-- validate endpoint frequency assumptions and detunings;
-- resolve the resonant complex-Z link with a physical coupler topology;
-- include parasitic ZZ, spectator interactions, pump sidebands and higher-level leakage.
-
-**Tape-out blocker:** a single real static coupler does not reproduce the current complex Z-link amplitudes.
-
-## Gate 3 — Physical single-cell demonstrator
-
-**Status: not fabricated or measured.**
-
-Required evidence:
-
-- 12-transmon chip and verified connectivity;
-- calibrated frequencies, exchange amplitudes and pump phases;
-- measured spectrum and reconstruction of the candidate doublet;
-- measured separation from leakage states;
-- state preparation, reset and readout calibration;
-- projected-control tomography and pulse calibration;
-- leakage, crosstalk, drift and non-gauge noise characterization.
-
-No protection or fidelity claim should be made from the ideal Hamiltonian alone.
-
-## Gate 4 — Two-cell entangling demonstrator
-
-**Status: projected numerically; no physical gate demonstrated.**
-
-- connect two calibrated level-1 cells (24 data transmons);
-- implement the four cross-Kerr terms with the required \(+,-,-,+\) sign pattern;
-- characterize static shifts, excitation conservation, residual interactions and leakage;
-- calibrate the pulse and measure process fidelity, leakage, crosstalk and repeatability.
-
-The quoted 6.38074 μs is an ideal projected estimate at the illustrative assumption \(\chi/(2\pi)=10\) MHz, not a measured gate time.
-
-## Gate 5 — Modular scale-up
-
-**Status: future work.**
-
-Only after the single-cell and two-cell gates pass measured acceptance criteria:
-
-1. replicate calibrated level-1 tiles;
-2. begin with nearest-neighbour logical modules in a one-dimensional chain;
-3. validate control/readout wiring and inter-tile crosstalk;
-4. consider two-dimensional and fractal module connectivity only after routing and error data justify it.
-
-## Evidence labels
-
-- **Analytic/formal:** exact identities and machine-checked results within their stated assumptions.
-- **Numerical:** outputs of the finite matrix and circuit-mapping models.
-- **Proposed engineering:** circuit and control designs without fabrication evidence.
-- **Experimental:** measured hardware data only.
-
-These categories must remain separate in README, the website, partner material and future release notes.
+A green numerical test suite is Gate 0 only. It does not establish a fabricated or functioning QPU.
