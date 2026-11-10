@@ -48,7 +48,7 @@
   ],
   "effective_nonlocal_interaction_coefficient_over_chi": 0.007836083272491063,
   "chi_over_2pi_MHz_assumption": 10.0,
-  "ideal_maximally_entangling_time_us": 1.5951846815974806,
+  "ideal_maximally_entangling_time_us": 6.3807387263899225,
   "chi_sweep": [
     {
       "chi_over_J": 0.01,

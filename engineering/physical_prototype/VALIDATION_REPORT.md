@@ -48,7 +48,7 @@ Two-cell projected-interaction calculation was rerun:
 
 - physical modes: 24 transmons
 - projected ZZ coefficient / chi: 0.007836083272491063
-- idealized maximally-entangling time at chi/(2 pi)=10 MHz: 1.5951846815974806 microseconds
+- idealized maximally-entangling time at chi/(2 pi)=10 MHz: 6.3807387263899225 microseconds
 
 ## Interpretation boundary
 

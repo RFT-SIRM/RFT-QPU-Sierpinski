@@ -19,7 +19,7 @@ For `J/(2 pi)=10 MHz`, `Delta_leak/(2 pi)=13.937 MHz`. At 10 mK, `kBT/h=208.366 
 - 24 data transmons (two level-1 cells).
 - Differential-density coupling: `chi S_z(A,v5) S_z(B,v5)`.
 - Projected two-body coefficient: `0.00783608327 * chi`.
-- At `chi/(2 pi)=10 MHz`, ideal maximally-entangling time estimate: `1.595 microseconds`.
+- At `chi/(2 pi)=10 MHz`, ideal maximally-entangling time estimate: `6.381 microseconds`.
 - Full two-cell 144-dimensional product matrix diagonalized at `chi/J=0.01,0.05,0.10`; leakage gap after the lowest quartet remains approximately `1.3905 J` or larger in those static calculations.
 
 ## Disorder checks

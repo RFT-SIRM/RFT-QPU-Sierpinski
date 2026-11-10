@@ -70,10 +70,11 @@ def analyze_two_cell_interaction(
             "off_subspace_coupling_norm_over_J": leakage_coupling,
         })
 
-    # H_L/hbar = chi * (c/2.sigma) tensor (c/2.sigma)
-    # The Ising-equivalent interaction strength is chi * |c|^2 / 4.
+    # H_L/hbar = chi * |c|^2/4 * (sigma_z tensor sigma_z).
+    # A maximally-entangling ZZ phase is pi/4, so t = pi/(4 J_ZZ)
+    # = 1/(2 * (chi/2pi) * |c|^2).
     chi_hz = chi_over_2pi_MHz * 1e6
-    gate_time_seconds = 1.0 / (8.0 * chi_hz * effective_interaction_scale)
+    gate_time_seconds = 1.0 / (2.0 * chi_hz * effective_interaction_scale)
 
     return {
         "level": level,

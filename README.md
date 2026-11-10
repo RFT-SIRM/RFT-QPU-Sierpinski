@@ -189,7 +189,7 @@ Local reproducibility run on 10 November 2026:
 | Best local projected-control coefficient | `0.1770433` |
 | Two-cell modeled modes / proposed transmon mapping | 24 |
 | Projected nonlocal interaction coefficient divided by χ | `0.00783608327` |
-| Idealized gate time at assumed χ/(2π) = 10 MHz | `1.59518 μs` |
+| Idealized gate time at assumed χ/(2π) = 10 MHz | `6.38074 μs` |
 
 The near-zero doublet splitting is a floating-point numerical result,
 not a formal proof of exact degeneracy. The two-cell gate time is an

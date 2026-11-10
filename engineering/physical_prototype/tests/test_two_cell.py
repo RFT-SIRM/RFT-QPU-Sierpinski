@@ -13,5 +13,5 @@ def test_two_cell_projection_is_nonzero_and_entangling():
     assert abs(report["effective_nonlocal_interaction_coefficient_over_chi"] - 0.00783608327249) < 1e-12
     values = report["projected_interaction_eigenvalues_at_chi_over_J_1"]
     assert values[0] < 0 < values[-1]
-    assert abs(report["ideal_maximally_entangling_time_us"] - 1.5951846816) < 1e-9
+    assert abs(report["ideal_maximally_entangling_time_us"] - 6.3807387264) < 1e-9
     assert report["chi_sweep"][1]["gap_after_logical_quartet_over_J"] > 1.3

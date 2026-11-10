@@ -21,7 +21,7 @@ RFT-QPU-Sierpinski is the proposed architecture repository. The companion `Evgen
   leakage gap `1.3937126931 J`; best local projected-control coefficient
   `g_eff = 0.1770433`.
 - Two-cell projection: 24 modeled modes; projected interaction coefficient
-  `0.00783608327 χ`; idealized gate-time estimate `1.59518 μs` at the
+  `0.00783608327 χ`; idealized gate-time estimate `6.38074 μs` at the
   assumed `χ/(2π) = 10 MHz`.
 - The doublet splitting is at floating-point roundoff scale, not a proof
   of exact degeneracy. The gate-time estimate is not a measured result.
