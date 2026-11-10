@@ -1,0 +1,5 @@
+cell_a,cell_b,mode_a,mode_b,number_operator_a,number_operator_b,chi_coefficient_over_2pi_MHz_if_chi_10MHz,purpose
+A,B,A_q05_up,B_q05_up,+1,+1,2.5,positive term in differential-density ZZ interaction
+A,B,A_q05_up,B_q05_dn,+1,-1,-2.5,negative cross term in differential-density ZZ interaction
+A,B,A_q05_dn,B_q05_up,-1,+1,-2.5,negative cross term in differential-density ZZ interaction
+A,B,A_q05_dn,B_q05_dn,-1,-1,2.5,positive term in differential-density ZZ interaction

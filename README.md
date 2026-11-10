@@ -174,6 +174,34 @@ The included simulator is a **minimal research core**. It is not a full Sierpiń
 
 ---
 
+## Engineering Prototype v0.1
+
+The standalone numerical and engineering package is maintained in
+[engineering/physical_prototype](engineering/physical_prototype/README.md).
+
+Local reproducibility run on 10 November 2026:
+
+| Quantity | Numerical result |
+|---|---:|
+| Level-1 modeled modes / proposed transmon mapping | 12 |
+| Ground-doublet splitting divided by J | `1.61 × 10^-15` |
+| Gap to the next level divided by J | `1.3937126931` |
+| Best local projected-control coefficient | `0.1770433` |
+| Two-cell modeled modes / proposed transmon mapping | 24 |
+| Projected nonlocal interaction coefficient divided by χ | `0.00783608327` |
+| Idealized gate time at assumed χ/(2π) = 10 MHz | `6.38074 μs` |
+
+The near-zero doublet splitting is a floating-point numerical result,
+not a formal proof of exact degeneracy. The two-cell gate time is an
+idealized projected-model estimate, not a calibrated or measured gate.
+
+This package is not a fabrication-ready design. Physical implementation
+of the complex-Z coupling, multilevel circuit-QED modeling, electromagnetic
+validation, and open-system noise and control analysis remain outstanding.
+
+These calculations concern the SU(2) RFT-QPU model. They must not be
+conflated with the distinct signed-Z2 operator family studied in Phi-Genesis.
+
 ## Companion theorem repository
 
 The mathematical reference implementation and Lean 4 formalization are maintained separately:
@@ -195,6 +223,7 @@ The current public status distinguishes the machine-checked graph infrastructure
 | [VALIDATION_PLAN.md](docs/VALIDATION_PLAN.md) | Research-to-hardware validation gates |
 | [DISCLOSURE_BOUNDARY.md](docs/DISCLOSURE_BOUNDARY.md) | What is established vs proposed |
 | [qpu_core.py](qpu_core.py) | Minimal numerical core |
+| [engineering/physical_prototype/README.md](engineering/physical_prototype/README.md) | Executable numerical and engineering prototype |
 | [tests/test_qpu_core.py](tests/test_qpu_core.py) | Core simulator tests |
 | [requirements.txt](requirements.txt) | Runtime/test dependencies |
 | [CITATION.cff](CITATION.cff) | Citation metadata |

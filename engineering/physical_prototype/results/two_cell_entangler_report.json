@@ -1,0 +1,88 @@
+{
+  "level": 1,
+  "n_transmons_per_cell": 12,
+  "n_transmons_two_cell": 24,
+  "anchor_vertex": 5,
+  "anchor_coordinate": [
+    0.0,
+    1.0
+  ],
+  "local_projected_Sz_matrix": [
+    [
+      [
+        0.06555138309370598,
+        -9.93309540053368e-19
+      ],
+      [
+        0.05487092785464021,
+        0.022984358232592393
+      ]
+    ],
+    [
+      [
+        0.05487092785464021,
+        -0.02298435823259239
+      ],
+      [
+        -0.06555138309370587,
+        1.1003979897919628e-18
+      ]
+    ]
+  ],
+  "logical_Ising_axis_A": [
+    0.05487092785464021,
+    -0.022984358232592393,
+    0.06555138309370592
+  ],
+  "logical_Ising_axis_B": [
+    0.05487092785464021,
+    -0.022984358232592393,
+    0.06555138309370592
+  ],
+  "local_control_g_eff_for_Oz": 0.17704330851507563,
+  "projected_interaction_eigenvalues_at_chi_over_J_1": [
+    -0.007836083272491063,
+    -0.00783608327249106,
+    0.007836083272491053,
+    0.007836083272491074
+  ],
+  "effective_nonlocal_interaction_coefficient_over_chi": 0.007836083272491063,
+  "chi_over_2pi_MHz_assumption": 10.0,
+  "ideal_maximally_entangling_time_us": 6.3807387263899225,
+  "chi_sweep": [
+    {
+      "chi_over_J": 0.01,
+      "lowest_four_eigenvalues_over_J": [
+        0.25360771038880586,
+        0.2536077103888207,
+        0.2537644321531366,
+        0.25376443215314204
+      ],
+      "gap_after_logical_quartet_over_J": 1.3933955256882082,
+      "off_subspace_coupling_norm_over_J": 0.0004356164157913881
+    },
+    {
+      "chi_over_J": 0.05,
+      "lowest_four_eigenvalues_over_J": [
+        0.25329273493984716,
+        0.2532927349398516,
+        0.2540763556274853,
+        0.25407635562749376
+      ],
+      "gap_after_logical_quartet_over_J": 1.3921202326797295,
+      "off_subspace_coupling_norm_over_J": 0.0021780820789569404
+    },
+    {
+      "chi_over_J": 0.1,
+      "lowest_four_eigenvalues_over_J": [
+        0.2528961185299127,
+        0.25289611852991845,
+        0.25446343407146077,
+        0.2544634340714627
+      ],
+      "gap_after_logical_quartet_over_J": 1.390510986802434,
+      "off_subspace_coupling_norm_over_J": 0.004356164157913881
+    }
+  ],
+  "warning": "The differential cross-Kerr coupler is a proposed primitive. The projected model is numerical; the physical four-channel circuit and open-system gate are not validated."
+}

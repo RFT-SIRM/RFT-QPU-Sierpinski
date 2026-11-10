@@ -1,0 +1,189 @@
+{
+  "source_model": "RFT-SG spinor graph Hamiltonian, theta=pi/2, canonical SG convention",
+  "levels": [
+    {
+      "level": 1,
+      "graph_sites": 6,
+      "graph_edges": 9,
+      "faces": 3,
+      "physical_transmons": 12,
+      "lambda0": 0.12684306742643353,
+      "ground_split_over_J": 3.2751579226442118e-15,
+      "leakage_gap_over_J": 1.3937126930868375,
+      "best_local_vertex": 5,
+      "best_local_coordinate": [
+        0.0,
+        1.0
+      ],
+      "local_g_eff": 0.17704330851507563,
+      "global_singular_values": [
+        0.9553173669798178,
+        0.9026465729392008,
+        0.8768566804909721
+      ],
+      "global_g_eff": 0.8768566804909721
+    },
+    {
+      "level": 2,
+      "graph_sites": 15,
+      "graph_edges": 27,
+      "faces": 9,
+      "physical_transmons": 30,
+      "lambda0": 0.17105655129687894,
+      "ground_split_over_J": 2.220446049250313e-16,
+      "leakage_gap_over_J": 0.39733497013689656,
+      "best_local_vertex": 14,
+      "best_local_coordinate": [
+        0.0,
+        1.0
+      ],
+      "local_g_eff": 0.07970855074245808,
+      "global_singular_values": [
+        0.9475889090054966,
+        0.8139056472428426,
+        0.7996233469946377
+      ],
+      "global_g_eff": 0.7996233469946377
+    },
+    {
+      "level": 3,
+      "graph_sites": 42,
+      "graph_edges": 81,
+      "faces": 27,
+      "physical_transmons": 84,
+      "lambda0": 0.18612278635239957,
+      "ground_split_over_J": 5.273559366969494e-16,
+      "leakage_gap_over_J": 0.08860787562821304,
+      "best_local_vertex": 41,
+      "best_local_coordinate": [
+        0.0,
+        1.0
+      ],
+      "local_g_eff": 0.03474935732909526,
+      "global_singular_values": [
+        0.9087715144099887,
+        0.5238409301197662,
+        0.4868526848044355
+      ],
+      "global_g_eff": 0.4868526848044355
+    },
+    {
+      "level": 4,
+      "graph_sites": 123,
+      "graph_edges": 243,
+      "faces": 81,
+      "physical_transmons": 246,
+      "lambda0": 0.19163392022894726,
+      "ground_split_over_J": 7.216449660063518e-16,
+      "leakage_gap_over_J": 0.015863591291925133,
+      "best_local_vertex": 122,
+      "best_local_coordinate": [
+        0.0,
+        1.0
+      ],
+      "local_g_eff": 0.017990017756033795,
+      "global_singular_values": [
+        0.8078777828758446,
+        0.3210885717918986,
+        0.22974075886349585
+      ],
+      "global_g_eff": 0.22974075886349585
+    },
+    {
+      "level": 5,
+      "graph_sites": 366,
+      "graph_edges": 729,
+      "faces": 243,
+      "physical_transmons": 732,
+      "lambda0": 0.1933848218711166,
+      "ground_split_over_J": 1.1657341758564144e-15,
+      "leakage_gap_over_J": 0.002985510986104861,
+      "best_local_vertex": 365,
+      "best_local_coordinate": [
+        0.0,
+        1.0
+      ],
+      "local_g_eff": 0.01508517742680184,
+      "global_singular_values": [
+        0.5789098571575614,
+        0.30878813958183116,
+        0.15417348567519287
+      ],
+      "global_g_eff": 0.15417348567519287
+    }
+  ],
+  "hardware_scaling": [
+    {
+      "level": 0,
+      "graph_sites": 3,
+      "physical_transmons": 6,
+      "graph_edges": 3,
+      "elementary_faces": 0,
+      "x_transport_edges": 0,
+      "y_transport_edges": 0,
+      "z_transport_edges": 0,
+      "effective_exchange_channels": 6,
+      "readout_resonators_target": 6
+    },
+    {
+      "level": 1,
+      "graph_sites": 6,
+      "physical_transmons": 12,
+      "graph_edges": 9,
+      "elementary_faces": 3,
+      "x_transport_edges": 1,
+      "y_transport_edges": 1,
+      "z_transport_edges": 1,
+      "effective_exchange_channels": 22,
+      "readout_resonators_target": 12
+    },
+    {
+      "level": 2,
+      "graph_sites": 15,
+      "physical_transmons": 30,
+      "graph_edges": 27,
+      "elementary_faces": 9,
+      "x_transport_edges": 3,
+      "y_transport_edges": 3,
+      "z_transport_edges": 3,
+      "effective_exchange_channels": 66,
+      "readout_resonators_target": 30
+    },
+    {
+      "level": 3,
+      "graph_sites": 42,
+      "physical_transmons": 84,
+      "graph_edges": 81,
+      "elementary_faces": 27,
+      "x_transport_edges": 9,
+      "y_transport_edges": 9,
+      "z_transport_edges": 9,
+      "effective_exchange_channels": 198,
+      "readout_resonators_target": 84
+    },
+    {
+      "level": 4,
+      "graph_sites": 123,
+      "physical_transmons": 246,
+      "graph_edges": 243,
+      "elementary_faces": 81,
+      "x_transport_edges": 27,
+      "y_transport_edges": 27,
+      "z_transport_edges": 27,
+      "effective_exchange_channels": 594,
+      "readout_resonators_target": 246
+    },
+    {
+      "level": 5,
+      "graph_sites": 366,
+      "physical_transmons": 732,
+      "graph_edges": 729,
+      "elementary_faces": 243,
+      "x_transport_edges": 81,
+      "y_transport_edges": 81,
+      "z_transport_edges": 81,
+      "effective_exchange_channels": 1782,
+      "readout_resonators_target": 732
+    }
+  ]
+}

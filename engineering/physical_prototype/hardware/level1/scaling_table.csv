@@ -1,0 +1,7 @@
+level,graph_sites,physical_transmons,graph_edges,elementary_faces,x_transport_edges,y_transport_edges,z_transport_edges,effective_exchange_channels,readout_resonators_target
+0,3,6,3,0,0,0,0,6,6
+1,6,12,9,3,1,1,1,22,12
+2,15,30,27,9,3,3,3,66,30
+3,42,84,81,27,9,9,9,198,84
+4,123,246,243,81,27,27,27,594,246
+5,366,732,729,243,81,81,81,1782,732

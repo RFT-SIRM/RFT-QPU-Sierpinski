@@ -1,0 +1,151 @@
+{
+  "level": 1,
+  "theta_rad": 1.5707963267948966,
+  "n_vertices": 6,
+  "n_edges": 9,
+  "n_faces": 3,
+  "n_modes": 12,
+  "degrees": [
+    2,
+    4,
+    4,
+    2,
+    4,
+    2
+  ],
+  "lowest_eigenvalues": [
+    0.12684306742643353,
+    0.1268430674264368,
+    1.5205557605132742,
+    1.5205557605132745,
+    1.832191045730923,
+    1.8321910457309238,
+    3.7794438343507113,
+    3.7794438343507126
+  ],
+  "ground_doublet_splitting_over_J": 3.2751579226442118e-15,
+  "leakage_gap_over_J": 1.3937126930868375,
+  "time_reversal_error_fro": 0.0,
+  "global_control": {
+    "coefficient_matrix": [
+      [
+        0.4151866773843127,
+        0.8118682072720613,
+        -0.06343330899733926
+      ],
+      [
+        -0.5744812304383975,
+        0.36694322567339144,
+        0.6089808968705992
+      ],
+      [
+        0.5518207058893059,
+        -0.16621397347672678,
+        0.7021958939589672
+      ]
+    ],
+    "singular_values": [
+      0.9553173669798178,
+      0.9026465729392008,
+      0.8768566804909721
+    ],
+    "rank": 3,
+    "condition_number": 1.089479487622668,
+    "g_eff": 0.8768566804909721
+  },
+  "best_local_control": {
+    "vertex": 5,
+    "coordinate": [
+      0.0,
+      1.0
+    ],
+    "coefficient_matrix": [
+      [
+        0.08186659502518107,
+        0.1563796852092789,
+        -0.013696268206854469
+      ],
+      [
+        -0.11224490551660118,
+        0.0691129817787841,
+        0.1181897204717017
+      ],
+      [
+        0.10974185570928043,
+        -0.045968716465184786,
+        0.13110276618741185
+      ]
+    ],
+    "singular_values": [
+      0.17704330851507566,
+      0.17704330851507563,
+      0.17704330851507563
+    ],
+    "rank": 3,
+    "condition_number": 1.0000000000000002,
+    "g_eff": 0.17704330851507563
+  },
+  "logical_ground_doublet_vertex_weights": [
+    0.16914625175108366,
+    0.16155472932758574,
+    0.1615547293275857,
+    0.16914625175108366,
+    0.16155472932758574,
+    0.17704330851507566
+  ],
+  "physical_scale_assumption": {
+    "J_over_2pi_MHz": 10.0,
+    "leakage_gap_over_2pi_MHz": 13.937126930868375,
+    "temperature_mK": 10.0,
+    "kBT_over_h_MHz": 208.36619123,
+    "equilibrium_boltzmann_factor_benchmark": 0.935300267173145,
+    "J_over_2pi_MHz_for_1pct_boltzmann_benchmark": 688.4932428182327,
+    "warning": "Boltzmann factor is a thermal-scale diagnostic, not a measured chip population or a full bath-coupling model."
+  },
+  "disorder_study": {
+    "level": 1,
+    "samples": 250,
+    "seed": 1234,
+    "edge_weight_disorder": [
+      {
+        "fractional_amplitude": 0.01,
+        "ground_splitting_max_over_J": 6.217248937900877e-15,
+        "leakage_gap_min_over_J": 1.3869645369944141,
+        "leakage_gap_median_over_J": 1.393595077126965,
+        "leakage_gap_max_over_J": 1.4016551719449266
+      },
+      {
+        "fractional_amplitude": 0.05,
+        "ground_splitting_max_over_J": 6.217248937900877e-15,
+        "leakage_gap_min_over_J": 1.360951632946434,
+        "leakage_gap_median_over_J": 1.391334471775603,
+        "leakage_gap_max_over_J": 1.4268742907696912
+      },
+      {
+        "fractional_amplitude": 0.1,
+        "ground_splitting_max_over_J": 6.2727600891321345e-15,
+        "leakage_gap_min_over_J": 1.3109493904016336,
+        "leakage_gap_median_over_J": 1.3879959024326705,
+        "leakage_gap_max_over_J": 1.4703621077571114
+      }
+    ],
+    "TR_breaking_local_z_field": [
+      {
+        "field_sigma_over_J": 0.001,
+        "ground_splitting_mean_over_J": 0.0007012156942583187,
+        "ground_splitting_max_over_J": 0.0020977904309900097
+      },
+      {
+        "field_sigma_over_J": 0.01,
+        "ground_splitting_mean_over_J": 0.007308398948511113,
+        "ground_splitting_max_over_J": 0.020694133005354165
+      },
+      {
+        "field_sigma_over_J": 0.05,
+        "ground_splitting_mean_over_J": 0.03515207925580835,
+        "ground_splitting_max_over_J": 0.1053800454612343
+      }
+    ],
+    "base_leakage_gap_over_J": 1.3937126930868402
+  }
+}
