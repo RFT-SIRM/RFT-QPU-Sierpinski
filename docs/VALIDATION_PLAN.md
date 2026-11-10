@@ -1,43 +1,86 @@
 # Validation Plan
 
-## Gate 0 — Mathematical reproducibility
+## Current baseline
 
-- reproduce the companion fourth-moment formula;
-- reproduce gauge-invariance tests;
-- record software versions and numerical tolerances.
+The repository now contains the level-1 numerical and hardware-mapping prototype in `engineering/physical_prototype/`. Its package test suite reported 20 passing tests locally on 10 November 2026. The post-merge GitHub Actions run on `main` completed successfully and reproduced the configured level-1 calculation.
 
-## Gate 1 — Full graph solver
+A green numerical test suite verifies the implemented model and code paths. It does not validate a fabricated device.
 
-Implement the actual SG(m) graph and SU(2) connection rather than relying on the minimal two-site core.
+## Gate 0 — Mathematical reference
 
-## Gate 2 — Qubit isolation
+**Status: documented in the companion project.**
 
-For each refinement and physical normalization, report:
+- reproduce the fourth spectral-moment formula and stated normalization;
+- record the exact graph, face ordering, edge orientation and axis assignment;
+- preserve the boundary between the graph-level Lean infrastructure and any still-open operator-level formalization.
 
-- the two selected eigenvalues;
-- their splitting;
-- the nearest leakage eigenvalue;
-- the leakage gap;
-- eigenvector stability under perturbations.
+## Gate 1 — Finite-level numerical model
 
-## Gate 3 — Control
+**Status: implemented for SG levels 1–5.**
 
-Construct projected `X_L`, `Y_L`, and `Z_L`. Quantify:
+- construct the finite Sierpiński graph using the reference recursion;
+- build the SU(2)-transport Hamiltonian;
+- compute spectra, candidate doublets and leakage gaps;
+- compute local/global projected controls;
+- test graph, Hamiltonian, hardware mapping, disorder/thermal analysis and two-cell projection.
 
-- operator norms;
-- linear independence;
-- commutators;
-- pulse synthesis;
-- leakage during pulses.
+Acceptance for future changes: exact regression checks on graph counts, link assignments, Hermiticity, matrix dimensions and benchmark outputs.
 
-## Gate 4 — Noise
+## Gate 2 — Hardware coefficient export
 
-Separate gauge-equivalent perturbations from physical non-gauge perturbations. Test disorder, drift, thermal effects, control noise and coupling errors.
+**Status: generated; one critical phase-realization issue remains open.**
 
-## Gate 5 — Hardware demonstrator
+- export the 22 level-1 effective exchange channels;
+- preserve complex amplitudes and the sign/orientation convention;
+- validate endpoint frequency assumptions and detunings;
+- resolve the resonant complex-Z link with a physical coupler topology;
+- include parasitic ZZ, spectator interactions, pump sidebands and higher-level leakage.
 
-Specify the physical Hamiltonian, fabrication tolerances, control lines, readout, calibration and measurement protocol.
+**Tape-out blocker:** a single real static coupler does not reproduce the current complex Z-link amplitudes.
 
-## Gate 6 — Experimental protection claim
+## Gate 3 — Physical single-cell demonstrator
 
-Only after measured data are available should claims concerning robustness, protection, fidelity or scalability be made.
+**Status: not fabricated or measured.**
+
+Required evidence:
+
+- 12-transmon chip and verified connectivity;
+- calibrated frequencies, exchange amplitudes and pump phases;
+- measured spectrum and reconstruction of the candidate doublet;
+- measured separation from leakage states;
+- state preparation, reset and readout calibration;
+- projected-control tomography and pulse calibration;
+- leakage, crosstalk, drift and non-gauge noise characterization.
+
+No protection or fidelity claim should be made from the ideal Hamiltonian alone.
+
+## Gate 4 — Two-cell entangling demonstrator
+
+**Status: projected numerically; no physical gate demonstrated.**
+
+- connect two calibrated level-1 cells (24 data transmons);
+- implement the four cross-Kerr terms with the required \(+,-,-,+\) sign pattern;
+- characterize static shifts, excitation conservation, residual interactions and leakage;
+- calibrate the pulse and measure process fidelity, leakage, crosstalk and repeatability.
+
+The quoted 6.38074 μs is an ideal projected estimate at the illustrative assumption \(\chi/(2\pi)=10\) MHz, not a measured gate time.
+
+## Gate 5 — Modular scale-up
+
+**Status: future work.**
+
+Only after the single-cell and two-cell gates pass measured acceptance criteria:
+
+1. replicate calibrated level-1 tiles;
+2. begin with nearest-neighbour logical modules in a one-dimensional chain;
+3. validate control/readout wiring and inter-tile crosstalk;
+4. consider two-dimensional and fractal module connectivity only after routing and error data justify it.
+
+## Evidence labels
+
+- **Analytic/formal:** exact identities and machine-checked results within their stated assumptions.
+- **Numerical:** outputs of the finite matrix and circuit-mapping models.
+- **Proposed engineering:** circuit and control designs without fabrication evidence.
+- **Experimental:** measured hardware data only.
+
+These categories must remain separate in README, the website, partner material and future release notes.

@@ -2,33 +2,34 @@
 
 > **A research architecture for a gauge-covariant fractal SU(2) quantum-processing element.**
 
-[![Website](https://img.shields.io/badge/website-live%20demo-ef4444?style=for-the-badge)](https://rft-sirm.github.io/RFT-QPU-Sierpinski/)
-[![Research Status](https://img.shields.io/badge/status-research%20prototype-111827?style=for-the-badge)](#research-status)
-[![Geometry](https://img.shields.io/badge/geometry-Sierpi%C5%84ski%20gasket-2563eb?style=for-the-badge)](#architecture)
-[![Internal Degree](https://img.shields.io/badge/internal%20degree-SU%282%29-7c3aed?style=for-the-badge)](#architecture)
-[![Anchor](https://img.shields.io/badge/anchor-I%E2%88%9E%20%3D%20%E2%88%928%2F9-059669?style=for-the-badge)](#mathematical-anchor)
-[![Lean 4](https://img.shields.io/badge/Lean%204-machine--checked%20graph%20layer-0891b2?style=for-the-badge)](https://github.com/RFT-SIRM/Evgeny-Theorem/tree/main/formalization)
-[![License](https://img.shields.io/badge/license-Business%201.0-black?style=for-the-badge)](LICENSE.md)
+[![CI](https://img.shields.io/github/actions/workflow/status/RFT-SIRM/RFT-QPU-Sierpinski/test.yml?branch=main&label=CI&style=flat-square)](https://github.com/RFT-SIRM/RFT-QPU-Sierpinski/actions/workflows/test.yml)
+[![Prototype](https://img.shields.io/badge/prototype-v0.1-2563eb?style=flat-square)](engineering/physical_prototype/README.md)
+[![Geometry](https://img.shields.io/badge/graph-SG%281%29-4777bd?style=flat-square)](#level-1-transmon-tile)
+[![Hardware mapping](https://img.shields.io/badge/mapping-12%20transmons-168f83?style=flat-square)](#level-1-transmon-tile)
+[![Status](https://img.shields.io/badge/status-pre--experimental-d97706?style=flat-square)](#research-status)
+[![License](https://img.shields.io/badge/license-Business%201.0-303846?style=flat-square)](LICENSE.md)
 
 ---
 
 ## Navigation
 
-**[Executive Summary](#executive-summary)** · **[Architecture](#architecture)** · **[Mathematical Anchor](#mathematical-anchor)** · **[Qubit Passport](#qubit-passport)** · **[Validation](#validation)** · **[IP / Patent](#ip--patent-position)** · **[Repository Map](#repository-map)** · **[Installation](#installation)**
+**[Executive Summary](#executive-summary)** · **[Architecture](#architecture)** · **[Level-1 Transmon Tile](#level-1-transmon-tile)** · **[Mathematical Anchor](#mathematical-anchor)** · **[Qubit Passport](#qubit-passport)** · **[Validation](#validation)** · **[IP / Patent](#ip--patent-position)** · **[Repository Map](#repository-map)** · **[Installation](#installation)**
 
 ---
 
 ## Executive Summary
 
-RFT-QPU-Sierpinski is a proposed quantum-processing architecture built around a self-similar Sierpiński-gasket connectivity structure carrying non-Abelian SU(2) edge transport.
+RFT-QPU-Sierpinski investigates a quantum-processing architecture in which a self-similar Sierpiński-gasket graph carries non-Abelian SU(2) edge transport. The first hardware embodiment now has a reproducible **level-1 numerical prototype** mapped to a proposed superconducting-transmon tile.
 
-The project is deliberately split into three evidence layers:
+The current tile has **6 graph sites, 9 graph edges, 3 non-commuting SU(2) links, 12 transmon modes in the single-excitation model, and 22 effective exchange channels**. Its candidate logical qubit is the lowest two-dimensional spectral subspace of the finite Hamiltonian.
 
-1. **Established mathematical anchor.** The companion [Evgeny's Theorem](https://github.com/RFT-SIRM/Evgeny-Theorem) repository reports an exact fourth spectral-moment defect and a normalized asymptotic invariant.
-2. **Qubit architecture.** This repository defines a candidate two-dimensional low-energy logical subspace and projected control operators for numerical investigation.
-3. **Hardware program.** Fabrication, calibration, noise characterization, gate fidelity, leakage suppression, readout, coupling, and scalability remain experimental engineering tasks.
+The project keeps three evidence layers separate:
 
-The long-term objective is a deterministic quantum-processing architecture in which the physical graph, non-Abelian transport, and logical subspace are designed together rather than treating topology as an after-the-fact software abstraction.
+1. **Mathematical anchor.** The companion [Evgeny's Theorem](https://github.com/RFT-SIRM/Evgeny-Theorem) repository documents the fourth spectral-moment identity and its normalized limit.
+2. **Numerical prototype.** This repository contains a finite-level solver, projected-control analysis, hardware coefficient exports, two-cell projection, and regression tests.
+3. **Physical hardware.** The transmon mapping is a design proposal. No device has been fabricated or measured; complex-Z coupling, multilevel circuit-QED, calibration, noise, leakage, and gate fidelity remain open engineering work.
+
+The intended sequence is mathematical reproducibility → numerical characterization → physical single-cell demonstrator → two-cell entangler → modular scaling.
 
 ---
 
@@ -59,7 +60,29 @@ $$
 X_L=P S_xP,\qquad Y_L=P S_yP,\qquad Z_L=P S_zP.
 $$
 
-These definitions are an architecture under investigation; they are not, by themselves, evidence of a manufactured or fault-tolerant qubit.
+These definitions specify the effective graph model. The transmon realization and any protection or fault-tolerance claim require separate physical validation.
+
+---
+
+## Level-1 Transmon Tile
+
+The first proposed hardware embodiment maps each graph site to a dual-rail pair of transmons. The single-excitation sector contains 12 modeled modes and reproduces the level-1 SU(2) graph Hamiltonian.
+
+<p align="center">
+  <img src="engineering/physical_prototype/design/level1_transmon_topology.png" alt="Level-1 Sierpinski graph mapped to six dual-rail transmon sites, with identity, X, Y and Z links" width="760">
+</p>
+
+<p align="center"><sub>Proposed topology: 6 graph sites · 9 graph edges · 3 non-commuting SU(2) face links · 12 transmons. This is a design schematic, not a fabricated chip.</sub></p>
+
+| Link class | Graph edges | Effective exchange channels |
+|---|---:|---:|
+| Identity | 6 | 12 |
+| X transport | 1 | 4 |
+| Y transport | 1 | 4 |
+| Z transport | 1 | 2 |
+| **Total** | **9** | **22** |
+
+The active Z link is the present implementation blocker: its required hopping amplitudes are complex, while a single real static coupler cannot reproduce them. A phase-engineered parametric or multi-path implementation, or a revised rotating-frame/frequency plan, must be worked out before tape-out. See [Physical Realization](engineering/physical_prototype/docs/PHYSICAL_REALIZATION.md) and the [hardware risk register](engineering/physical_prototype/docs/RISK_REGISTER.md).
 
 ---
 
@@ -95,21 +118,21 @@ The current companion repository also documents gauge-invariance checks, vanishi
 | Encoding | Selected low-energy subspace `Q = Ran(P)` |
 | Logical controls | `P Sx P`, `P Sy P`, `P Sz P` |
 | Spectral anchor | `I∞(π/2) = −8/9` |
-| Effective-control scale | `g_eff ≈ 0.015085` in the referenced model; model-dependent |
+| Effective-control scale | Level 1: `g_eff = 0.1770433` at vertex 5; level 5 reference: `g_eff ≈ 0.015085`; level-dependent |
 | Leakage gap | Must be recomputed for graph refinement, normalization and physical parameter set |
 | Experimental status | Not experimentally validated |
 
 ### Evidence boundary
 
-The value `g_eff ≈ 0.015085` is treated as a **model-dependent research parameter**, not a universal constant. A production specification must regenerate it from the exact Hamiltonian, normalization, refinement level, control convention, and selected logical subspace.
+The value is **level- and convention-dependent**. The current finite-level study reports `g_eff = 0.1770433` for the level-1 local control at vertex 5, while `g_eff ≈ 0.015085` is the level-5 reference value. They are different finite graphs, not competing estimates of one universal constant.
 
-Likewise, a leakage gap must be reported as an explicit computed spectral separation for a named device model. It must not be inferred from `I∞ = −8/9`.
+The computed level-1 leakage gap is `1.3937126931 J`. Neither this gap nor any other device gap follows from `I∞ = −8/9`; the latter is a normalized fourth-moment invariant.
 
 ---
 
 ## Validation
 
-Before calling a physical implementation a protected qubit, the following must be demonstrated numerically and experimentally:
+The numerical prototype now computes the finite-level graph, candidate doublet, leakage separation, projected local controls, hardware channel map and two-cell projected interaction. Physical acceptance still requires:
 
 - two-dimensional logical-subspace isolation;
 - reproducible spectral gap to leakage states;
@@ -170,7 +193,7 @@ python qpu_core.py
 pytest -q
 ```
 
-The included simulator is a **minimal research core**. It is not a full Sierpiński-gasket device solver.
+The top-level `qpu_core.py` is a compact research reference. The full finite-level numerical and hardware-mapping package is `engineering/physical_prototype/`; install it separately using its project instructions.
 
 ---
 
@@ -179,7 +202,9 @@ The included simulator is a **minimal research core**. It is not a full Sierpiń
 The standalone numerical and engineering package is maintained in
 [engineering/physical_prototype](engineering/physical_prototype/README.md).
 
-Local reproducibility run on 10 November 2026:
+The level-1 topology schematic is shown above; the generated coefficient map contains 22 nonzero effective exchange channels. The current model also includes a two-cell, 24-mode projected interaction.
+
+Reproducibility status: 20 package tests passed locally on 10 November 2026; the post-merge GitHub Actions run on `main` passed all configured steps. Numerical values below are model outputs, not measurements:
 
 | Quantity | Numerical result |
 |---|---:|
@@ -195,9 +220,7 @@ The near-zero doublet splitting is a floating-point numerical result,
 not a formal proof of exact degeneracy. The two-cell gate time is an
 idealized projected-model estimate, not a calibrated or measured gate.
 
-This package is not a fabrication-ready design. Physical implementation
-of the complex-Z coupling, multilevel circuit-QED modeling, electromagnetic
-validation, and open-system noise and control analysis remain outstanding.
+This package is not a fabrication-ready design. The resonant complex-Z hopping phase is the immediate pre-tape-out blocker. Multilevel circuit-QED modeling, electromagnetic validation, coupler parasitics, and open-system noise and control analysis also remain outstanding.
 
 These calculations concern the SU(2) RFT-QPU model. They must not be
 conflated with the distinct signed-Z2 operator family studied in Phi-Genesis.
@@ -219,8 +242,11 @@ The current public status distinguishes the machine-checked graph infrastructure
 | [PATENT_SPEC.md](PATENT_SPEC.md) | Patent-oriented technical disclosure |
 | [COMPARISON.md](COMPARISON.md) | Factual technology comparison |
 | [INVESTOR_BRIEF.md](INVESTOR_BRIEF.md) | Investor / partner one-page narrative |
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Technical architecture and data flow |
-| [VALIDATION_PLAN.md](docs/VALIDATION_PLAN.md) | Research-to-hardware validation gates |
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Mathematical-to-transmon architecture and current device mapping |
+| [site preview](docs/index.html) | Responsive, self-contained architecture presentation |
+| [SITE_DEPLOYMENT.md](docs/SITE_DEPLOYMENT.md) | Publication boundary and deployment prerequisites |
+| [VALIDATION_PLAN.md](docs/VALIDATION_PLAN.md) | Updated numerical-to-hardware validation gates |
+| [level-1 topology SVG](engineering/physical_prototype/design/level1_transmon_topology.svg) | Source schematic for the 12-transmon demonstrator |
 | [DISCLOSURE_BOUNDARY.md](docs/DISCLOSURE_BOUNDARY.md) | What is established vs proposed |
 | [qpu_core.py](qpu_core.py) | Minimal numerical core |
 | [engineering/physical_prototype/README.md](engineering/physical_prototype/README.md) | Executable numerical and engineering prototype |
