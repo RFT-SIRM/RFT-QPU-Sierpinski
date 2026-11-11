@@ -1,354 +1,159 @@
 # RFT-QPU-Sierpinski
 
-> **A research architecture for a gauge-covariant fractal SU(2) quantum-processing element.**
+> **A research architecture for a self-similar quantum-processing element with non-Abelian SU(2) transport.**
 
-[![CI](https://img.shields.io/github/actions/workflow/status/RFT-SIRM/RFT-QPU-Sierpinski/test.yml?branch=main&label=CI&style=flat-square)](https://github.com/RFT-SIRM/RFT-QPU-Sierpinski/actions/workflows/test.yml)
-[![Prototype](https://img.shields.io/badge/prototype-v0.1-2563eb?style=flat-square)](engineering/physical_prototype/README.md)
-[![Geometry](https://img.shields.io/badge/graph-SG%281%29-4777bd?style=flat-square)](#level-1-transmon-tile)
-[![Hardware mapping](https://img.shields.io/badge/mapping-12%20transmons-168f83?style=flat-square)](#level-1-transmon-tile)
-[![Status](https://img.shields.io/badge/status-closed%20pre--release%20v0.4--rc1-d97706?style=flat-square)](#research-status)
-[![License](https://img.shields.io/badge/license-Business%201.0-303846?style=flat-square)](LICENSE.md)
+**Project author attribution:** Evgeny Zaprudnov  
+**Programme:** RFT-SIRM · **Engineering checkpoint:** v0.4-rc1 · **Review date:** 11 November 2026
 
----
+![RFT-QPU architecture pathway](docs/assets/rft-architecture-flow.svg)
 
-## Navigation
-
-**[Executive Summary](#executive-summary)** · **[Architecture](#architecture)** · **[Level-1 Transmon Tile](#level-1-transmon-tile)** · **[Mathematical Anchor](#mathematical-anchor)** · **[Qubit Passport](#qubit-passport)** · **[Validation](#validation)** · **[IP / Patent](#ip--patent-position)** · **[Repository Map](#repository-map)** · **[Installation](#installation)**
+This repository is maintained as a **private research and engineering record**. It documents a numerical architecture and a proposed superconducting-transmon implementation. It does not claim that a quantum processor has been fabricated, measured, or made fault tolerant.
 
 ---
 
-## Executive Summary
+## Executive view
 
-RFT-QPU-Sierpinski investigates a quantum-processing architecture in which a self-similar Sierpiński-gasket graph carries non-Abelian SU(2) edge transport. The first hardware embodiment now has a reproducible **level-1 numerical prototype** mapped to a proposed superconducting-transmon tile.
+RFT-QPU-Sierpinski studies whether a self-similar graph can serve as the connectivity substrate for a logical quantum degree of freedom carried by non-commuting SU(2) edge transports.
 
-The current tile has **6 graph sites, 9 graph edges, 3 non-commuting SU(2) links, 12 transmon modes in the single-excitation model, and 22 effective exchange channels**. Its candidate logical qubit is the lowest two-dimensional spectral subspace of the finite Hamiltonian.
+The first hardware mapping is a level-1 Sierpiński-gasket tile:
 
-The project keeps three evidence layers separate:
+- **6 graph sites** and **9 graph edges**;
+- **3 selected non-commuting SU(2) links** (X, Y and Z);
+- **12 transmon modes** representing the graph-site spinor components;
+- **22 non-zero effective exchange channels**;
+- a candidate logical state encoded in a two-dimensional low-energy subspace.
 
-1. **Mathematical anchor.** The companion [Evgeny's Theorem](https://github.com/RFT-SIRM/Evgeny-Theorem) repository documents the fourth spectral-moment identity and its normalized limit.
-2. **Numerical prototype.** This repository contains a finite-level solver, projected-control analysis, hardware coefficient exports, two-cell projection, and regression tests.
-3. **Physical hardware.** The transmon mapping is a design proposal. No device has been fabricated or measured; complex-Z coupling, multilevel circuit-QED, calibration, noise, leakage, and gate fidelity remain open engineering work.
+The software programme records Stages 1–11B. The latest Stage 11B work contains a nominal full three-mode re-quantized gate baseline, local pulse retuning, five-/six-level comparisons and a seven-level spot check. The best retuned numbers are model outputs, not measured hardware fidelities.
 
-The intended sequence is mathematical reproducibility → numerical characterization → physical single-cell demonstrator → two-cell entangler → modular scaling.
+![Level-1 proposed transmon topology](engineering/physical_prototype/design/level1_transmon_topology.svg)
 
----
+*The level-1 topology is a proposed device mapping. The schematic and coefficient tables are design artifacts, not a fabrication netlist.*
 
 ## Architecture
 
-For a graph with vertices `V`, degree operator `D`, and SU(2) edge transports `U_ab`, the research Hamiltonian is represented schematically as
+For a finite graph G = (V,E), each site carries a two-component internal degree of freedom. A representative graph Hamiltonian is
 
-$$
-H = D \otimes I_2 - \sum_{(a,b)} |a\rangle\langle b| \otimes U_{ab} + \mathrm{h.c.}
-$$
+H = D ⊗ I₂ − Σ(a,b) [ |a⟩⟨b| ⊗ Uₐᵦ + h.c. ],
 
-with selected transports
+with SU(2) transport Uₐᵦ = exp(−i θ σₐₓᵢₛ / 2) and nominal connection angle θ = π/2. The candidate logical qubit is a selected two-dimensional low-energy subspace. Physical controls are projected into that subspace and must be calibrated and tested independently.
 
-$$
-U_{ab}=\exp\left(-i\frac{\theta}{2}\sigma_\alpha\right),
-\qquad \alpha\in\{x,y,z\}.
-$$
+![Architecture flow](docs/assets/rft-architecture-flow.svg)
 
-The nominal research point is
+The hardware mapping uses pairs of transmon modes at graph sites. Parametric exchange is proposed for complex hopping phases. In the current degree-based frequency plan, the active Z edge is resonant and requires complex diagonal amplitudes. A single real static coupler cannot implement those phases. A phase-engineered multi-path or auxiliary Floquet implementation, or a revised frequency/rotating-frame plan, is therefore a **pre-tape-out blocker**.
 
-$$
-\theta = \frac{\pi}{2}.
-$$
+Detailed hardware definitions: [Architecture](docs/ARCHITECTURE.md) · [Physical realization](engineering/physical_prototype/docs/PHYSICAL_REALIZATION.md) · [Industrial architecture](engineering/physical_prototype/docs/INDUSTRIAL_ARCHITECTURE.md).
 
-A candidate logical qubit is a selected two-dimensional low-energy subspace with projector `P`, subject to numerical verification of spectral isolation and control quality. Candidate projected controls are
+## Latest numerical checkpoint
 
-$$
-X_L=P S_xP,\qquad Y_L=P S_yP,\qquad Z_L=P S_zP.
-$$
+### Stage 11B — re-quantized three-mode gate model
 
-These definitions specify the effective graph model. The transmon realization and any protection or fault-tolerance claim require separate physical validation.
+The selected local operating point recorded in this repository is:
 
----
-
-## Level-1 Transmon Tile
-
-The first proposed hardware embodiment maps each graph site to a dual-rail pair of transmons. The single-excitation sector contains 12 modeled modes and reproduces the level-1 SU(2) graph Hamiltonian.
-
-<p align="center">
-  <img src="engineering/physical_prototype/design/level1_transmon_topology.png" alt="Level-1 Sierpinski graph mapped to six dual-rail transmon sites, with identity, X, Y and Z links" width="760">
-</p>
-
-<p align="center"><sub>Proposed topology: 6 graph sites · 9 graph edges · 3 non-commuting SU(2) face links · 12 transmons. This is a design schematic, not a fabricated chip.</sub></p>
-
-| Link class | Graph edges | Effective exchange channels |
-|---|---:|---:|
-| Identity | 6 | 12 |
-| X transport | 1 | 4 |
-| Y transport | 1 | 4 |
-| Z transport | 1 | 2 |
-| **Total** | **9** | **22** |
-
-The active Z link is the present implementation blocker: its required hopping amplitudes are complex, while a single real static coupler cannot reproduce them. A phase-engineered parametric or multi-path implementation, or a revised rotating-frame/frequency plan, must be worked out before tape-out. See [Physical Realization](engineering/physical_prototype/docs/PHYSICAL_REALIZATION.md) and the [hardware risk register](engineering/physical_prototype/docs/RISK_REGISTER.md).
-
----
-
-## Mathematical Anchor
-
-The companion repository establishes the central fourth-moment result numerically and analytically at the stated mathematical level:
-
-$$
-\Delta_m(H^4,\theta)
-=-16\left(3^{m-1}+1\right)\sin^2\left(\frac{\theta}{2}\right).
-$$
-
-With normalization by `3^(m+1)+3`, the intensive invariant at `θ = π/2` approaches
-
-$$
-I_m\left(\frac{\pi}{2}\right)\longrightarrow -\frac{8}{9}.
-$$
-
-The current companion repository also documents gauge-invariance checks, vanishing of the first three spectral moments in the relevant defect construction, higher-moment numerical results, and the current Lean 4 formalization boundary. See the [theorem repository](https://github.com/RFT-SIRM/Evgeny-Theorem).
-
-> **Important:** `−8/9` is a normalized fourth spectral-moment invariant. It is **not** an energy gap and must not be presented as one.
-
----
-
-## Qubit Passport
-
-| Parameter | Research specification |
-|---|---|
-| Geometry | Sierpiński-gasket graph |
-| Internal degree | SU(2) spinor / pseudospin |
-| Nominal connection angle | `θ = π/2` |
-| Logical dimension | `dim(Q) = 2` candidate subspace |
-| Encoding | Selected low-energy subspace `Q = Ran(P)` |
-| Logical controls | `P Sx P`, `P Sy P`, `P Sz P` |
-| Spectral anchor | `I∞(π/2) = −8/9` |
-| Effective-control scale | Level 1: `g_eff = 0.1770433` at vertex 5; level 5 reference: `g_eff ≈ 0.015085`; level-dependent |
-| Leakage gap | Must be recomputed for graph refinement, normalization and physical parameter set |
-| Experimental status | Not experimentally validated |
-
-### Evidence boundary
-
-The value is **level- and convention-dependent**. The current finite-level study reports `g_eff = 0.1770433` for the level-1 local control at vertex 5, while `g_eff ≈ 0.015085` is the level-5 reference value. They are different finite graphs, not competing estimates of one universal constant.
-
-The computed level-1 leakage gap is `1.3937126931 J`. Neither this gap nor any other device gap follows from `I∞ = −8/9`; the latter is a normalized fourth-moment invariant.
-
----
-
-## Validation
-
-The numerical prototype now computes the finite-level graph, candidate doublet, leakage separation, projected local controls, hardware channel map and two-cell projected interaction. Physical acceptance still requires:
-
-- two-dimensional logical-subspace isolation;
-- reproducible spectral gap to leakage states;
-- projected-control linear independence and controllability;
-- gate fidelity under calibration uncertainty;
-- leakage during single- and two-qubit operations;
-- sensitivity to non-gauge perturbations;
-- fabrication disorder and parameter spread;
-- thermal excitation and relaxation;
-- readout fidelity;
-- inter-qubit coupling and crosstalk;
-- scaling with refinement level and device count.
-
-Gauge covariance of the mathematical spectrum is not equivalent to immunity from arbitrary laboratory noise.
-
----
-
-## IP / Patent Position
-
-The repository contains a technical disclosure intended to organize the architecture for patent counsel review. It identifies potentially protectable combinations such as:
-
-- self-similar graph connectivity used as a quantum-processing substrate;
-- non-Abelian SU(2) edge transport;
-- a prescribed connection-angle/axis construction;
-- logical encoding into a selected two-dimensional low-energy subspace;
-- projected logical controls;
-- calibration and validation procedures tied to the spectral construction.
-
-See **[PATENT_SPEC.md](PATENT_SPEC.md)**.
-
-This document is a technical disclosure, **not a legal opinion and not a statement that any claim is patentable**. Patentability depends on jurisdiction, priority date, enablement, written description, novelty, inventive step/non-obviousness, and prior art.
-
----
-
-## Comparison Framework
-
-See **[COMPARISON.md](COMPARISON.md)** for a factual architecture comparison covering classical accelerators, mainstream superconducting quantum processors, and the proposed RFT-QPU architecture. It intentionally avoids unsupported claims of superiority.
-
----
-
-## Installation
-
-### Requirements
-
-- Python 3.10+
-- NumPy
-- pytest for the test suite
-
-### Quick start
-
-```bash
-git clone https://github.com/RFT-SIRM/RFT-QPU-Sierpinski.git
-cd RFT-QPU-Sierpinski
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python qpu_core.py
-pytest -q
-```
-
-The top-level `qpu_core.py` is a compact research reference. The full finite-level numerical and hardware-mapping package is `engineering/physical_prototype/`; install it separately using its project instructions.
-
----
-
-## Closed engineering pre-release candidate v0.4-rc1 — 2026-11-11
-
-**Release channel: closed/internal engineering pre-release candidate.** This checkpoint consolidates the Stage 1–11B numerical work recorded through 11 November 2026 so it can be reproduced and extended from a single repository state. It is a software/model pre-release, **not** a fabrication release, foundry package, tape-out authorization, or experimental hardware claim.
-
-The standalone model and engineering package is maintained in [engineering/physical_prototype](engineering/physical_prototype/README.md). The stages are deliberately separated by evidence level:
-
-| Stage | Work recorded | Evidence boundary |
-|---|---|---|
-| 1–3 | Effective three-mode stress model, parameter sweeps, and Stage-3 charge-basis circuit assumptions | Declared circuit assumptions; not layout-extracted parameters |
-| 4–6 | Four-state logical gate propagation, local-Z frame fitting, full-matrix temporal convergence, and common-duration checks | Closed-system calculation in the retained Stage-5 local coupler basis |
-| 7–8 | Harmonic, chirp, and envelope exploration | Exploratory candidates; no waveform promoted solely from coarse-grid gains |
-| 9–10 | Shifted-bias and local frequency/duration refinement | Converged 120/240/480 candidate in the Stage-5 fixed local coupler basis |
-| 11A | Explicit local SQUID-coupler re-quantization at shifted DC flux, with charge-cutoff and retained-subspace comparisons | Local coupler audit; the first full-gate integration is recorded separately in Stage 11B |
-| 11B | Full three-mode Hamiltonian rebuilt in the shifted coupler basis; 120/240/480 baseline, local bias/frequency and amplitude/duration retuning, five-/six-level audit | Local nominal retune recorded; seven-level temporal convergence, full driven truncation convergence, uncertainty budgets and hardware effects remain open |
-
-### Best currently converged full-gate candidate — Stage 10
-
-| Quantity | Result |
+| Parameter | Selected point |
 |---|---:|
-| DC flux | `0.259343676252 Φ₀` |
-| Pump frequency | `987.609221499 MHz` |
-| Pump offset from shifted static detuning | `-64.000 kHz` |
-| Flux amplitude | `0.020000 Φ₀` |
-| Common physical pulse duration | `1.081002799582 μs` |
-| Raised-cosine ramp | `8.0` pump periods |
-| A → B probability, 480 grid | `0.999983152623` |
-| B → A probability, 480 grid | `0.999983152074` |
-| Projected process overlap after fitted local Z, 480 grid | `0.999991271648` |
-| Conditional iSWAP phase, 480 grid | `0.0021957288 rad` |
-| Richardson conditional phase | `0.0021963301 rad` |
+| DC flux bias | 0.25884589447013934 Φ₀ |
+| Pump frequency | 987.6171621707836 MHz |
+| Flux amplitude | 0.0199946062 Φ₀ |
+| Requested pulse duration | 1.081140796 μs |
+| Raised-cosine ramp | 8 pump periods |
 
-These are projected, closed-system numerical metrics. The process-overlap figure is not an experimental gate fidelity and does not include T1/T2, thermal population, flux-line distortion, crosstalk, calibration uncertainty, or fabrication spread.
+At 480 steps per period, five retained levels per mode (125-dimensional A–coupler–B product space), the reported local retune gives:
 
-### Stage 11A — local coupler re-quantization audit
-
-At charge cutoff 12 with five retained local levels, the coupler f01 changes from 5007.500000 MHz to 5075.910813 MHz (Δ +68.410813 MHz); the minimum matched-state overlap probability is 0.9989682 and the minimum retained-subspace singular value is 0.9995692.
-
-The Stage 11A report includes the 8/10/12 charge-cutoff × 3/4/5 retained-level local-coupler study. Stage 11B rebuilt the full three-mode Hamiltonian in the shifted local coupler basis, completed the original 120/240/480 baseline, and then performed local bias/frequency and amplitude/duration retuning. The selected nominal point and its five-/six-level checks are recorded below; the seven-level 240/480 temporal audit and broader uncertainty qualification remain open.
-
-### Stage 11B — re-quantized gate retuning update (11 November 2026)
-
-The Stage 11B baseline was followed by deterministic local searches in the rebuilt re-quantized model: a bias × pump-frequency screen, then a local amplitude × duration screen. The current selected nominal point is:
-
-| Quantity | Selected value |
+| Metric | Model result |
 |---|---:|
-| DC bias | `0.25884589447013934 Φ₀` |
-| Pump frequency | `987.6171621707836 MHz` |
-| Flux amplitude | `0.0199946062 Φ₀` |
-| Requested duration | `1.081140796 μs` |
-| Raised-cosine ramp | `8` pump periods |
+| Projected process overlap after local-Z fit | 0.9999999793763371 |
+| Average logical-state fidelity including leakage | 0.9999999803654352 |
+| A → B transfer probability | 0.9999999973549074 |
+| B → A transfer probability | 0.999999992602828 |
+| Conditional iSWAP phase | 0.00027739757232 rad |
+| Maximum sampled logical leakage | 3.312 × 10⁻⁴ |
+| Maximum sampled coupler-excited population | 6.090 × 10⁻³ |
 
-At 480 steps per period with five retained levels per mode (125-dimensional product space):
+![Stage 11B selected local operating point](docs/assets/stage11b-operating-point.svg)
 
-| Metric | Result |
-|---|---:|
-| Projected process overlap after local-Z fit | `0.9999999793763371` |
-| Average logical-state fidelity including leakage | `0.9999999803654352` |
-| A → B transfer probability | `0.9999999973549074` |
-| B → A transfer probability | `0.999999992602828` |
-| Conditional iSWAP phase | `0.00027739757232 rad` |
-| Final norm error | `1.31 × 10⁻⁹` |
-| Maximum sampled logical leakage | `3.312 × 10⁻⁴` |
-| Maximum sampled coupler-excited population | `6.090 × 10⁻³` |
+These numbers are **closed-system numerical projections** with nominal circuit assumptions. The selected retune is recorded in [the Stage 11B local-retune note](engineering/physical_prototype/docs/STAGE11B_LOCAL_RETUNE_NOTE.md). The raw JSON/NPZ files for those local retune runs are not tracked in this repository; their reported SHA-256 fingerprints are retained in the note. The original Stage 11B baseline JSON and matrix archive are tracked under engineering/physical_prototype/results/.
 
-At the same operating point, the six-level (216-dimensional) process overlap after local-Z fitting was `0.999999967757` at 480 steps/period. The five-/six-level phase-aligned matrix Frobenius difference at 480 steps/period was `1.8981859 × 10⁻⁴`. This is a useful cross-check, not proof that the retained-level limit has converged.
+**Important model boundary:** Stage 11B is an A–coupler–B three-mode circuit simulation. It is not a driven simulation of the complete 12-transmon Sierpiński tile.
 
-The seven-level model has so far been checked only at 120 steps/period. Its phase-aligned matrix difference from the six-level result at that grid was `2.3211679 × 10⁻⁵`; the raw matrix difference is frame-dependent and is not used as the convergence metric. Seven-level 240/480 propagation remains a pending numerical audit.
+The six-level 480-grid process overlap was 0.999999967757. The seven-level model is only spot-checked at 120 steps per period; seven-level 240/480 propagation remains open. The five-level driven charge-cutoff screen is documented, but it does not close the full retained-level convergence question.
 
-A separate five-retained-level driven truncation screen found the full logical-matrix difference relative to charge-cutoff 10 of `8.15 × 10⁻⁸` at cutoff 8 and `8.78 × 10⁻⁸` at cutoff 12. The three-/four-retained-level variants differed by approximately `9.79 × 10⁻⁴` and `9.24 × 10⁻⁴`, respectively. These data support the five-level choice in that screen; they do not replace the outstanding matched seven-level temporal/charge-cutoff study.
+## Scale and engineering path
 
-The fine-retune outputs were created locally under `RFT-QPU-Stage11B-FineRobustness` and `RFT-QPU-Stage11B-LocalPulseRetune`. The local manifests reported the following SHA-256 fingerprints:
+The graph counts and transmon counts below are structural outputs of the current mapping. They are not fabrication-cost, yield, wiring, packaging or cryogenic-resource estimates.
 
-| Local artifact | SHA-256 reported by the run |
+| Graph level | Sites | Edges | Transmons | Leakage gap / J | Best local g_eff |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 6 | 9 | 12 | 1.393713 | 0.177043 |
+| 2 | 15 | 27 | 30 | 0.397335 | 0.079709 |
+| 3 | 42 | 81 | 84 | 0.088608 | 0.034749 |
+| 4 | 123 | 243 | 246 | 0.015864 | 0.017990 |
+| 5 | 366 | 729 | 732 | 0.002986 | 0.015085 |
+
+![Modular scaling scenarios](docs/assets/scale-roadmap.svg)
+
+A separate static two-cell projection gives an interaction coefficient of 0.00783608327 χ. The corresponding 6.38074 μs entangling-time estimate assumes χ/(2π) = 10 MHz and is **not a calibrated or measured gate**.
+
+## Noise, leakage and what has not been demonstrated
+
+The current engineering record is explicit about its limits:
+
+- At the illustrative J/(2π) = 10 MHz, the level-1 leakage gap is 13.94 MHz. At 10 mK, kBT/h is 208.37 MHz and the corresponding equilibrium Boltzmann benchmark is about 0.935. This does not support a claim of passive thermal protection.
+- The graph-wide first-order nine-tone screen reports 73 primary resonance warnings within 10 MHz and 653 conditional harmonic/intermodulation warnings. Simultaneous nine-tone operation is **not cleared**.
+- The Stage 11B gate calculation does not include T1/T2, thermal-bath dynamics, flux-line transfer, pump phase noise, delay, distortion, crosstalk or layout-extracted parasitics.
+- Circuit capacitances and Josephson parameters are assumptions rather than layout-extracted values.
+- No chip has been fabricated or measured. There are no experimental gate fidelities, coherence times, readout results or fault-tolerance demonstrations.
+
+See [Evidence boundary](docs/DISCLOSURE_BOUNDARY.md), [Risk register](engineering/physical_prototype/docs/RISK_REGISTER.md) and [Validation gates](engineering/physical_prototype/docs/VALIDATION_GATES.md).
+
+## Development gates
+
+![RFT-QPU validation roadmap](docs/assets/validation-roadmap.svg)
+
+1. **Numerical model:** graph construction, SU(2) Hamiltonian, projected controls, circuit studies and regression tests are recorded.
+2. **Circuit feasibility:** resolve the complex Z link, pump collisions, multilevel dynamics, open-system effects and device-specific tolerances.
+3. **One-cell demonstrator:** fabricate and characterize a 12-transmon tile; measure its spectrum, controls, leakage, coherence and readout.
+4. **Two-cell entangler:** build and measure a 24-transmon two-cell system and demonstrate an entangling logical gate.
+5. **Modular scale-up:** scale only after measured single-cell and two-cell gates pass predeclared criteria.
+
+A green software workflow is a model-integrity result, not a hardware-validation gate.
+
+## IP, attribution and confidentiality
+
+**Project author attribution: Evgeny Zaprudnov.** The citation metadata is corrected to this name. Authorship attribution does not, by itself, establish patent inventorship or the chain of legal title.
+
+The repository contains a patent-oriented technical disclosure for review by qualified patent counsel. It is **not** a patent application, legal opinion, novelty search or grant. At this review date, this repository records no patent application number, filing date, patent office or granted patent. This is a repository audit statement, not proof about documents held outside the repository.
+
+The repository remains private. Do not publish the technical disclosure, detailed coupling maps, source code or enabling diagrams, or share them with prospective partners, before confidentiality and filing strategy have been reviewed. See:
+
+- [Patent-oriented technical disclosure](PATENT_SPEC.md)
+- [IP, ownership and licensing framework](IP_AND_LICENSING.md)
+- [Proprietary rights notice](LICENSE.md)
+- [Disclosure log template](docs/DISCLOSURE_LOG_TEMPLATE.md)
+
+## Reproducibility
+
+From the repository root:
+
+    python -m pip install -e 'engineering/physical_prototype[test]'
+    python -m pytest -q tests engineering/physical_prototype/tests
+
+The Stage 11B baseline runner is:
+
+    python engineering/physical_prototype/scripts/run_stage11b_requantized_gate.py
+
+The historical pre-release preparation recorded 75 passing tests locally on Python 3.14.2. The merged Stage 11B PR #5 also has a successful GitHub Actions run #23 on the reviewed head. These records predate this documentation-only branch; the documentation branch itself still requires its own CI check.
+
+## Repository map
+
+| Document | Purpose |
 |---|---|
-| FineRobustness report JSON | `46ed497a3c244e802182ac56c48f3652588d0ecc913ba16e22327a4af5625cac` |
-| FineRobustness matrices NPZ | `1ef4fa45bfb76727d98f561b58ba1693a9593a3819ce3ac7d043b7c35a274942` |
-| LocalPulseRetune report JSON | `b0fa114e4e4d7de9d95cd2441e6de25093543a8d2b66d401226d296427512c21` |
-| LocalPulseRetune matrices NPZ | `e3c250f214ba2ac77cdd9aa208cf09f036c4e9e7deb3d262d3ef2b7b822cfbe4` |
+| [COMPARISON.md](COMPARISON.md) | Architecture and noise-evidence comparison |
+| [INVESTOR_BRIEF.md](INVESTOR_BRIEF.md) | Internal strategic-partner brief |
+| [PATENT_SPEC.md](PATENT_SPEC.md) | Technical disclosure for patent counsel |
+| [IP_AND_LICENSING.md](IP_AND_LICENSING.md) | Authorship, title, patent strategy and commercial licensing |
+| [REPOSITORY_STATUS.md](REPOSITORY_STATUS.md) | Audited project status |
+| [docs/VALIDATION_PLAN.md](docs/VALIDATION_PLAN.md) | Staged evidence and hardware acceptance plan |
+| [engineering/physical_prototype/README.md](engineering/physical_prototype/README.md) | Numerical package and stage map |
+| [engineering/physical_prototype/results/RESULT_SUMMARY.md](engineering/physical_prototype/results/RESULT_SUMMARY.md) | Finite-level and two-cell result summary |
 
-These hashes identify the user-side output artifacts; the raw fine-retune JSON/NPZ files themselves were not present in the GitHub workspace during this README update and are not represented as repository-tracked binaries here. The original Stage 11B baseline report and its six 4×4 matrices remain tracked under `engineering/physical_prototype/results/`.
-
-**Evidence boundary:** these are deterministic, closed-system numerical projections with nominal Stage-3 circuit assumptions. The local retune does not include calibrated flux-line response, noise distributions, T1/T2, thermal excitation, crosstalk, layout-extracted parasitics or hardware measurements. The model's projected process overlap is not an experimental gate fidelity.
-
-### Reproducibility snapshot
-
-- Local interpreter: `Python 3.14.2`.
-- Complete repository + prototype test command: `python -m pytest -q tests engineering/physical_prototype/tests`.
-- Captured local result during this pre-release preparation: **75 passed in 1.33s**.
-- Pre-release base commit: `d9b374c1dbd7e24050a33b13acf21f57858ff775`.
-- Stage reports, scripts, tests, JSON/CSV data and complex-matrix NPZ archives are retained under `engineering/physical_prototype/`.
-
-GitHub Actions on the release-candidate pull request is the required CI check. A local pass is not a substitute for the Python 3.11 CI run.
-
-### Release blockers — explicitly not closed
-
-1. Complete the seven-level 240/480 temporal-convergence audit and matched full-matrix comparisons across five, six and seven retained levels; extend the driven charge-cutoff check beyond the five-level screen.
-2. Turn the local deterministic pulse search into parameter-tolerance and uncertainty budgets; the current grids are not a worst-case robustness envelope.
-3. Add measured or target flux-line transfer functions, bandwidth, delay, distortion, pump phase noise and channel crosstalk.
-4. Add open-system dynamics (T1/T2, thermal occupation, relaxation/dephasing, leakage and spectator channels).
-5. Replace assumed capacitances/Josephson parameters with layout extraction and independent circuit-QED review.
-6. Resolve the graph-wide simultaneous nine-tone Floquet collision warnings before simultaneous operation or tape-out.
-7. Obtain fabrication, EM, packaging, readout, calibration and independent hardware review.
-
-The graph-wide first-order screen remains uncleared: the existing audit reports 73 primary pump/sideband warnings within 10 MHz and 653 conditional harmonic/intermodulation warnings. These are possible resonance scenarios, not measured error rates.
-
-**Status:** closed/internal engineering pre-release candidate v0.4-rc1 for continued numerical and circuit-design work. It is not a fabricated or experimentally validated device, not a foundry-ready design, and not permission to proceed directly to tape-out.
-
----
-
-## Companion theorem repository
-
-The mathematical reference implementation and Lean 4 formalization are maintained separately:
-
-**[RFT-SIRM / Evgeny-Theorem](https://github.com/RFT-SIRM/Evgeny-Theorem)**
-
-The current public status distinguishes the machine-checked graph infrastructure from the still-open general operator-level Lean proof of `TraceDefectIdentity`. That distinction is intentional and should remain visible in investor and patent materials.
-
----
-
-## Repository Map
-
-| File | Purpose |
-|---|---|
-| [PATENT_SPEC.md](PATENT_SPEC.md) | Patent-oriented technical disclosure |
-| [COMPARISON.md](COMPARISON.md) | Factual technology comparison |
-| [INVESTOR_BRIEF.md](INVESTOR_BRIEF.md) | Investor / partner one-page narrative |
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Mathematical-to-transmon architecture and current device mapping |
-| [site preview](docs/index.html) | Responsive, self-contained architecture presentation |
-| [SITE_DEPLOYMENT.md](docs/SITE_DEPLOYMENT.md) | Publication boundary and deployment prerequisites |
-| [VALIDATION_PLAN.md](docs/VALIDATION_PLAN.md) | Updated numerical-to-hardware validation gates |
-| [level-1 topology SVG](engineering/physical_prototype/design/level1_transmon_topology.svg) | Source schematic for the 12-transmon demonstrator |
-| [DISCLOSURE_BOUNDARY.md](docs/DISCLOSURE_BOUNDARY.md) | What is established vs proposed |
-| [qpu_core.py](qpu_core.py) | Minimal numerical core |
-| [engineering/physical_prototype/README.md](engineering/physical_prototype/README.md) | Executable numerical and engineering prototype |
-| [tests/test_qpu_core.py](tests/test_qpu_core.py) | Core simulator tests |
-| [requirements.txt](requirements.txt) | Runtime/test dependencies |
-| [CITATION.cff](CITATION.cff) | Citation metadata |
-| [LICENSE.md](LICENSE.md) | Business 1.0 proprietary license |
-
----
-
-## Research Status
-
-**Status: closed/internal engineering pre-release candidate v0.4-rc1 (software/model checkpoint); physical hardware remains pre-experimental.**
-
-No statement in this repository should be read as a claim of demonstrated fault tolerance, universal error correction, arbitrary-noise immunity, commercial fabrication readiness, or experimentally measured qubit performance.
-
-The purpose of this repository is to make the proposed architecture precise enough to be independently simulated, challenged, refined, and eventually tested.
-
-
-## Nine-tone pump collision screen — 11 November 2026
-
-The isolated 245 MHz phase-conjugate Z link has a reduced four-qutrit process overlap of 0.999609. However, the first-order graph-wide screen of the nine-tone schedule finds a 0 MHz minimum primary resonance margin and 73 primary pump/sideband warnings within 10 MHz across the 22 channel rows. Conditional second/third harmonics and pairwise intermodulation scenarios raise the warning count to 653. These are possible resonances if cross-coupling exists, not measured error probabilities.
-
-The current schedule is **not cleared for simultaneous nine-tone operation**. Reproduce the audit from the engineering package with `PYTHONPATH=src python scripts/run_floquet_audit.py`. See [the detailed audit](engineering/physical_prototype/docs/FLOQUET_COLLISION_AUDIT.md). A redesigned frame assignment, measured 22×22 channel-transfer matrix and explicit data–coupler–data circuit model remain required.
+**Status:** closed/internal software and model pre-release candidate v0.4-rc1. Private repository. Not a fabrication release, tape-out package or experimentally validated QPU.

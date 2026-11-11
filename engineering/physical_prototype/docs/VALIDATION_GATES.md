@@ -1,74 +1,76 @@
-# Hardware validation gates
+# Hardware and model validation gates
 
-## Gate 0 — model/software integrity
+## Gate 0 — software/model integrity
 
-- [x] Canonical Sierpinski graph recursion and face/edge ordering in a reproducible package.
-- [x] SU(2) edge transport and full Hamiltonian construction.
-- [x] Hermiticity and local gauge covariance regression tests.
-- [x] Effective time-reversal/Kramers-like symmetry check.
-- [x] Projected-control rank and singular-value analysis.
-- [x] Level-1 transmon coefficient/netlist export.
-- [x] Initial disorder and thermal-scale diagnostics.
+- [x] Canonical Sierpiński graph recursion and level counts.
+- [x] SU(2) edge transport and graph Hamiltonian construction.
+- [x] Hermiticity, covariance and effective-symmetry regression checks.
+- [x] Candidate doublet, leakage gap and projected-control analysis.
+- [x] Level-1 coefficient export and two-cell static projection.
+- [x] Stage 11B initial full three-mode re-quantized baseline with 120/240/480 matrix archive.
+- [x] Historical local suite record: 75 passing tests.
+- [x] Merged Stage 11B PR #5 CI run #23: successful.
+
+A new documentation branch must pass its own CI check. Gate 0 validates the software/model record only.
 
 ## Gate 1 — circuit feasibility (before tape-out)
 
-- [ ] Produce a circuit-level coupler Hamiltonian for every complex channel.
-- [ ] Verify all pump frequencies and avoid harmful frequency collisions.
-- [ ] Resolve the resonant complex Z-edge channel with a concrete multi-path/static-flux or Floquet coupler design; demonstrate its phase experimentally.
-- [ ] Extract static and driven ZZ, residual exchange, Stark shifts and higher sidebands.
-- [ ] Simulate at least the first three transmon levels per mode and coupler dynamics.
-- [ ] Run a full 12-transmon open-system simulation with measured/target T1, T2, thermal occupation and pump noise.
+**Status: open.**
+
+- [ ] Produce a physical coupler Hamiltonian for every complex exchange channel.
+- [ ] Resolve the resonant complex Z edge; one real static coupler is insufficient.
+- [ ] Validate the multi-path or auxiliary Floquet phase-engineering option.
+- [ ] Redesign the graph-wide nine-tone allocation and clear the current 73 primary / 653 conditional warnings.
+- [ ] Extract static/driven ZZ, residual exchange, Stark shifts, sidebands and spectator interactions.
+- [ ] Simulate multi-level transmons and coupler dynamics.
+- [ ] Add realistic open-system T1/T2 and thermal population.
 - [ ] Close package, filtering, magnetic environment, flux-line and readout layout.
-- [ ] Obtain independent circuit-QED/fabrication review.
+- [ ] Replace declared circuit assumptions with layout extraction and independent EM/circuit-QED review.
 
 ## Gate 2 — one-cell fabricated demonstrator
 
-- [ ] Spectroscopically identify 12 modes and the 22 inter-site exchange channels.
-- [ ] Calibrate all complex amplitudes and phases with uncertainty bars.
-- [ ] Measure effective Hamiltonian and compare to the ideal 12x12 one-excitation matrix.
-- [ ] Reconstruct the lowest two dressed states and next leakage doublet.
-- [ ] Measure ground-doublet splitting and leakage gap across repeated cooldowns.
+**Status: not fabricated or measured.**
+
+- [ ] Fabricate one level-1 tile containing 12 data transmons.
+- [ ] Spectroscopically identify all modes and the 22 effective exchange channels.
+- [ ] Calibrate complex amplitudes and phases with uncertainty bars.
+- [ ] Measure the effective Hamiltonian and compare it with the ideal 12×12 one-excitation matrix.
+- [ ] Reconstruct the lowest two dressed states and the next leakage state(s).
+- [ ] Measure doublet splitting and leakage gap across repeated cooldowns.
 - [ ] Reconstruct projected X/Y/Z operators and verify rank three.
 - [ ] Demonstrate state preparation, single-logical-qubit rotations and tomography.
-- [ ] Measure leakage, coherence, thermal repopulation and drift.
+- [ ] Measure leakage, coherence, thermal repopulation, drift, reset and readout assignment.
 
-## Gate 3 — two-cell universal-gate test
+## Gate 3 — two-cell entangling demonstrator
 
-- [ ] Couple two level-1 cells (24 transmons).
-- [ ] Derive and calibrate a number-conserving inter-cell interaction.
-- [ ] Verify that the projected interaction is entangling (nonlocal invariant / process tomography).
-- [ ] Measure two-logical-qubit gate fidelity, leakage and spectator effects.
-- [ ] Repeat at multiple coupler biases and cooldowns.
+**Status: static model projection only.**
 
-## Gate 4 — processor tile
+- [ ] Couple two calibrated level-1 cells (24 data transmons).
+- [ ] Implement the four cross-Kerr channels with the required (+, −, −, +) sign pattern.
+- [ ] Calibrate the two-logical-qubit interaction and pulse envelope.
+- [ ] Verify entanglement using process tomography or a suitable non-local invariant.
+- [ ] Measure leakage, spectator effects, crosstalk and repeatability.
+- [ ] Repeat over bias points and cooldowns.
+
+The 6.38074 μs time estimate assumes χ/(2π)=10 MHz and is not a measured gate time.
+
+## Gate 4 — modular processor tile
+
+**Status: future work.**
 
 - [ ] Replicate at least 5–10 logical cells.
-- [ ] Validate simultaneous independent gates and simultaneous readout.
-- [ ] Measure crosstalk and correlated errors between cells.
+- [ ] Validate simultaneous independent gates and readout.
+- [ ] Measure inter-cell crosstalk and correlated errors.
 - [ ] Demonstrate stable calibration and automated drift correction.
-- [ ] Produce a first logical compilation and runtime stack.
+- [ ] Establish the logical compilation and runtime stack.
 
-## Gate 5 — scalable processor / protection claim
+## Gate 5 — scalable processor and protection claims
+
+**Status: future work.**
 
 - [ ] Demonstrate a fault-tolerance-compatible logical gate set.
 - [ ] Implement and measure a chosen error-correction or leakage-reduction protocol.
 - [ ] Show logical error suppression with increasing code size or protection depth.
 - [ ] Publish full hardware data, uncertainty budgets and independent reproduction instructions.
 
-A green numerical test suite is Gate 0 only. A successful one-cell chip is Gate 2 only. Neither is, by itself, a universal or fault-tolerant quantum computer.
-
-## Closed engineering pre-release candidate v0.4-rc1
-
-This is a **software/model release checkpoint**, not a hardware validation gate. It can be closed independently while the following physical gates remain open.
-
-- [x] Stages 1–10 source, reports, tests and numerical outputs consolidated.
-- [x] Stage 10 full logical matrix calculated at 120/240/480 steps per period with a common physical pulse duration.
-- [x] Stage 11A local SQUID coupler re-quantization audit executed for charge cutoffs [8, 10, 12] and retained levels [3, 4, 5].
-- [x] Local compile and full test suite recorded as **75 passed in 1.33s** on Python 3.14.2.
-- [ ] Release-candidate GitHub Actions run on Python 3.11 must pass before merge.
-- [ ] Stage 11B: rebuild the complete three-mode Hamiltonian and driven gate using the re-quantized coupler basis; reconverge full matrices at 120/240/480.
-- [ ] Re-run robust bias/frequency/amplitude/duration sweeps with the Stage 11B model.
-- [ ] Add flux-line transfer, phase noise, crosstalk and open-system T1/T2/thermal models.
-- [ ] Replace declared circuit assumptions with layout-extracted parameters and independent circuit-QED/EM review.
-
-**Interpretation:** passing the software pre-release gate does not close Gate 1 circuit feasibility, Gate 2 fabrication, Gate 3 two-cell gate, or any fault-tolerance/scaling gate above.
+A passing software suite is Gate 0 only. A successful one-cell chip is Gate 2 only. Neither alone demonstrates a universal or fault-tolerant quantum computer.
