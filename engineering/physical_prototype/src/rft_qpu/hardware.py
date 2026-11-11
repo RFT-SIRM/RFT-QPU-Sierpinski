@@ -10,6 +10,9 @@ import numpy as np
 from .graph import SGGraph, build_sg_graph
 from .hamiltonian import edge_transports
 
+# The level-1 rotating-frame assignment used by the current nine-tone audit.
+DEFAULT_FRAME_OFFSETS_MHZ = (0.0, 350.0, 270.0, 465.0, 515.0, 655.0)
+
 
 def transmon_id(vertex: int, spin: int) -> str:
     return f"q{vertex:02d}_{'up' if spin == 0 else 'dn'}"
@@ -42,13 +45,40 @@ def level_scale_table(max_level: int = 5) -> list[dict]:
     return rows
 
 
-def coupler_rows(graph: SGGraph, theta: float, J_over_2pi_MHz: float) -> list[dict]:
+def coupler_rows(
+    graph: SGGraph,
+    theta: float,
+    J_over_2pi_MHz: float,
+    frame_offsets_MHz: tuple[float, ...] | None = None,
+) -> list[dict]:
     rows = []
     degrees = graph.degrees
+    if frame_offsets_MHz is None:
+        # The explicit six-site frame plan is only defined for level 1.
+        # For other graph sizes retain the legacy degree-frame behavior.
+        frame_offsets = (
+            DEFAULT_FRAME_OFFSETS_MHZ
+            if graph.n_vertices == len(DEFAULT_FRAME_OFFSETS_MHZ)
+            else None
+        )
+    else:
+        frame_offsets = tuple(float(x) for x in frame_offsets_MHz)
+        if len(frame_offsets) != graph.n_vertices:
+            raise ValueError("frame_offsets_MHz must have one value per graph vertex")
+        if any(not math.isfinite(x) for x in frame_offsets):
+            raise ValueError("frame_offsets_MHz values must be finite")
     for edge_index, transport in enumerate(edge_transports(graph, theta)):
         U = transport.matrix
+        # Preserve the mathematical onsite term separately from the chosen
+        # rotating-frame assignment. The pump follows the frame difference;
+        # qutrit collision targets use the signed onsite detuning.
         detuning = (degrees[transport.a] - degrees[transport.b]) * J_over_2pi_MHz
-        pump_frequency = abs(detuning)
+        frame_detuning = (
+            detuning
+            if frame_offsets is None
+            else frame_offsets[transport.a] - frame_offsets[transport.b]
+        )
+        pump_frequency = abs(frame_detuning)
         for spin_a in range(2):
             for spin_b in range(2):
                 element = U[spin_a, spin_b]
@@ -67,6 +97,8 @@ def coupler_rows(graph: SGGraph, theta: float, J_over_2pi_MHz: float) -> list[di
                     "U_imag": float(element.imag),
                     "coupling_amplitude_MHz": float(abs(hopping) * J_over_2pi_MHz),
                     "coupling_phase_deg": float(np.angle(hopping, deg=True)),
+                    "frame_detuning_MHz_signed": float(frame_detuning),
+                    "target_onsite_detuning_MHz_signed": float(detuning),
                     "site_detuning_MHz_signed": float(detuning),
                     "pump_frequency_MHz": float(pump_frequency),
                     "drive_implementation_note": (
