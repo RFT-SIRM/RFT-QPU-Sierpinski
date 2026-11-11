@@ -50,7 +50,7 @@ Do not approve simultaneous nine-tone operation until the frame plan is redesign
 
 ## Gate 2C — Circuit-derived driven-coupler numerical pre-release
 
-**Status: Stage 10 full-gate candidate converged in the Stage-5 fixed local coupler basis; Stage 11A local coupler re-quantization audit complete; Stage 11B full-gate integration open.**
+**Status: Stage 10 fixed-basis candidate retained for comparison; Stage 11A local coupler re-quantization audit complete; initial Stage 11B full three-mode rebuild and 120/240/480 gate convergence complete. Robust retuning and hardware qualification remain open.**
 
 Stage 10 reference at 480 steps/period:
 
@@ -68,8 +68,8 @@ Stage 11A explicitly re-diagonalizes the local SQUID Hamiltonian at the shifted 
 
 Required before this gate can be considered circuit-qualified:
 
-- [ ] Rebuild the complete three-mode Hamiltonian and driven four-state gate using the Stage-11A re-quantized coupler basis.
-- [ ] Re-run common-duration 120/240/480 convergence of the full logical matrices.
+- [x] Rebuild the complete three-mode Hamiltonian and driven four-state gate using the Stage-11A re-quantized coupler basis (initial nominal 10-charge-cutoff / 5-level baseline).
+- [x] Re-run common-duration 120/240/480 convergence of the full logical matrices; archive the complex matrices and convergence comparisons.
 - [ ] Repeat robust bias/frequency/amplitude/duration sweeps in the rebuilt model.
 - [ ] Add flux-line transfer, pump phase noise, crosstalk and open-system T1/T2/thermal effects.
 
