@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="420" viewBox="0 0 1100 420" role="img" aria-labelledby="title desc">
+<title id="title">Stage 11B selected numerical operating point</title>
+<desc id="desc">Summary of the five-level local retune projected process overlap, six-level cross-check and the distinction between the simulated three-mode gate and measured hardware performance.</desc>
+<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101b31"/><stop offset="1" stop-color="#213c5c"/></linearGradient></defs>
+<rect width="1100" height="420" rx="24" fill="url(#b)"/>
+<text x="46" y="55" fill="#f6f8ff" font-family="Arial,sans-serif" font-size="25" font-weight="700">Stage 11B · selected local retune</text>
+<text x="46" y="84" fill="#b4c5dc" font-family="Arial,sans-serif" font-size="15">Closed-system A–coupler–B model · 480 steps per pump period</text>
+<g font-family="Arial,sans-serif">
+  <rect x="45" y="118" width="320" height="212" rx="17" fill="#1b3453" stroke="#587da5"/>
+  <text x="70" y="153" fill="#9eb8d4" font-size="14">FIVE-LEVEL MODEL · DIMENSION 125</text>
+  <text x="70" y="203" fill="#53d6c2" font-size="34" font-weight="700">0.999999979376</text>
+  <text x="70" y="230" fill="#eef4ff" font-size="16">Projected process overlap</text>
+  <text x="70" y="254" fill="#b4c5dc" font-size="12">after local-Z fitting</text>
+  <path d="M70 282 L335 282" stroke="#4e6c8b" stroke-width="7" stroke-linecap="round"/>
+  <path d="M70 282 L334.999994 282" stroke="#53d6c2" stroke-width="7" stroke-linecap="round"/>
+  <text x="70" y="309" fill="#b4c5dc" font-size="12">Avg. logical-state fidelity incl. leakage: 0.999999980365</text>
+  <rect x="390" y="118" width="320" height="212" rx="17" fill="#1b3453" stroke="#587da5"/>
+  <text x="415" y="153" fill="#9eb8d4" font-size="14">SIX-LEVEL CROSS-CHECK · DIMENSION 216</text>
+  <text x="415" y="203" fill="#8caeff" font-size="34" font-weight="700">0.999999967757</text>
+  <text x="415" y="230" fill="#eef4ff" font-size="16">Projected process overlap</text>
+  <text x="415" y="254" fill="#b4c5dc" font-size="12">same nominal point and 480-grid run</text>
+  <path d="M415 282 L680 282" stroke="#4e6c8b" stroke-width="7" stroke-linecap="round"/>
+  <path d="M415 282 L679.999997 282" stroke="#8caeff" stroke-width="7" stroke-linecap="round"/>
+  <text x="415" y="309" fill="#b4c5dc" font-size="12">5/6-level matrix difference: 1.898 × 10⁻⁴</text>
+  <rect x="735" y="118" width="320" height="212" rx="17" fill="#203e4a" stroke="#53d6c2"/>
+  <text x="760" y="153" fill="#9fcfc7" font-size="14">SAMPLED TRANSIENT DIAGNOSTICS</text>
+  <text x="760" y="202" fill="#ffffff" font-size="30" font-weight="700">3.31 × 10⁻⁴</text>
+  <text x="760" y="226" fill="#d5e7e4" font-size="14">Maximum logical leakage</text>
+  <text x="760" y="268" fill="#ffffff" font-size="30" font-weight="700">6.09 × 10⁻³</text>
+  <text x="760" y="292" fill="#d5e7e4" font-size="14">Maximum coupler population</text>
+  <text x="760" y="315" fill="#9fcfc7" font-size="11">Sampled values, not continuous-time bounds</text>
+</g>
+<rect x="45" y="354" width="1010" height="42" rx="12" fill="#462f34" stroke="#b87578"/>
+<text x="550" y="380" text-anchor="middle" fill="#ffe9e9" font-family="Arial,sans-serif" font-size="14" font-weight="700">Numerical projections only — not a measured gate, not the full 12-mode tile, not hardware fidelity.</text>
+</svg>

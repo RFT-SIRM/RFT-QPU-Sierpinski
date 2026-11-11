@@ -1,12 +1,13 @@
 cff-version: 1.2.0
-message: "If this research package is used, please cite the RFT-QPU-Sierpinski technical repository and the companion Evgeny's Theorem repository."
+message: "Please cite the RFT-QPU-Sierpinski research and engineering repository. Project author attribution: Evgeny Zaprudnov. This repository is private and does not grant a public reuse licence."
 title: "RFT-QPU-Sierpinski"
-version: "0.1.0"
-date-released: 2026-09-25
+version: "0.4.0-rc1"
+date-released: 2026-11-11
 type: software
 url: https://github.com/RFT-SIRM/RFT-QPU-Sierpinski
 repository-code: https://github.com/RFT-SIRM/RFT-QPU-Sierpinski
-license: "Proprietary"
+license: "NOASSERTION"
 authors:
-  - family-names: "[Author]"
+  - family-names: "Zaprudnov"
     given-names: "Evgeny"
+    affiliation: "RFT-SIRM"

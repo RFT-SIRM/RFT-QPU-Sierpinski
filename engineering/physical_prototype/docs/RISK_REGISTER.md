@@ -1,30 +1,33 @@
-# Engineering risk register
+# Engineering risk register — reviewed 11 November 2026
 
-| Risk | Evidence / calculation | Impact | Required mitigation / decision |
+| Risk | Current evidence | Impact | Mitigation / decision |
 |---|---|---|---|
-| Thermal scale is too small for passive memory | At level 1 and `J/(2 pi)=10 MHz`, gap is 13.94 MHz; at 10 mK, `kBT/h` is 208.37 MHz and the equilibrium Boltzmann benchmark is 0.935 | Cannot claim passive thermal protection from this gap | Treat first chip as a dynamically prepared demonstrator; measure bath coupling and thermal repopulation; investigate stronger J, active cooling and alternative platforms |
-| Parametric link count / pump crosstalk | Level 1 needs 22 effective exchange channels; frequency collisions depend on actual device spectrum | Incorrect phases/amplitudes alter SU(2) links and the spectrum | Joint frequency-plan and pump-spectrum optimization before tape-out |
-| Resonant complex Z link | The level-1 Z face edge joins two degree-4 sites (zero detuning in the initial frequency plan) but requires opposite complex diagonal phases | A single real resonant coupler cannot provide the required phase | Design a multi-path/static-flux or auxiliary Floquet coupler, or re-optimize the frequency/frame convention; validate before tape-out |
-| Effective antiunitary symmetry breaking | Ideal SU(2) model has Kramers-like pair; random local z fields split it | Logical splitting / dephasing | Calibrate and bound differential mode shifts and pump phase errors; add symmetry-breaking diagnostics |
-| Coupling disorder | 250 numerical samples at +/-10% positive scalar edge weights preserve the doublet but reduce minimum gap to 1.311 J in the sample | Gap degradation and localization | Measure each link; use weighted Hamiltonian fitting; set per-edge tolerance from open-system simulation |
-| Local controls | Level-1 best local `g_eff=0.177`; level-5 falls to 0.015085 | Large refinement weakens local logical drive and slows gates | Start level 1; compare local vs global controls; optimize controls before increasing refinement |
-| Entangling gate undefined experimentally | One cell has no second logical qubit; four cross-Kerr terms are only a design target | No universal processor without entanglers | Make two-cell gate a mandatory Gate 3; do not claim a complete computer before it passes |
-| Transmon higher-level leakage | Ideal calculation uses a two-component single-excitation model | Real transmons are multilevel and driven | Simulate at least 3 levels per transmon and coupler; measure leakage during parametric pulses |
-| Readout of a distributed logical state | The encoded state is delocalized across 12 modes | A single readout is insufficient for tomography | Calibrate full measurement map, multiplex readout and state reconstruction |
-| Scaling costs | Level 5 already maps to 732 transmons and 1,782 inter-site effective channels per cell | Direct large-level implementation may be impractical | Keep first tile at level 1; compare a distributed/digital encoding before scaling the SG level |
-| Mathematical model transfer | Different RFT operator families and graph conventions must remain separate | Invalid inference from companion projects | Keep provenance, operator definition and graph convention pinned in every result |
+| Resonant complex Z link | The active Z face edge joins two degree-4 sites and requires complex diagonal hopping phases | A single real static resonant coupler cannot realize the required phase | Design and simulate a multi-path/static-flux or auxiliary Floquet coupler, or revise frame/frequency plan; validate before tape-out |
+| Graph-wide pump collisions | First-order screen: 73 primary warnings within 10 MHz; 653 conditional harmonic/intermodulation warnings; 0 MHz minimum margin | Current nine-tone assignment is not cleared for simultaneous operation | Redesign frame offsets; measure/extract complex 22×22 pump-channel transfer; run full multitone circuit/Floquet and open-system analysis |
+| Thermal scale | At J/(2π)=10 MHz, level-1 gap is 13.94 MHz; at 10 mK, kBT/h=208.37 MHz and Boltzmann benchmark is 0.935 | No passive thermal protection can be claimed at this illustrative scale | Treat initial chip as dynamically prepared demonstrator; measure bath and thermal repopulation; evaluate larger J, active cooling or alternate platforms |
+| Retuned Stage 11B archive | README reports local retune and SHA-256 hashes; raw JSON/NPZ outputs are absent from the repository | Best local point is not fully reproducible from tracked artifacts | Add original outputs, manifests, environment, exact command and deterministic runner |
+| Retuned retained-level convergence | Five-level 480-grid and six-level 480-grid result recorded; seven-level only 120-grid | Numerical truncation error at the selected point remains incompletely bounded | Complete seven-level 240/480 propagation and matched matrix comparisons; extend driven cutoff study |
+| Pulse robustness | Local deterministic search selected one nominal point; no complete worst-case uncertainty envelope | Small nominal error may not survive parameter drift or calibration uncertainty | Sweep bias, frequency, amplitude, duration, transfer-function and correlated perturbations; report worst-case and confidence bounds |
+| Closed-system approximation | Stage 11B omits T1/T2, thermal bath, flux-line transfer, pump phase noise, delay, distortion and crosstalk | Projected overlap can materially overstate physical performance | Add open-system and control-transfer models, then replace model assumptions with measurements |
+| Assumed circuit parameters | Stage-3 capacitances, EC/EJ and SQUID asymmetry are declared assumptions, not layout-extracted values | Static spectrum and pulse response may shift after layout and fabrication | Layout extraction, EM simulation, independent circuit-QED review and parameter uncertainty propagation |
+| Effective antiunitary symmetry breaking | Ideal SU(2) model has a Kramers-like pair; random local z fields split it | Frequency mismatch and pump-phase errors can split/rotate the candidate subspace | Calibrate mode offsets and phases; add symmetry-breaking measurements; do not claim arbitrary-noise immunity |
+| Coupling disorder | 250 ideal numerical samples with positive scalar edge weights ±10% and weighted-degree diagonal preserve the pair; minimum sampled gap 1.31095 J | This restricted perturbation does not model general fabrication error | Extend to independent frequency, phase, amplitude, parasitic and lossy-coupler error distributions |
+| Projected controls | Level-1 local g_eff=0.177043; level-5 g_eff=0.015085 | Refinement changes control scale and leakage gap; larger level is not automatically better | Start with level 1; compare local/global control routing and measured calibration cost |
+| Two-cell interaction | Static projected coefficient 0.00783608327 χ; 6.38074 μs assumes χ/(2π)=10 MHz | No calibrated two-logical-qubit gate exists | Treat as a design target; derive four cross-Kerr channels and measure process matrix, leakage and spectator effects |
+| Readout and reset | Logical state is distributed over 12 modes; no measured readout map | State preparation, assignment and tomography may dominate error | Design multiplexed resonator readout; measure reset, assignment, leakage discrimination and full logical tomography |
+| Scaling overhead | Level 5 maps to 732 transmons and 1,782 intra-cell exchange channels | Higher graph level may become impractical before logical advantages are demonstrated | Keep first tile at level 1; validate modular cells before increasing graph refinement |
+| IP/title and disclosure | Repo lists project-author attribution but no filing, assignment, NDA or disclosure register | Rights to file/license may be unclear; premature disclosure may harm patent options | Keep private; verify inventorship, assignments and disclosure dates; patent-counsel review before sharing |
 
-## Disorder study interpretation
+## Disorder-study interpretation
 
-In the current level-1 Monte Carlo model, positive scalar edge-weight changes are accompanied by the corresponding weighted degree diagonal. This preserves the SU(2) form and the Kramers-like degeneracy. It does **not** model arbitrary fabrication errors, independent vertex-frequency offsets, lossy couplers, pump phase noise or open-system dynamics.
+The current level-1 Monte Carlo study changes positive scalar edge weights together with the corresponding weighted-degree diagonal. This preserves the SU(2) form and the Kramers-like degeneracy in that restricted model. It does not model independent vertex-frequency offsets, arbitrary complex phase errors, lossy couplers, pump phase noise or open-system dynamics.
 
-The local z-field study is intentionally time-reversal-breaking. Its mean doublet splitting grows with the field amplitude; this is a sensitivity diagnostic, not a field-to-flux calibration for a real transmon chip.
+The local-z-field study deliberately breaks the effective antiunitary symmetry. It is a sensitivity diagnostic, not a calibrated field-to-flux response for a fabricated transmon chip.
 
-## Pre-release candidate risk additions
+## Decision summary
 
-| Risk | Current evidence | Impact | Required mitigation / decision |
-|---|---|---|---|
-| Shifted-bias fixed-basis approximation | Stages 5–10 propagate in the Stage-5 retained local coupler basis; Stage 11A separately quantizes the local SQUID at shifted bias | Stage 10 is not yet a full-gate result in the re-quantized shifted-bias basis | Complete Stage 11B full three-mode rebuild and 120/240/480 matrix convergence before promoting the shifted-bias candidate |
-| Assumed circuit parameters | Capacitances, EC/EJ and SQUID asymmetry are declared Stage-3 assumptions, not layout-extracted values | Gate response may shift when parasitics and fabrication geometry are included | Obtain layout extraction, EM simulation and independent circuit-QED review |
-| Closed-system gate metrics | Stage 4–10 omit dissipation, thermal occupation, flux-line transfer and pump errors | Projected process overlap can overstate physical performance | Add measured/target T1/T2, thermal, control-transfer, phase-noise and crosstalk models |
-| Graph-wide pump collisions | Existing screen has 73 primary and 653 conditional warnings | Simultaneous nine-tone operation is not cleared | Redesign frequency/frame allocation and validate with a measured channel-transfer matrix |
+- The numerical architecture is reproducible at the level described in the test suite.
+- The Stage 11B initial full-gate baseline is archived; the later local retune is reported but not fully archived.
+- The proposed level-1 circuit still has an unresolved complex Z-link implementation and an uncleared multitone plan.
+- Thermal, open-system, layout, fabrication, readout and measured two-cell gate evidence remain outstanding.
+- No hardware-readiness, fault-tolerance or measured-noise-resilience claim is authorised by the current evidence.

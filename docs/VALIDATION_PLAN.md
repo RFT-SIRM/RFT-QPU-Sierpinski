@@ -1,121 +1,139 @@
-# Validation Plan
+# Validation plan — current state and acceptance gates
+
+**Review date:** 11 November 2026  
+**Engineering checkpoint:** closed/internal model pre-release candidate v0.4-rc1.
 
 ## Current baseline
 
-The repository contains a closed/internal engineering pre-release candidate v0.4-rc1. Stages 1–10 record the circuit-derived coupler and full logical-gate numerical study; Stage 11A adds a separate local SQUID-coupler re-quantization audit. The local release-preparation run used Python 3.14.2 and recorded **75 passed in 1.33s**. The release-candidate pull request must also pass GitHub Actions on Python 3.11 before merge.
+Stages 1–11B are recorded in this repository. Stage 11B has:
+- an initial full three-mode rebuild in the re-quantized coupler basis;
+- 120/240/480 temporal-grid convergence for the initial baseline, with archived complex matrices;
+- a later local pulse retune with reported five-level 480-grid metrics and five-/six-level comparisons;
+- only a seven-level 120-grid spot check for the retuned point.
 
-A green numerical test suite verifies the implemented model and code paths. It does not validate a fabricated device.
+The local retune raw JSON/NPZ artifacts are not tracked. The selected point is recorded in the root README and in the Stage 11B local-retune note. It must be archived with a reproducing runner before it is treated as a fully reproducible numerical release artifact.
 
-## Gate 0 — Mathematical reference
+A passing numerical test suite verifies the code and mathematical model represented by the tests. It does not validate a fabricated device.
 
-**Status: documented in the companion project.**
+## Gate 0 — software/model integrity
 
-- reproduce the fourth spectral-moment formula and stated normalization;
-- record the exact graph, face ordering, edge orientation and axis assignment;
-- preserve the boundary between the graph-level Lean infrastructure and any still-open operator-level formalization.
+**Status: completed for the recorded pre-release checkpoint.**
 
-## Gate 1 — Finite-level numerical model
+- [x] Canonical finite graph construction and level counts.
+- [x] SU(2) edge-transport Hamiltonian.
+- [x] Hermiticity, covariance and effective-symmetry regression tests.
+- [x] Candidate spectrum, leakage gap and projected-control analysis.
+- [x] Coefficient export and two-cell static projection.
+- [x] Circuit-model and Stage 11B baseline regression tests.
+- [x] Historical local test record: 75 passed.
+- [x] Merged Stage 11B PR #5 CI: run #23 succeeded on its reviewed head.
 
-**Status: implemented for SG levels 1–5.**
+The documentation branch created from this review still requires its own CI run.
 
-- construct the finite Sierpiński graph using the reference recursion;
-- build the SU(2)-transport Hamiltonian;
-- compute spectra, candidate doublets and leakage gaps;
-- compute local/global projected controls;
-- test graph, Hamiltonian, hardware mapping, disorder/thermal analysis and two-cell projection.
+## Gate 1 — finite graph and proposed hardware coefficient map
 
-Acceptance for future changes: exact regression checks on graph counts, link assignments, Hermiticity, matrix dimensions and benchmark outputs.
+**Status: implemented numerically; physical phase-realization issue remains open.**
 
-## Gate 2 — Hardware coefficient export
+The level-1 tile has 6 graph sites, 9 graph edges, 3 non-commuting face links, 12 transmon modes and 22 effective exchange channels.
 
-**Status: generated; one critical phase-realization issue remains open.**
+Required before circuit qualification:
+- [ ] Preserve edge orientation and all complex amplitudes in a device-level netlist.
+- [ ] Resolve the resonant complex Z edge using a multi-path/static-flux or auxiliary Floquet embodiment, or revise the frame/frequency plan.
+- [ ] Derive the physical coupler Hamiltonian for each channel.
+- [ ] Include residual ZZ, static exchange, spectator terms and higher transmon levels.
+- [ ] Verify rotating-wave and parametric-drive approximations against the proposed device.
 
-- export the 22 level-1 effective exchange channels;
-- preserve complex amplitudes and the sign/orientation convention;
-- validate endpoint frequency assumptions and detunings;
-- resolve the resonant complex-Z link with a physical coupler topology;
-- include parasitic ZZ, spectator interactions, pump sidebands and higher-level leakage.
+## Gate 2 — graph-wide multitone feasibility
 
-**Tape-out blocker:** a single real static coupler does not reproduce the current complex Z-link amplitudes.
+**Status: not cleared.**
 
-## Gate 2A — Isolated phase-conjugate Z-link screen
+The existing first-order screen reports:
+- 73 primary-tone warnings within 10 MHz;
+- 653 conditional harmonic/intermodulation warnings;
+- 0 MHz minimum primary margin.
 
-**Status: implemented in a reduced effective two-/four-qutrit model.** The concurrent block gives process overlap 0.999609. This is a reduced-block trace overlap, not an average two-qubit gate fidelity.
+These are resonance candidates, not measured error rates or a full Floquet/Sambe solution.
 
-## Gate 2B — Nine-tone spectral collision screen
+Required:
+- [ ] Redesign the six frame offsets and frequency assignment.
+- [ ] Measure or extract the complex 22×22 channel-transfer matrix.
+- [ ] Include actual coupler and pump response.
+- [ ] Run multitone Floquet/circuit simulation and open-system validation.
+- [ ] Demonstrate simultaneous operation experimentally before enabling the full nine-tone schedule.
 
-**Status: implemented; current frequency assignment fails.** The first-order primary-tone screen finds 0 MHz minimum margin and 73 warnings within 10 MHz. Conditional harmonics and pairwise intermodulation scenarios raise the count to 653. This is a resonance-candidate screen, not a full Floquet solution or measured device failure.
+## Gate 3 — Stage 11B re-quantized three-mode gate model
 
-Do not approve simultaneous nine-tone operation until the frame plan is redesigned and actual channel isolation is measured.
+**Status: initial baseline and local nominal retune recorded; full convergence and uncertainty qualification remain open.**
 
-## Gate 2C — Circuit-derived driven-coupler numerical pre-release
+The initial baseline was rebuilt at shifted DC flux in the new local SQUID eigenbasis. The tracked baseline covers charge cutoff 10, five retained levels per mode, a 125-dimensional product Hilbert space, and 120/240/480 time grids.
 
-**Status: Stage 10 fixed-basis candidate retained for comparison; Stage 11A local coupler re-quantization audit complete; initial Stage 11B full three-mode rebuild and 120/240/480 gate convergence complete. Robust retuning and hardware qualification remain open.**
+The later selected local retune is:
+- bias 0.25884589447013934 Φ₀;
+- pump 987.6171621707836 MHz;
+- amplitude 0.0199946062 Φ₀;
+- requested duration 1.081140796 μs;
+- raised-cosine ramp of 8 pump periods.
 
-Stage 10 reference at 480 steps/period:
+At five retained levels and 480 steps per period, the local README record gives projected process overlap 0.9999999793763371 after local-Z fitting and average logical-state fidelity including leakage 0.9999999803654352. The six-level 480-grid process overlap is 0.999999967757. The seven-level 240/480 propagation remains incomplete.
 
-- DC flux: `0.259343676252 Phi0`.
-- Pump frequency: `987.609221499 MHz`.
-- Flux amplitude: `0.020000 Phi0`.
-- Common duration: `1.081002799582 us`.
-- A→B / B→A: `0.999983152623` / `0.999983152074`.
-- Projected process overlap after local-Z fitting: `0.999991271648`.
-- Conditional iSWAP phase: `0.0021957288 rad`.
+Required:
+- [ ] Add the raw fine-retune JSON/NPZ files to the repository with their original manifests and hashes.
+- [ ] Add an exact runner/configuration that reproduces the selected local point.
+- [ ] Complete seven-level 240/480 temporal propagation.
+- [ ] Compare phase-aligned full matrices across five, six and seven retained levels.
+- [ ] Extend the full driven charge-cutoff study.
+- [ ] Turn local deterministic searches into uncertainty and worst-case tolerance maps.
 
-These are closed-system projected metrics, not measured gate fidelity. Stages 5–10 use the retained Stage-5 local coupler basis while the flux-dependent coupler Hamiltonian is projected into it.
+All Stage 11B process results are closed-system model projections, not measured gate fidelity.
 
-Stage 11A explicitly re-diagonalizes the local SQUID Hamiltonian at the shifted DC flux and tracks local eigenstates/operator matrices across charge cutoffs `[8, 10, 12]` and retained levels `[3, 4, 5]`. At charge cutoff 12 with five retained local levels, the coupler f01 changes from 5007.500000 MHz to 5075.910813 MHz (Δ +68.410813 MHz); the minimum matched-state overlap probability is 0.9989682 and the minimum retained-subspace singular value is 0.9995692. This is a local-basis audit, not a new full driven-gate result.
+## Gate 4 — circuit/noise qualification
 
-Required before this gate can be considered circuit-qualified:
+**Status: not started as a measured-device programme.**
 
-- [x] Rebuild the complete three-mode Hamiltonian and driven four-state gate using the Stage-11A re-quantized coupler basis (initial nominal 10-charge-cutoff / 5-level baseline).
-- [x] Re-run common-duration 120/240/480 convergence of the full logical matrices; archive the complex matrices and convergence comparisons.
-- [ ] Repeat robust bias/frequency/amplitude/duration sweeps in the rebuilt model.
-- [ ] Add flux-line transfer, pump phase noise, crosstalk and open-system T1/T2/thermal effects.
+- [ ] Replace Stage-3 nominal capacitances/Josephson parameters with layout-extracted values.
+- [ ] Obtain independent EM/circuit-QED review.
+- [ ] Measure or specify a realistic flux-line transfer function, bandwidth, delay and distortion.
+- [ ] Characterise pump phase noise, amplitude noise and cross-channel crosstalk.
+- [ ] Add T1/T2, thermal occupation, relaxation, dephasing, leakage and spectator dynamics.
+- [ ] Include fabrication variation and repeated-cooldown drift.
+- [ ] Resolve packaging, filtering, magnetic environment and readout architecture.
 
-## Gate 3 — Physical single-cell demonstrator
+## Gate 5 — one-cell fabricated demonstrator
 
 **Status: not fabricated or measured.**
 
-Required evidence:
+Acceptance requires a 12-transmon tile, spectroscopy of all modes, calibration of all complex hopping amplitudes/phases, reconstruction of the candidate doublet and leakage gap, projected X/Y/Z control tomography, reset/readout calibration, measured leakage and coherence, and repeatability across cooldowns.
 
-- 12-transmon chip and verified connectivity;
-- calibrated frequencies, exchange amplitudes and pump phases;
-- measured spectrum and reconstruction of the candidate doublet;
-- measured separation from leakage states;
-- state preparation, reset and readout calibration;
-- projected-control tomography and pulse calibration;
-- leakage, crosstalk, drift and non-gauge noise characterization.
+A single successful cell demonstrates one logical element only; it does not demonstrate a universal processor.
 
-No protection or fidelity claim should be made from the ideal Hamiltonian alone.
+## Gate 6 — two-cell entangling demonstrator
 
-## Gate 4 — Two-cell entangling demonstrator
+**Status: static numerical projection only.**
 
-**Status: projected numerically; no physical gate demonstrated.**
+The model's two-cell interaction coefficient is 0.00783608327 χ. The ideal 6.38074 μs time estimate assumes χ/(2π) = 10 MHz.
 
-- connect two calibrated level-1 cells (24 data transmons);
-- implement the four cross-Kerr terms with the required \(+,-,-,+\) sign pattern;
-- characterize static shifts, excitation conservation, residual interactions and leakage;
-- calibrate the pulse and measure process fidelity, leakage, crosstalk and repeatability.
+Acceptance requires:
+- [ ] Two calibrated level-1 cells (24 data transmons).
+- [ ] Four cross-Kerr channels with the required sign pattern.
+- [ ] Calibrated pulse and measured non-local gate invariant/process tomography.
+- [ ] Leakage, spectator effects, crosstalk and repeatability measurements.
 
-The quoted 6.38074 μs is an ideal projected estimate at the illustrative assumption \(\chi/(2\pi)=10\) MHz, not a measured gate time.
-
-## Gate 5 — Modular scale-up
+## Gate 7 — modular scale-up and protection claims
 
 **Status: future work.**
 
-Only after the single-cell and two-cell gates pass measured acceptance criteria:
+Only after single-cell and two-cell hardware acceptance:
+1. replicate calibrated level-1 cells;
+2. start with nearest-neighbour modules and measured inter-cell coupling;
+3. validate simultaneous controls, readout and correlated errors;
+4. consider larger or fractal module-level connectivity from measured data;
+5. make protection or fault-tolerance claims only after a measured logical-error suppression experiment.
 
-1. replicate calibrated level-1 tiles;
-2. begin with nearest-neighbour logical modules in a one-dimensional chain;
-3. validate control/readout wiring and inter-tile crosstalk;
-4. consider two-dimensional and fractal module connectivity only after routing and error data justify it.
+## Evidence vocabulary
 
-## Evidence labels
+- **Analytic / formal:** identities or proofs within stated assumptions.
+- **Numerical:** output from a specified finite matrix or circuit model.
+- **Proposed engineering:** coefficient maps and device designs without fabrication evidence.
+- **Experimental:** measured hardware results only.
 
-- **Analytic/formal:** exact identities and machine-checked results within their stated assumptions.
-- **Numerical:** outputs of the finite matrix and circuit-mapping models.
-- **Proposed engineering:** circuit and control designs without fabrication evidence.
-- **Experimental:** measured hardware data only.
-
-These categories must remain separate in README, the website, partner material and future release notes.
+Keep these labels consistent across the README, partner material, validation reports and any later public release.

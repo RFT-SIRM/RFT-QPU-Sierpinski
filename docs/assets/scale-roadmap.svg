@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="390" viewBox="0 0 1100 390" role="img" aria-labelledby="title desc">
+<title id="title">RFT-QPU modular scaling scenarios</title>
+<desc id="desc">Structural scaling counts for one, two, ten, one hundred and one thousand level-1 logical cells, showing data transmons and internal exchange channels. The counts are not cost or manufacturing estimates.</desc>
+<rect width="1100" height="390" rx="24" fill="#111d33"/>
+<text x="48" y="54" fill="#f4f7ff" font-family="Arial,sans-serif" font-size="25" font-weight="700">Modular scale scenarios</text>
+<text x="48" y="82" fill="#aebed4" font-family="Arial,sans-serif" font-size="15">Structural counts for replicated level-1 cells · before control, coupler, readout and cryogenic overhead</text>
+<g font-family="Arial,sans-serif">
+<g transform="translate(54 124)">
+  <rect width="180" height="194" rx="15" fill="#203753" stroke="#4f7297"/>
+  <text x="90" y="35" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">1 cell</text>
+  <text x="90" y="91" text-anchor="middle" fill="#53d6c2" font-size="31" font-weight="700">12</text>
+  <text x="90" y="114" text-anchor="middle" fill="#c3d4e8" font-size="13">transmons</text>
+  <text x="90" y="153" text-anchor="middle" fill="#8caeff" font-size="22" font-weight="700">22</text>
+  <text x="90" y="174" text-anchor="middle" fill="#c3d4e8" font-size="12">internal channels</text>
+</g>
+<g transform="translate(264 124)">
+  <rect width="180" height="194" rx="15" fill="#203753" stroke="#4f7297"/>
+  <text x="90" y="35" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">2 cells</text>
+  <text x="90" y="91" text-anchor="middle" fill="#53d6c2" font-size="31" font-weight="700">24</text>
+  <text x="90" y="114" text-anchor="middle" fill="#c3d4e8" font-size="13">transmons</text>
+  <text x="90" y="153" text-anchor="middle" fill="#8caeff" font-size="22" font-weight="700">44</text>
+  <text x="90" y="174" text-anchor="middle" fill="#c3d4e8" font-size="12">internal channels</text>
+</g>
+<g transform="translate(474 124)">
+  <rect width="180" height="194" rx="15" fill="#203753" stroke="#4f7297"/>
+  <text x="90" y="35" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">10 cells</text>
+  <text x="90" y="91" text-anchor="middle" fill="#53d6c2" font-size="31" font-weight="700">120</text>
+  <text x="90" y="114" text-anchor="middle" fill="#c3d4e8" font-size="13">transmons</text>
+  <text x="90" y="153" text-anchor="middle" fill="#8caeff" font-size="22" font-weight="700">220</text>
+  <text x="90" y="174" text-anchor="middle" fill="#c3d4e8" font-size="12">internal channels</text>
+</g>
+<g transform="translate(684 124)">
+  <rect width="180" height="194" rx="15" fill="#203753" stroke="#4f7297"/>
+  <text x="90" y="35" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">100 cells</text>
+  <text x="90" y="91" text-anchor="middle" fill="#53d6c2" font-size="31" font-weight="700">1,200</text>
+  <text x="90" y="114" text-anchor="middle" fill="#c3d4e8" font-size="13">transmons</text>
+  <text x="90" y="153" text-anchor="middle" fill="#8caeff" font-size="22" font-weight="700">2,200</text>
+  <text x="90" y="174" text-anchor="middle" fill="#c3d4e8" font-size="12">internal channels</text>
+</g>
+<g transform="translate(894 124)">
+  <rect width="180" height="194" rx="15" fill="#203e4a" stroke="#53d6c2"/>
+  <text x="90" y="35" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">1,000 cells</text>
+  <text x="90" y="91" text-anchor="middle" fill="#53d6c2" font-size="31" font-weight="700">12,000</text>
+  <text x="90" y="114" text-anchor="middle" fill="#d5e7e4" font-size="13">transmons</text>
+  <text x="90" y="153" text-anchor="middle" fill="#8caeff" font-size="22" font-weight="700">22,000</text>
+  <text x="90" y="174" text-anchor="middle" fill="#d5e7e4" font-size="12">internal channels</text>
+</g>
+</g>
+<text x="550" y="357" text-anchor="middle" fill="#b4c5dc" font-family="Arial,sans-serif" font-size="13">A chain assumes four cross-cell ZZ terms per neighbouring cell pair. These are arithmetic scenarios, not a build forecast.</text>
+</svg>

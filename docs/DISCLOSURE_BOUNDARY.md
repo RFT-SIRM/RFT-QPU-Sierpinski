@@ -1,35 +1,47 @@
-# Evidence and Disclosure Boundary
+# Evidence and disclosure boundary
 
-This file separates established mathematical results, numerical model outputs, proposed hardware design and experimental evidence.
+**Review date:** 11 November 2026. This file separates mathematical-model results, numerical outputs, proposed hardware, local reports without tracked raw artifacts and experimental evidence.
 
-| Item | Status | Evidence class |
+## Evidence ledger
+
+| Item | Current status | Evidence class |
 |---|---|---|
-| Sierpiński graph construction and finite-level counts | Implemented for levels 1–5 | Numerical/computable |
-| Fourth spectral-moment closed form | Documented in companion project | Analytic + numerical reference |
-| \(I_\infty(\pi/2)=-8/9\) | Consequence of the stated normalization | Analytic |
-| Gauge spectral invariance | Numerically validated in companion work | Numerical |
-| General operator-level Lean proof of TraceDefectIdentity | Still open in the current companion repository status | Formalization boundary |
+| Sierpiński graph and finite-level counts | Implemented for levels 1–5 | Numerical/computable |
+| Fourth spectral-moment formula and normalized −8/9 value | Referenced in the project README as the mathematical anchor and attributed to the companion mathematical work | Mathematical statement; not an energy gap |
+| Gauge spectral invariance | Described in the project record | Mathematical/model property |
+| General operator-level Lean proof | Not established by this repository alone | Do not claim complete formal proof from this repository |
 | Level-1 12-mode SU(2) Hamiltonian | Implemented and regression-tested | Numerical |
-| Level-1 candidate doublet and gap | Splitting \(1.61\times10^{-15}J\); gap \(1.3937126931J\) | Floating-point numerical result |
-| Level-1 best local projected-control coefficient | \(g_{\mathrm{eff}}=0.1770433\), vertex 5 | Model-dependent numerical result |
-| Level-5 reference control coefficient | \(g_{\mathrm{eff}}\approx0.015085\) | Different refinement/model point |
-| 12-transmon level-1 mapping and 22 exchange channels | Coefficient export exists; complex-Z realization unresolved | Proposed engineering |
-| Nine-tone simultaneous pump schedule | First-order screen: 0 MHz primary margin; 73 primary warnings ≤10 MHz | Not cleared; resonance candidates only |
-| Two-cell projected interaction | \(0.00783608327\chi\); ideal estimate 6.38074 μs at assumed \(\chi/(2\pi)=10\) MHz | Static numerical projection |
-| Physical QPU fabrication or measurement | Not demonstrated | Not claimed |
+| Level-1 candidate doublet | Near-degenerate to floating-point roundoff | Ideal-model numerical result |
+| Level-1 leakage gap | 1.3937127 J | Ideal finite graph Hamiltonian |
+| Level-1 local projected-control coefficient | g_eff = 0.1770433, vertex 5 | Model-dependent numerical result |
+| Level-5 local projected-control coefficient | g_eff ≈ 0.015085 | Different finite graph/model point |
+| Level-1 transmon mapping | 12 modes and 22 exchange channels | Proposed hardware design |
+| Resonant complex Z edge | Requires non-real diagonal hopping phases; a single real static coupler is insufficient | Open circuit-feasibility blocker |
+| Nine-tone plan | 73 primary warnings and 653 conditional warnings; 0 MHz minimum margin | Not cleared; first-order resonance screen |
+| Two-cell interaction | 0.00783608327 χ; 6.38074 μs ideal estimate at assumed χ/(2π)=10 MHz | Static model projection |
+| Stage 11B initial full-gate baseline | Tracked JSON/NPZ; 120/240/480 convergence | Closed-system three-mode numerical evidence |
+| Stage 11B local retune | 480-grid five-level metrics; six-level 480-grid spot check; seven-level 120-grid spot check | Local run reported in README; raw retune JSON/NPZ not tracked |
+| Physical chip or measured gate | None recorded in this repository | Not demonstrated |
+| T1/T2/open-system gate performance | Not recorded | Not demonstrated |
 | Arbitrary-noise immunity or fault tolerance | Not established | Not claimed |
-| \(-8/9\) as a universal energy gap | **Not claimed** | — |
 
 ## Interpretation rules
 
-1. The near-zero level-1 doublet splitting is at floating-point roundoff scale; it is not, by itself, a proof of exact degeneracy.
-2. The value \(g_{\mathrm{eff}}=0.1770433\) belongs to the level-1 local-control calculation at vertex 5. The value \(0.015085\) is a level-5 reference result. Neither is a universal constant.
-3. The \(-8/9\) quantity is a normalized fourth spectral-moment invariant, not an energy gap, a leakage suppression factor or a measure of noise protection.
-4. Gauge covariance is a model symmetry property. It does not imply immunity to arbitrary non-gauge laboratory noise.
-5. The 12-transmon and 24-transmon configurations are proposed hardware embodiments. No physical device, calibrated gate, or measured fidelity is claimed.
-6. The resonant complex-Z link is an open pre-tape-out blocker. The coefficient CSV is not a foundry-ready netlist.
+1. The −8/9 value is a normalized fourth spectral-moment invariant. It is not an energy gap, leakage suppression factor or noise metric.
+2. The near-zero ideal doublet splitting is at floating-point roundoff. It is not a manufactured-device splitting measurement or proof of exact device degeneracy.
+3. The values g_eff = 0.1770433 (level 1) and 0.015085 (level 5) belong to different finite graphs and are not universal constants.
+4. Gauge covariance is a mathematical symmetry property. It does not imply immunity to arbitrary laboratory noise.
+5. The Stage 11B gate is a three-mode A–coupler–B calculation. It is not a complete driven simulation of the 12-mode level-1 tile.
+6. A process overlap computed from a closed-system projected matrix is not experimental gate fidelity.
+7. Transmon and two-cell configurations are proposed embodiments. No chip or calibrated multi-logical-qubit gate is demonstrated.
+8. The level-1 coefficient CSV is not a foundry-ready netlist. Complex phases, parasitic couplings, frequency collisions and fabrication geometry still need circuit-level implementation and validation.
+9. The fine-retune hashes identify user-side artifacts but cannot substitute for the absent JSON/NPZ files.
+10. A passing software test suite validates code/model integrity only.
 
-The detailed hardware acceptance criteria are maintained in [Validation Plan](VALIDATION_PLAN.md) and [Physical Realization](../engineering/physical_prototype/docs/PHYSICAL_REALIZATION.md).
+## Disclosure handling
 
+The repository metadata indicates that the GitHub repository is private. This alone does not prove that the information has never been disclosed elsewhere. Check older repositories, mirrors, sites, talks, preprints, emails, demonstrations and partner discussions before drawing a patent novelty conclusion.
 
-The four-qutrit phase-conjugate block is an effective-exchange simulation, not a physical tunable-coupler demonstration. The collision audit identifies possible off-target resonances conditional on drive/coupler cross-coupling; it does not calculate their probabilities. Harmonic/intermodulation products are conditional model scenarios, not measured spectral components.
+The current patent-oriented disclosure is a private working document for counsel review. No filing number or date is recorded in this repository. See [IP and Licensing](../IP_AND_LICENSING.md) and [Disclosure Log](DISCLOSURE_LOG_TEMPLATE.md).
+
+The Stage 11B outputs are distinguished in [the tracked baseline report](../engineering/physical_prototype/docs/STAGE11B_REQUANTIZED_GATE.md) and [the local retune note](../engineering/physical_prototype/docs/STAGE11B_LOCAL_RETUNE_NOTE.md).
