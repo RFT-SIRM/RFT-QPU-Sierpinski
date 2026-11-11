@@ -199,7 +199,7 @@ The top-level `qpu_core.py` is a compact research reference. The full finite-lev
 
 ## Closed engineering pre-release candidate v0.4-rc1 — 2026-11-11
 
-**Release channel: closed/internal engineering pre-release candidate.** This checkpoint consolidates the Stage 1–11A numerical work so it can be reproduced and extended from a single repository state. It is a software/model pre-release, **not** a fabrication release, foundry package, tape-out authorization, or experimental hardware claim.
+**Release channel: closed/internal engineering pre-release candidate.** This checkpoint consolidates the Stage 1–11B numerical work recorded through 11 November 2026 so it can be reproduced and extended from a single repository state. It is a software/model pre-release, **not** a fabrication release, foundry package, tape-out authorization, or experimental hardware claim.
 
 The standalone model and engineering package is maintained in [engineering/physical_prototype](engineering/physical_prototype/README.md). The stages are deliberately separated by evidence level:
 
@@ -210,7 +210,7 @@ The standalone model and engineering package is maintained in [engineering/physi
 | 7–8 | Harmonic, chirp, and envelope exploration | Exploratory candidates; no waveform promoted solely from coarse-grid gains |
 | 9–10 | Shifted-bias and local frequency/duration refinement | Converged 120/240/480 candidate in the Stage-5 fixed local coupler basis |
 | 11A | Explicit local SQUID-coupler re-quantization at shifted DC flux, with charge-cutoff and retained-subspace comparisons | Local coupler audit; the first full-gate integration is recorded separately in Stage 11B |
-| 11B | Full three-mode Hamiltonian rebuilt in the shifted coupler basis; four-state gate rerun on 120/240/480 grids | Initial nominal baseline complete; robust retuning, truncation convergence and hardware effects remain open |
+| 11B | Full three-mode Hamiltonian rebuilt in the shifted coupler basis; 120/240/480 baseline, local bias/frequency and amplitude/duration retuning, five-/six-level audit | Local nominal retune recorded; seven-level temporal convergence, full driven truncation convergence, uncertainty budgets and hardware effects remain open |
 
 ### Best currently converged full-gate candidate — Stage 10
 
@@ -234,7 +234,51 @@ These are projected, closed-system numerical metrics. The process-overlap figure
 
 At charge cutoff 12 with five retained local levels, the coupler f01 changes from 5007.500000 MHz to 5075.910813 MHz (Δ +68.410813 MHz); the minimum matched-state overlap probability is 0.9989682 and the minimum retained-subspace singular value is 0.9995692.
 
-The Stage 11A report includes the 8/10/12 charge-cutoff × 3/4/5 retained-level local-coupler study. The initial Stage 11B baseline now rebuilds the 125-dimensional three-mode Hamiltonian in the shifted local coupler basis and reruns the four-state gate with 120/240/480 time-grid convergence. Robust pulse retuning, full-gate truncation convergence and hardware effects remain open; see [the Stage 11B report](engineering/physical_prototype/docs/STAGE11B_REQUANTIZED_GATE.md).
+The Stage 11A report includes the 8/10/12 charge-cutoff × 3/4/5 retained-level local-coupler study. Stage 11B rebuilt the full three-mode Hamiltonian in the shifted local coupler basis, completed the original 120/240/480 baseline, and then performed local bias/frequency and amplitude/duration retuning. The selected nominal point and its five-/six-level checks are recorded below; the seven-level 240/480 temporal audit and broader uncertainty qualification remain open.
+
+### Stage 11B — re-quantized gate retuning update (11 November 2026)
+
+The Stage 11B baseline was followed by deterministic local searches in the rebuilt re-quantized model: a bias × pump-frequency screen, then a local amplitude × duration screen. The current selected nominal point is:
+
+| Quantity | Selected value |
+|---|---:|
+| DC bias | `0.25884589447013934 Φ₀` |
+| Pump frequency | `987.6171621707836 MHz` |
+| Flux amplitude | `0.0199946062 Φ₀` |
+| Requested duration | `1.081140796 μs` |
+| Raised-cosine ramp | `8` pump periods |
+
+At 480 steps per period with five retained levels per mode (125-dimensional product space):
+
+| Metric | Result |
+|---|---:|
+| Projected process overlap after local-Z fit | `0.9999999793763371` |
+| Average logical-state fidelity including leakage | `0.9999999803654352` |
+| A → B transfer probability | `0.9999999973549074` |
+| B → A transfer probability | `0.999999992602828` |
+| Conditional iSWAP phase | `0.00027739757232 rad` |
+| Final norm error | `1.31 × 10⁻⁹` |
+| Maximum sampled logical leakage | `3.312 × 10⁻⁴` |
+| Maximum sampled coupler-excited population | `6.090 × 10⁻³` |
+
+At the same operating point, the six-level (216-dimensional) process overlap after local-Z fitting was `0.999999967757` at 480 steps/period. The five-/six-level phase-aligned matrix Frobenius difference at 480 steps/period was `1.8981859 × 10⁻⁴`. This is a useful cross-check, not proof that the retained-level limit has converged.
+
+The seven-level model has so far been checked only at 120 steps/period. Its phase-aligned matrix difference from the six-level result at that grid was `2.3211679 × 10⁻⁵`; the raw matrix difference is frame-dependent and is not used as the convergence metric. Seven-level 240/480 propagation remains a pending numerical audit.
+
+A separate five-retained-level driven truncation screen found the full logical-matrix difference relative to charge-cutoff 10 of `8.15 × 10⁻⁸` at cutoff 8 and `8.78 × 10⁻⁸` at cutoff 12. The three-/four-retained-level variants differed by approximately `9.79 × 10⁻⁴` and `9.24 × 10⁻⁴`, respectively. These data support the five-level choice in that screen; they do not replace the outstanding matched seven-level temporal/charge-cutoff study.
+
+The fine-retune outputs were created locally under `RFT-QPU-Stage11B-FineRobustness` and `RFT-QPU-Stage11B-LocalPulseRetune`. The local manifests reported the following SHA-256 fingerprints:
+
+| Local artifact | SHA-256 reported by the run |
+|---|---|
+| FineRobustness report JSON | `46ed497a3c244e802182ac56c48f3652588d0ecc913ba16e22327a4af5625cac` |
+| FineRobustness matrices NPZ | `1ef4fa45bfb76727d98f561b58ba1693a9593a3819ce3ac7d043b7c35a274942` |
+| LocalPulseRetune report JSON | `b0fa114e4e4d7de9d95cd2441e6de25093543a8d2b66d401226d296427512c21` |
+| LocalPulseRetune matrices NPZ | `e3c250f214ba2ac77cdd9aa208cf09f036c4e9e7deb3d262d3ef2b7b822cfbe4` |
+
+These hashes identify the user-side output artifacts; the raw fine-retune JSON/NPZ files themselves were not present in the GitHub workspace during this README update and are not represented as repository-tracked binaries here. The original Stage 11B baseline report and its six 4×4 matrices remain tracked under `engineering/physical_prototype/results/`.
+
+**Evidence boundary:** these are deterministic, closed-system numerical projections with nominal Stage-3 circuit assumptions. The local retune does not include calibrated flux-line response, noise distributions, T1/T2, thermal excitation, crosstalk, layout-extracted parasitics or hardware measurements. The model's projected process overlap is not an experimental gate fidelity.
 
 ### Reproducibility snapshot
 
@@ -248,8 +292,8 @@ GitHub Actions on the release-candidate pull request is the required CI check. A
 
 ### Release blockers — explicitly not closed
 
-1. Rebuild and converge the full driven three-mode gate with the Stage 11A re-quantized coupler basis (Stage 11B).
-2. Complete robust sweeps using the rebuilt model; derive parameter tolerances from worst-case behavior, not a single optimum.
+1. Complete the seven-level 240/480 temporal-convergence audit and matched full-matrix comparisons across five, six and seven retained levels; extend the driven charge-cutoff check beyond the five-level screen.
+2. Turn the local deterministic pulse search into parameter-tolerance and uncertainty budgets; the current grids are not a worst-case robustness envelope.
 3. Add measured or target flux-line transfer functions, bandwidth, delay, distortion, pump phase noise and channel crosstalk.
 4. Add open-system dynamics (T1/T2, thermal occupation, relaxation/dephasing, leakage and spectator channels).
 5. Replace assumed capacitances/Josephson parameters with layout extraction and independent circuit-QED review.
