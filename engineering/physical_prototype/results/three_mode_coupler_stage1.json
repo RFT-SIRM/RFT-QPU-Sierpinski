@@ -1,0 +1,115 @@
+{
+  "model": "three nonlinear Duffing modes with sinusoidal coupler-frequency modulation",
+  "model_boundary": "Effective rotating-frame model only. It is not yet a circuit-quantized capacitance/Josephson/SQUID model; the flux dependence of couplings, higher circuit modes, dissipation and calibration are omitted.",
+  "units": {
+    "frequency": "MHz",
+    "time": "microseconds",
+    "hbar": 1.0
+  },
+  "parameters": {
+    "f_a_MHz": 0.0,
+    "f_c_MHz": -492.5,
+    "f_b_MHz": -985.0,
+    "alpha_a_MHz": -250.0,
+    "alpha_c_MHz": -300.0,
+    "alpha_b_MHz": -245.0,
+    "g_ac_MHz": 100.0,
+    "g_cb_MHz": 100.0,
+    "pump_amplitude_MHz": 200.0,
+    "pump_frequency_MHz": "auto-tuned",
+    "pump_phase_rad": 0.0,
+    "sambe_order": 3
+  },
+  "resonance": {
+    "bare_data_frequency_difference_MHz": 985.0,
+    "dressed_resonant_pump_frequency_MHz": 1023.8517295985567,
+    "pump_shift_from_bare_difference_MHz": 38.851729598556744
+  },
+  "effective_exchange": {
+    "quasienergy_pair_MHz": [
+      15.659699974288287,
+      23.192030323149538
+    ],
+    "quasienergy_pair_target_weight": [
+      0.9619033411044037,
+      0.961903340110031
+    ],
+    "exact_sambe_exchange_MHz": 3.7661651744306255,
+    "feshbach_exchange_MHz": 3.92144951548734,
+    "feshbach_complex_exchange": {
+      "real_MHz": -3.92144951548734,
+      "imag_MHz": 0.0,
+      "phase_deg": 180.0
+    },
+    "target_diagonal_shifts_MHz": [
+      20.198547109976133,
+      20.198547109993914
+    ],
+    "sambe_sidebands": [
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3
+    ],
+    "target_basis": [
+      "|1,0,0; m=0>",
+      "|0,0,1; m=+1>"
+    ]
+  },
+  "static_spectrum": {
+    "dressed_E10_MHz": 19.902429736628008,
+    "dressed_E01_MHz": -1004.9024297366276,
+    "dressed_E11_MHz": -985.4510725412918,
+    "static_residual_ZZ_MHz": -0.45107254129220564,
+    "bare_state_overlap": {
+      "A_single_excitation": 0.9615357597567936,
+      "B_single_excitation": 0.9615357597567938,
+      "AB_two_excitation": 0.915742262752419
+    },
+    "coupler_anharmonicity_MHz": -300.0
+  },
+  "coupler_anharmonicity_sensitivity": [
+    {
+      "alpha_c_MHz": -200.0,
+      "static_residual_ZZ_MHz": -0.45044990864789725
+    },
+    {
+      "alpha_c_MHz": -300.0,
+      "static_residual_ZZ_MHz": -0.45107254129220564
+    },
+    {
+      "alpha_c_MHz": -400.0,
+      "static_residual_ZZ_MHz": -0.451384093865272
+    }
+  ],
+  "pump_phase_calibration": {
+    "pump_phase_deg_to_effective_hopping_phase_deg": {
+      "45": 135.0,
+      "-45": -135.0
+    },
+    "note": "The absolute phase offset depends on mode and hopping sign conventions; conjugation under phase reversal is the invariant check."
+  },
+  "dynamic_gate_check": {
+    "nominal_swap_time_from_J_us": 0.0663805192871806,
+    "best_dynamic_swap_time_us": 0.06688233977762287,
+    "single_excitation_transfer_probability": 0.9978680365537619,
+    "single_excitation_max_coupler_population": 0.1578164947267118,
+    "single_excitation_coupler_population_at_swap": 0.00018921132652371836,
+    "two_excitation_logical_survival_probability": 0.792145234686508,
+    "two_excitation_leakage_probability_at_swap": 0.207854765313492,
+    "two_excitation_coupler_population_at_swap": 0.1638300851351237,
+    "two_excitation_high_level_population_at_swap": 0.07055785367112112,
+    "two_excitation_basis_populations": {
+      "|200>": 0.05171147597114624,
+      "|110>": 0.11970655114535032,
+      "|101>": 0.792145234686508,
+      "|020>": 0.013266586849758033,
+      "|011>": 0.017590360290257314,
+      "|002>": 0.005579790850216846
+    }
+  },
+  "decision": "Toy-model stress test only. Do not use this parameter point for a hardware design: the predicted two-excitation leakage must be reduced with a circuit-derived model and pulse/coupler optimization."
+}
