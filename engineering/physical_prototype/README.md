@@ -1,65 +1,69 @@
-# RFT-QPU-Sierpinski — level-1 physical demonstrator model
+# RFT-QPU-Sierpinski — closed engineering pre-release candidate v0.4-rc1
 
-**Package:** v0.1 · **Evidence status:** executable numerical prototype and proposed hardware mapping. No chip has been fabricated or measured.
+**Release channel:** closed/internal engineering pre-release candidate. This is a reproducible numerical and circuit-model checkpoint, not a fabricated device, foundry package, tape-out release, or experimental hardware result.
 
-This package contains the reproducible finite-graph SU(2) model, projected logical controls, a proposed 12-transmon level-1 mapping, the first two-cell projected-entangler calculation, design tables, test suite and engineering gate documents.
+## Scope
 
-## Start here
+This package includes the level-1 Sierpiński SU(2) graph model and proposed 12-transmon mapping, the two-cell projected-interaction study, the graph-wide Floquet collision audit, the circuit-derived three-mode SQUID coupler work (Stages 1–4), and the subsequent full logical-gate exploration (Stages 5–11A).
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[test]'
-python -m pytest -q
-```
+## Reproduce the complete test suite
 
-Expected test result: `20 passed`.
-
-## Reproduce the one-cell demonstrator calculation
+From the repository root:
 
 ```bash
-python -m rft_qpu.cli \
-  --level 1 \
-  --J-MHz 10 \
-  --temperature-mK 10 \
-  --disorder-samples 250 \
-  --output results/level1_prototype_report.json \
-  --hardware-dir hardware/level1
+python -m pip install -e 'engineering/physical_prototype[test]'
+python -m pytest -q tests engineering/physical_prototype/tests
 ```
 
-## Reproduce the two-cell projected interaction
+Local pre-release preparation used Python 3.14.2 and recorded **75 passed in 1.33s**. The release-candidate PR must also pass the repository's GitHub Actions workflow (Python 3.11).
 
-```bash
-python scripts/run_two_cell.py
-```
+## Stage map and evidence
 
-The two-cell report models 24 physical transmon modes and a proposed projected interaction. The physical coupler implementation and driven/open-system gate are not validated.
+| Stage | Contents | Status |
+|---|---|---|
+| 1 | Effective three-mode nonlinear coupler stress model | Recorded; exploratory |
+| 2 | Static and dynamic parameter sweeps | Recorded; assumed effective-model parameters |
+| 3 | Three-node charge-basis circuit model | Recorded; declared capacitance/Josephson assumptions |
+| 4 | Full four-state driven-gate checkpoint | Recorded; closed-system model |
+| 5–6 | Full logical matrices, phase alignment, fixed-duration convergence | Recorded; retained Stage-5 coupler basis |
+| 7–8 | Harmonic/chirp/envelope control exploration | Recorded; no coarse-grid-only candidate promoted |
+| 9–10 | Shifted-bias candidate refinement and 120/240/480 convergence | Recorded; retained Stage-5 fixed local coupler basis |
+| 11A | Local coupler re-quantization at shifted DC flux | Recorded; local audit only |
+| 11B | Rebuild and reconverge full driven gate using the re-quantized basis | **Open** |
 
-## Level-1 design summary
+## Current Stage 10 reference point
 
-- 6 graph sites, 9 edges, 3 face transports (X/Y/Z).
-- 2 transmon modes per graph site: 12 modes in the single-excitation model.
-- ground-doublet splitting: `3.2751579226442118e-15 J` (numerical roundoff in the ideal model).
-- leakage gap to the next level: `1.3937126930868375 J`.
-- strongest local projected-control scale: `0.17704330851507563` at vertex 5.
-- at `J/(2 pi)=10 MHz`, the model gap corresponds to `13.9371 MHz`; at 10 mK the equilibrium Boltzmann benchmark is `0.9353`. This is a warning scale, not a prediction of measured chip population.
+- Bias: `0.259343676252 Φ₀`.
+- Pump: `987.609221499 MHz` (`-64.000 kHz` relative to shifted static detuning).
+- Flux amplitude: `0.020000 Φ₀`.
+- Pulse duration: `1.081002799582 μs`; raised-cosine ramp `8.0` periods.
+- At 480 steps/period: A→B `0.999983152623`, B→A `0.999983152074`, projected process overlap after local-Z fitting `0.999991271648`, conditional phase `0.0021957288 rad`.
 
-## Project map
+These are closed-system projected calculations, not measured gate fidelity.
 
-- `src/rft_qpu/` — graph, SU(2) links, Hamiltonian, projected controls, noise and hardware mapping.
-- `tests/` — regression tests for graph construction, operator properties, control mapping, disorder and two-cell projection.
-- `hardware/level1/` — frequency assumptions, BOM, coupler channels and scale tables.
-- `design/level1_transmon_topology.svg` — editable topology schematic.
-- `design/level1_transmon_topology.png` — raster preview.
-- `results/` — numerical output reports.
-- `docs/` — physical-realization notes, prototype specification, scale architecture, validation gates, risk register and source provenance.
-- `VALIDATION_REPORT.md` — independent package/test/command validation and evidence boundary.
+## Important model boundary
 
-## Critical engineering blockers before fabrication
+Stages 5–10 use the Stage-5 fixed-DC local coupler basis, with the flux-dependent coupler Hamiltonian projected into that retained basis. Stage 11A independently diagonalizes the local SQUID at the shifted bias and compares spectra, operators, state overlaps and retained-subspace overlap over charge cutoffs 8/10/12 and retained levels 3/4/5. Stage 11A has not yet been integrated into the full driven three-mode gate. Do not describe Stage 10 as a fully re-quantized shifted-bias gate.
 
-1. The complex-phase resonant Z transport needs a realizable multi-path or parametrically driven coupler and a phase/noise budget.
-2. The 2-level single-excitation approximation must be replaced by a multi-level transmon + coupler circuit model, including parasitic ZZ, drive sidebands and higher-level leakage.
-3. The device needs a concrete resonator/readout/reset/control layout, frequency-collision analysis, calibration plan and EM extraction.
-4. Open-system simulations and measured coherence, thermal population, leakage and gate fidelity are required before any protection or processor claim.
+## Output layout
 
-**Do not treat the CSV channel map as a foundry netlist or the two-cell projected interaction as an experimentally realized entangling gate.**
+- `src/rft_qpu/` — model implementations for Stages 5–11A.
+- `scripts/` — reproducible sweep, convergence and audit runners.
+- `tests/` — regression tests.
+- `docs/` — stage reports and release/validation boundaries.
+- `results/` — JSON/CSV summaries and NPZ complex matrices/checkpoints.
+- `hardware/level1/` — proposed level-1 coefficient/channel tables; not a foundry netlist.
+
+## Open requirements before physical design release
+
+1. Stage 11B full-gate rebuild with re-quantized coupler basis.
+2. Robust parameter maps and uncertainty budgets using that rebuilt model.
+3. Flux-line bandwidth/delay/distortion/phase-noise/crosstalk characterization.
+4. Open-system T1/T2, thermal, leakage and spectator modeling.
+5. Layout-extracted capacitances/parasitics and independent EM/circuit-QED review.
+6. Resolution of graph-wide pump-collision warnings and simultaneous-tone feasibility.
+7. Fabrication, packaging, readout, calibration and independent hardware qualification.
+
+The existing graph-wide screen reports 73 primary pump/sideband warnings within 10 MHz and 653 conditional harmonic/intermodulation warnings. Simultaneous nine-tone operation is not cleared.
+
+**The package is suitable as a closed, reproducible engineering research baseline. It is not suitable as a fabrication-ready or experimentally qualified design.**

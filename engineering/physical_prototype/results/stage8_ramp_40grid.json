@@ -1,0 +1,252 @@
+{
+  "best_feasible_process_overlap_candidate": {
+    "A_to_B_transfer": 0.999999838498605,
+    "B_to_A_transfer": 0.9999998578870927,
+    "average_logical_fidelity_including_leakage": 0.9999847150718523,
+    "candidate_key": "chirp_p0.000000_rise_8.000_fall_8.000",
+    "chirp_span_kHz": 0.0,
+    "conditional_phase_rad": 0.01744372404929326,
+    "duration_actual_us": 1.0625675587737073,
+    "duration_requested_us": 1.0625675587737073,
+    "final_logical_leakage_by_input": [
+      -3.585776120473838e-11,
+      2.946926469515887e-08,
+      1.0073444967062528e-08,
+      3.263761549909816e-08
+    ],
+    "final_max_logical_leakage": 3.263761549909816e-08,
+    "frequency_MHz": 987.5136797993163,
+    "frobenius_distance_to_iSWAP_after_local_Z": 0.008736980315308748,
+    "fundamental_amplitude_Phi0": 0.02,
+    "instantaneous_frequency_end_MHz": 987.5136797993163,
+    "instantaneous_frequency_start_MHz": 987.5136797993163,
+    "local_Z_fit_rad_canonical": [
+      1.1630164317139582,
+      1.259561620978912,
+      -2.812655598579892,
+      -2.7099988148257412,
+      1.385953580728384
+    ],
+    "logical_unitarity_defect": 5.125756409660151e-08,
+    "norm_error": 5.582334594578242e-11,
+    "process_overlap_after_local_Z": 0.9999808983488446,
+    "ramp_in_periods": 8.0,
+    "ramp_out_periods": 8.0,
+    "sampled_max_coupler_excited_probability": 0.00563214232289712,
+    "sampled_max_coupler_excited_probability_by_input": [
+      0.0003138848837854545,
+      0.005167013404070727,
+      0.005165898570159726,
+      0.00563214232289712
+    ],
+    "sampled_max_logical_leakage": 0.00038210027021490234,
+    "sampled_max_logical_leakage_by_input": [
+      0.0003013024413850429,
+      0.00036079275067524286,
+      0.00036090096608165645,
+      0.00038210027021490234
+    ],
+    "screen_feasible": true,
+    "second_harmonic_cos_Phi0": 0.0,
+    "second_harmonic_sin_Phi0": 0.0,
+    "steps_per_period": 40,
+    "time_steps": 41972
+  },
+  "candidate_count": 2,
+  "candidates": [
+    {
+      "A_to_B_transfer": 0.9999986348513487,
+      "B_to_A_transfer": 0.9999986846272872,
+      "average_logical_fidelity_including_leakage": 0.9999842311192786,
+      "candidate_key": "chirp_p0.000000_rise_6.000_fall_8.000",
+      "chirp_span_kHz": 0.0,
+      "conditional_phase_rad": 0.017438200033895266,
+      "duration_actual_us": 1.0625675587737073,
+      "duration_requested_us": 1.0625675587737073,
+      "final_logical_leakage_by_input": [
+        -3.019939853743381e-11,
+        6.871327995483512e-08,
+        1.901692969763502e-08,
+        9.585303251125055e-08
+      ],
+      "final_max_logical_leakage": 9.585303251125055e-08,
+      "frequency_MHz": 987.5136797993163,
+      "frobenius_distance_to_iSWAP_after_local_Z": 0.00886652978241631,
+      "fundamental_amplitude_Phi0": 0.02,
+      "instantaneous_frequency_end_MHz": 987.5136797993163,
+      "instantaneous_frequency_start_MHz": 987.5136797993163,
+      "local_Z_fit_rad_canonical": [
+        1.2409953877714444,
+        2.422455486930161,
+        -1.6563426119238194,
+        2.4165156443588964,
+        0.22319737792826264
+      ],
+      "logical_unitarity_defect": 1.2992225320684447e-07,
+      "norm_error": 5.5922821928788835e-11,
+      "process_overlap_after_local_Z": 0.9999803003711635,
+      "ramp_in_periods": 6.0,
+      "ramp_out_periods": 8.0,
+      "sampled_max_coupler_excited_probability": 0.005648620998329212,
+      "sampled_max_coupler_excited_probability_by_input": [
+        0.0003138910950626832,
+        0.0051830518232745745,
+        0.005181209685180846,
+        0.005648620998329212
+      ],
+      "sampled_max_logical_leakage": 0.00038470051302808006,
+      "sampled_max_logical_leakage_by_input": [
+        0.0003013082430232128,
+        0.0003632158336440705,
+        0.00036329667864631876,
+        0.00038470051302808006
+      ],
+      "screen_feasible": true,
+      "second_harmonic_cos_Phi0": 0.0,
+      "second_harmonic_sin_Phi0": 0.0,
+      "steps_per_period": 40,
+      "time_steps": 41972
+    },
+    {
+      "A_to_B_transfer": 0.999999838498605,
+      "B_to_A_transfer": 0.9999998578870927,
+      "average_logical_fidelity_including_leakage": 0.9999847150718523,
+      "candidate_key": "chirp_p0.000000_rise_8.000_fall_8.000",
+      "chirp_span_kHz": 0.0,
+      "conditional_phase_rad": 0.01744372404929326,
+      "duration_actual_us": 1.0625675587737073,
+      "duration_requested_us": 1.0625675587737073,
+      "final_logical_leakage_by_input": [
+        -3.585776120473838e-11,
+        2.946926469515887e-08,
+        1.0073444967062528e-08,
+        3.263761549909816e-08
+      ],
+      "final_max_logical_leakage": 3.263761549909816e-08,
+      "frequency_MHz": 987.5136797993163,
+      "frobenius_distance_to_iSWAP_after_local_Z": 0.008736980315308748,
+      "fundamental_amplitude_Phi0": 0.02,
+      "instantaneous_frequency_end_MHz": 987.5136797993163,
+      "instantaneous_frequency_start_MHz": 987.5136797993163,
+      "local_Z_fit_rad_canonical": [
+        1.1630164317139582,
+        1.259561620978912,
+        -2.812655598579892,
+        -2.7099988148257412,
+        1.385953580728384
+      ],
+      "logical_unitarity_defect": 5.125756409660151e-08,
+      "norm_error": 5.582334594578242e-11,
+      "process_overlap_after_local_Z": 0.9999808983488446,
+      "ramp_in_periods": 8.0,
+      "ramp_out_periods": 8.0,
+      "sampled_max_coupler_excited_probability": 0.00563214232289712,
+      "sampled_max_coupler_excited_probability_by_input": [
+        0.0003138848837854545,
+        0.005167013404070727,
+        0.005165898570159726,
+        0.00563214232289712
+      ],
+      "sampled_max_logical_leakage": 0.00038210027021490234,
+      "sampled_max_logical_leakage_by_input": [
+        0.0003013024413850429,
+        0.00036079275067524286,
+        0.00036090096608165645,
+        0.00038210027021490234
+      ],
+      "screen_feasible": true,
+      "second_harmonic_cos_Phi0": 0.0,
+      "second_harmonic_sin_Phi0": 0.0,
+      "steps_per_period": 40,
+      "time_steps": 41972
+    }
+  ],
+  "feasible_candidate_count": 2,
+  "hardware_ready": false,
+  "limitations": [
+    "closed-system model; no measured flux-line transfer, bandwidth, distortion, latency or crosstalk",
+    "coarse temporal grid; finalists require common-duration 120/240/480 convergence",
+    "transient population extrema are sampled and may be under-resolved",
+    "nominal capacitances and SQUID parameters are assumptions rather than layout extraction",
+    "no T1/T2, thermal population, quasiparticles or fabrication disorder"
+  ],
+  "matrices_archive": "internal_stage8_ramp_40grid_matrices.npz",
+  "minimum_absolute_conditional_phase_candidate": {
+    "A_to_B_transfer": 0.9999986348513487,
+    "B_to_A_transfer": 0.9999986846272872,
+    "average_logical_fidelity_including_leakage": 0.9999842311192786,
+    "candidate_key": "chirp_p0.000000_rise_6.000_fall_8.000",
+    "chirp_span_kHz": 0.0,
+    "conditional_phase_rad": 0.017438200033895266,
+    "duration_actual_us": 1.0625675587737073,
+    "duration_requested_us": 1.0625675587737073,
+    "final_logical_leakage_by_input": [
+      -3.019939853743381e-11,
+      6.871327995483512e-08,
+      1.901692969763502e-08,
+      9.585303251125055e-08
+    ],
+    "final_max_logical_leakage": 9.585303251125055e-08,
+    "frequency_MHz": 987.5136797993163,
+    "frobenius_distance_to_iSWAP_after_local_Z": 0.00886652978241631,
+    "fundamental_amplitude_Phi0": 0.02,
+    "instantaneous_frequency_end_MHz": 987.5136797993163,
+    "instantaneous_frequency_start_MHz": 987.5136797993163,
+    "local_Z_fit_rad_canonical": [
+      1.2409953877714444,
+      2.422455486930161,
+      -1.6563426119238194,
+      2.4165156443588964,
+      0.22319737792826264
+    ],
+    "logical_unitarity_defect": 1.2992225320684447e-07,
+    "norm_error": 5.5922821928788835e-11,
+    "process_overlap_after_local_Z": 0.9999803003711635,
+    "ramp_in_periods": 6.0,
+    "ramp_out_periods": 8.0,
+    "sampled_max_coupler_excited_probability": 0.005648620998329212,
+    "sampled_max_coupler_excited_probability_by_input": [
+      0.0003138910950626832,
+      0.0051830518232745745,
+      0.005181209685180846,
+      0.005648620998329212
+    ],
+    "sampled_max_logical_leakage": 0.00038470051302808006,
+    "sampled_max_logical_leakage_by_input": [
+      0.0003013082430232128,
+      0.0003632158336440705,
+      0.00036329667864631876,
+      0.00038470051302808006
+    ],
+    "screen_feasible": true,
+    "second_harmonic_cos_Phi0": 0.0,
+    "second_harmonic_sin_Phi0": 0.0,
+    "steps_per_period": 40,
+    "time_steps": 41972
+  },
+  "model": "125-dimensional circuit-derived fixed-DC-basis closed-system Strang propagator",
+  "run_config": {
+    "amplitude_Phi0": 0.02,
+    "chirp_grid_kHz": [
+      0.0
+    ],
+    "duration_us": 1.0625675587737073,
+    "frequency_MHz": 987.5136797993163,
+    "ramp_in_grid": [
+      6.0,
+      8.0
+    ],
+    "ramp_out_grid": [
+      8.0
+    ],
+    "steps_per_period": 40
+  },
+  "screening_thresholds_not_hardware_acceptance": {
+    "final_max_logical_leakage_max": 0.001,
+    "sampled_max_coupler_population_max": 0.02,
+    "transfer_min_each_direction": 0.999
+  },
+  "stage": 8,
+  "status": "chirped_asymmetric_envelope_screen_complete",
+  "waveform": "Phi=Phi_DC+env_asym(t)*A*cos(theta(t)); instantaneous f sweeps linearly from f0-Deltaf/2 to f0+Deltaf/2"
+}

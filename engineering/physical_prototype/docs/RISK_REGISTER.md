@@ -19,3 +19,12 @@
 In the current level-1 Monte Carlo model, positive scalar edge-weight changes are accompanied by the corresponding weighted degree diagonal. This preserves the SU(2) form and the Kramers-like degeneracy. It does **not** model arbitrary fabrication errors, independent vertex-frequency offsets, lossy couplers, pump phase noise or open-system dynamics.
 
 The local z-field study is intentionally time-reversal-breaking. Its mean doublet splitting grows with the field amplitude; this is a sensitivity diagnostic, not a field-to-flux calibration for a real transmon chip.
+
+## Pre-release candidate risk additions
+
+| Risk | Current evidence | Impact | Required mitigation / decision |
+|---|---|---|---|
+| Shifted-bias fixed-basis approximation | Stages 5–10 propagate in the Stage-5 retained local coupler basis; Stage 11A separately quantizes the local SQUID at shifted bias | Stage 10 is not yet a full-gate result in the re-quantized shifted-bias basis | Complete Stage 11B full three-mode rebuild and 120/240/480 matrix convergence before promoting the shifted-bias candidate |
+| Assumed circuit parameters | Capacitances, EC/EJ and SQUID asymmetry are declared Stage-3 assumptions, not layout-extracted values | Gate response may shift when parasitics and fabrication geometry are included | Obtain layout extraction, EM simulation and independent circuit-QED review |
+| Closed-system gate metrics | Stage 4–10 omit dissipation, thermal occupation, flux-line transfer and pump errors | Projected process overlap can overstate physical performance | Add measured/target T1/T2, thermal, control-transfer, phase-noise and crosstalk models |
+| Graph-wide pump collisions | Existing screen has 73 primary and 653 conditional warnings | Simultaneous nine-tone operation is not cleared | Redesign frequency/frame allocation and validate with a measured channel-transfer matrix |

@@ -1,0 +1,127 @@
+{
+  "best_feasible_process_overlap_candidate": {
+    "A_to_B_transfer": 0.9999740803053969,
+    "B_to_A_transfer": 0.9999740805399657,
+    "actual_duration_us": 1.0809932671407319,
+    "average_fidelity_including_leakage": 0.9999894054132007,
+    "bias_flux_Phi0": 0.25934367625232063,
+    "bias_offset_Phi0": -0.0075,
+    "candidate_key": "bm0.007500_dfm63.000_T1.081000000",
+    "conditional_phase_rad": 0.0021068921498110563,
+    "duration_requested_us": 1.081,
+    "final_max_logical_leakage": 1.8612122953953758e-08,
+    "local_Z_fit_rad": [
+      -1.867425370063879,
+      -0.9595308286298794,
+      0.2971624475908117,
+      2.443935608313081,
+      1.1873538768896095
+    ],
+    "logical_unitarity_defect": 1.8741412215979317e-08,
+    "minimum_bare_overlap": 0.9942448225409911,
+    "norm_error": 1.2763412549077202e-10,
+    "process_overlap_after_local_Z": 0.9999867580652252,
+    "pump_frequency_MHz": 987.610221499198,
+    "pump_offset_from_static_kHz": -63.0,
+    "sampled_max_coupler_population": 0.005925639885497307,
+    "sampled_max_logical_leakage": 0.000348040633290303,
+    "screen_feasible": true,
+    "static_AB_detuning_MHz": 987.673221499198,
+    "static_ZZ_MHz": -0.000766699942289506
+  },
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "A_to_B_transfer": 0.9999740803053969,
+      "B_to_A_transfer": 0.9999740805399657,
+      "actual_duration_us": 1.0809932671407319,
+      "average_fidelity_including_leakage": 0.9999894054132007,
+      "bias_flux_Phi0": 0.25934367625232063,
+      "bias_offset_Phi0": -0.0075,
+      "candidate_key": "bm0.007500_dfm63.000_T1.081000000",
+      "conditional_phase_rad": 0.0021068921498110563,
+      "duration_requested_us": 1.081,
+      "final_max_logical_leakage": 1.8612122953953758e-08,
+      "local_Z_fit_rad": [
+        -1.867425370063879,
+        -0.9595308286298794,
+        0.2971624475908117,
+        2.443935608313081,
+        1.1873538768896095
+      ],
+      "logical_unitarity_defect": 1.8741412215979317e-08,
+      "minimum_bare_overlap": 0.9942448225409911,
+      "norm_error": 1.2763412549077202e-10,
+      "process_overlap_after_local_Z": 0.9999867580652252,
+      "pump_frequency_MHz": 987.610221499198,
+      "pump_offset_from_static_kHz": -63.0,
+      "sampled_max_coupler_population": 0.005925639885497307,
+      "sampled_max_logical_leakage": 0.000348040633290303,
+      "screen_feasible": true,
+      "static_AB_detuning_MHz": 987.673221499198,
+      "static_ZZ_MHz": -0.000766699942289506
+    }
+  ],
+  "feasible_candidate_count": 1,
+  "hardware_ready": false,
+  "limitations": [
+    "bias shift is evaluated in the Stage-5 fixed 5-level coupler basis; excluded local coupler levels are not re-quantized",
+    "coarse temporal grid; finalists require common-duration 120/240/480 convergence",
+    "no measured flux-line calibration, bandwidth, delay, distortion or crosstalk",
+    "closed-system only; no T1/T2, thermal population, quasiparticles or fabrication disorder",
+    "nominal capacitances and SQUID parameters remain assumptions, not layout extraction"
+  ],
+  "matrices_archive": "internal_stage9_preliminary_40grid_matrices.npz",
+  "minimum_absolute_conditional_phase_candidate": {
+    "A_to_B_transfer": 0.9999740803053969,
+    "B_to_A_transfer": 0.9999740805399657,
+    "actual_duration_us": 1.0809932671407319,
+    "average_fidelity_including_leakage": 0.9999894054132007,
+    "bias_flux_Phi0": 0.25934367625232063,
+    "bias_offset_Phi0": -0.0075,
+    "candidate_key": "bm0.007500_dfm63.000_T1.081000000",
+    "conditional_phase_rad": 0.0021068921498110563,
+    "duration_requested_us": 1.081,
+    "final_max_logical_leakage": 1.8612122953953758e-08,
+    "local_Z_fit_rad": [
+      -1.867425370063879,
+      -0.9595308286298794,
+      0.2971624475908117,
+      2.443935608313081,
+      1.1873538768896095
+    ],
+    "logical_unitarity_defect": 1.8741412215979317e-08,
+    "minimum_bare_overlap": 0.9942448225409911,
+    "norm_error": 1.2763412549077202e-10,
+    "process_overlap_after_local_Z": 0.9999867580652252,
+    "pump_frequency_MHz": 987.610221499198,
+    "pump_offset_from_static_kHz": -63.0,
+    "sampled_max_coupler_population": 0.005925639885497307,
+    "sampled_max_logical_leakage": 0.000348040633290303,
+    "screen_feasible": true,
+    "static_AB_detuning_MHz": 987.673221499198,
+    "static_ZZ_MHz": -0.000766699942289506
+  },
+  "model": "125-dimensional fixed-local-basis circuit-derived closed-system propagator",
+  "run_config": {
+    "amplitude_Phi0": 0.02,
+    "bias_offsets_Phi0": [
+      -0.0075
+    ],
+    "durations_us": [
+      1.081
+    ],
+    "pump_offset_from_static_kHz": [
+      -63.0
+    ],
+    "ramp_periods": 8.0,
+    "steps_per_period": 40
+  },
+  "screening_thresholds_not_hardware_acceptance": {
+    "max_final_logical_leakage": 0.001,
+    "max_sampled_coupler_population": 0.02,
+    "min_transfer_each_direction": 0.999
+  },
+  "stage": 9,
+  "status": "static_bias_offset_parametric_gate_scan_complete"
+}

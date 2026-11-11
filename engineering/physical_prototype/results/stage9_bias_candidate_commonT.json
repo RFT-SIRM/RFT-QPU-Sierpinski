@@ -1,0 +1,202 @@
+{
+  "adjacent_grid_matrix_comparisons": [
+    {
+      "coarse_steps_per_period": 120,
+      "conditional_phase_difference_rad": -7.2407946767332095e-06,
+      "fine_steps_per_period": 240,
+      "phase_aligned_frobenius_difference": 0.00012992321127029954,
+      "phase_aligned_max_element_difference": 9.183219779083049e-05,
+      "phase_fit_rad_global_outA_outB_inA_inB": [
+        -0.090306025326604,
+        0.2521699306141391,
+        0.25227624214018385,
+        -0.2526388876580523,
+        -0.2525325761484411
+      ],
+      "raw_frobenius_difference": 0.1812760025572171
+    },
+    {
+      "coarse_steps_per_period": 240,
+      "conditional_phase_difference_rad": -1.8041577396483814e-06,
+      "fine_steps_per_period": 480,
+      "phase_aligned_frobenius_difference": 3.231712863808481e-05,
+      "phase_aligned_max_element_difference": 2.284231845643803e-05,
+      "phase_fit_rad_global_outA_outB_inA_inB": [
+        -0.02247655710948,
+        0.5027035259722983,
+        0.5027384823393749,
+        -0.5028288297044627,
+        -0.5027938733374006
+      ],
+      "raw_frobenius_difference": 0.04513304355333263
+    }
+  ],
+  "grid_results": [
+    {
+      "actual_duration_us": 1.0810017050174894,
+      "average_logical_fidelity_including_leakage": 0.9999847711053622,
+      "conditional_phase_iSWAP_deg": 0.12528883348198466,
+      "conditional_phase_iSWAP_rad": 0.002186702660243544,
+      "dt_ns": 0.008437876757374266,
+      "final_logical_leakage_by_input": [
+        -3.5074609883167795e-11,
+        -5.468958619303521e-13,
+        4.25039003992822e-10,
+        1.0503981351384084e-08
+      ],
+      "final_norm_error": 1.9300550047063325e-10,
+      "frobenius_distance_corrected_matrix_to_iSWAP": 0.008725320555224205,
+      "local_Z_fit_rad_global_outA_outB_inA_inB": [
+        -2.887664351445419,
+        -16.085172285741777,
+        -14.854680479102925,
+        17.831089288995383,
+        16.60066590130736
+      ],
+      "logical_unitarity_defect_frobenius": 1.0514353330301524e-08,
+      "max_coupler_excited_probability_sampled_by_input": [
+        0.0003735998819866449,
+        0.005568077229859475,
+        0.005562797540688549,
+        0.00589882937541518
+      ],
+      "max_logical_leakage_sampled_by_input": [
+        0.00023784671014281944,
+        0.0003229583044761508,
+        0.00032257731807106005,
+        0.0003302911853526602
+      ],
+      "max_norm_error_sampled": 1.9300550047063325e-10,
+      "projected_process_overlap_after_local_Z": 0.9999809645625403,
+      "requested_duration_us": 1.0810017050174894,
+      "steps_by_common_duration_grid": 128113,
+      "steps_per_period": 120,
+      "time_steps": 128113,
+      "transfer_A_to_B": 0.9999625324453854,
+      "transfer_B_to_A": 0.9999625320191651
+    },
+    {
+      "actual_duration_us": 1.0810017050174894,
+      "average_logical_fidelity_including_leakage": 0.9999843162736237,
+      "conditional_phase_iSWAP_deg": 0.12570370045733315,
+      "conditional_phase_iSWAP_rad": 0.0021939434549211653,
+      "dt_ns": 0.004218938378687133,
+      "final_logical_leakage_by_input": [
+        5.706517480774664e-10,
+        -1.296671658934656e-10,
+        3.9167713516974345e-10,
+        1.077735756194187e-08
+      ],
+      "final_norm_error": 5.607005970631462e-10,
+      "frobenius_distance_corrected_matrix_to_iSWAP": 0.008854631763919032,
+      "local_Z_fit_rad_global_outA_outB_inA_inB": [
+        -2.9779703771705055,
+        20.676825584601158,
+        21.906878908172306,
+        -18.930832743384855,
+        -20.161694614155078
+      ],
+      "logical_unitarity_defect_frobenius": 1.0804414568794959e-08,
+      "max_coupler_excited_probability_sampled_by_input": [
+        0.00037030560556360233,
+        0.005568299444158626,
+        0.005565380075166578,
+        0.0058972398435184125
+      ],
+      "max_logical_leakage_sampled_by_input": [
+        0.00023534688505855161,
+        0.0003230273497033531,
+        0.00032264459777264776,
+        0.0003304029190078772
+      ],
+      "max_norm_error_sampled": 5.607005970631462e-10,
+      "projected_process_overlap_after_local_Z": 0.999980396067656,
+      "requested_duration_us": 1.0810017050174894,
+      "steps_by_common_duration_grid": 256226,
+      "steps_per_period": 240,
+      "time_steps": 256226,
+      "transfer_A_to_B": 0.9999613999178815,
+      "transfer_B_to_A": 0.9999613993967699
+    },
+    {
+      "actual_duration_us": 1.0810017050174974,
+      "average_logical_fidelity_including_leakage": 0.9999842017399277,
+      "conditional_phase_iSWAP_deg": 0.12580707108133998,
+      "conditional_phase_iSWAP_rad": 0.0021957476126599255,
+      "dt_ns": 0.002109469189343582,
+      "final_logical_leakage_by_input": [
+        3.108133750373554e-10,
+        7.522393818959472e-11,
+        6.249100126254348e-10,
+        1.217615352988588e-08
+      ],
+      "final_norm_error": 1.477623245982329e-09,
+      "frobenius_distance_corrected_matrix_to_iSWAP": 0.008886799560813957,
+      "local_Z_fit_rad_global_outA_outB_inA_inB": [
+        -3.0004469340503674,
+        19.048764968998963,
+        20.27916485661575,
+        -17.30320903963658,
+        -18.533724346366526
+      ],
+      "logical_unitarity_defect_frobenius": 1.2197453868502515e-08,
+      "max_coupler_excited_probability_sampled_by_input": [
+        0.0003694907600828787,
+        0.00556789529500438,
+        0.005566265073696909,
+        0.005896843533162033
+      ],
+      "max_logical_leakage_sampled_by_input": [
+        0.000234728564003861,
+        0.00032304630480384233,
+        0.00032266238659584,
+        0.00033043115061659467
+      ],
+      "max_norm_error_sampled": 1.477623245982329e-09,
+      "projected_process_overlap_after_local_Z": 0.9999802529991034,
+      "requested_duration_us": 1.0810017050174974,
+      "steps_by_common_duration_grid": 512452,
+      "steps_per_period": 480,
+      "time_steps": 512452,
+      "transfer_A_to_B": 0.9999611153568266,
+      "transfer_B_to_A": 0.9999611148077859
+    }
+  ],
+  "hardware_ready": false,
+  "limitations": [
+    "DC bias shift is projected into the retained Stage-5 local 5-level coupler basis",
+    "common physical duration is enforced across grids",
+    "transient extrema are sampled rather than proven continuous-time extrema",
+    "no measured flux-line transfer function, bandwidth, delay, distortion or crosstalk",
+    "closed-system only; no T1/T2 or thermal bath",
+    "nominal capacitances and SQUID parameters remain assumptions, not layout extraction"
+  ],
+  "matrices_archive": "stage9_bias_candidate_commonT_matrices.npz",
+  "model": "125-dimensional fixed-local-basis circuit-derived closed-system Strang propagator",
+  "parameters": {
+    "actual_shared_duration_us": 1.0810017050174974,
+    "amplitude_Phi0": 0.02,
+    "bias_flux_Phi0": 0.25934367625232047,
+    "bias_offset_Phi0": -0.0075,
+    "minimum_bare_overlap": 0.99424482254099,
+    "pump_frequency_MHz": 987.6102214991907,
+    "pump_offset_from_static_kHz": -63.0,
+    "ramp_periods": 8.0,
+    "requested_duration_us": 1.081,
+    "static_AB_detuning_MHz": 987.6732214991907,
+    "static_ZZ_MHz": -0.0007666999452453638,
+    "steps_by_grid": {
+      "120": 128113,
+      "240": 256226,
+      "480": 512452
+    },
+    "steps_per_period": [
+      120,
+      240,
+      480
+    ]
+  },
+  "richardson_conditional_phase_rad_second_order": 0.0021963489985728454,
+  "stage": 9,
+  "status": "bias_shifted_full_gate_common_duration_convergence_complete"
+}

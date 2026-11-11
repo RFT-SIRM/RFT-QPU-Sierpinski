@@ -1,0 +1,75 @@
+{
+  "status": "preliminary_exploration_not_hardware_qualified",
+  "stage8": {
+    "linear_chirp_24grid": {
+      "chirp_minus_4_kHz_process_overlap": 0.999980226302,
+      "chirp_zero_process_overlap": 0.999980227164,
+      "chirp_plus_4_kHz_process_overlap": 0.999980226383,
+      "conclusion": "effectively neutral at 24 steps per period"
+    },
+    "ramp_comparison_40grid": {
+      "ramp_6_8": {
+        "A_to_B": 0.9999986348513487,
+        "B_to_A": 0.9999986846272872,
+        "process_overlap": 0.9999803003711635,
+        "conditional_phase_rad": 0.017438200033895266
+      },
+      "ramp_8_8": {
+        "A_to_B": 0.999999838498605,
+        "B_to_A": 0.9999998578870927,
+        "process_overlap": 0.9999808983488446,
+        "conditional_phase_rad": 0.01744372404929326
+      },
+      "decision": "do_not_promote_asymmetric_6_8_ramp"
+    }
+  },
+  "stage9": {
+    "bias_offset_Phi0": -0.0075,
+    "bias_flux_Phi0": 0.25934367625232063,
+    "static_AB_detuning_MHz": 987.673221499198,
+    "static_ZZ_MHz": -0.000766699942289506,
+    "minimum_bare_overlap": 0.9942448225409911,
+    "pump_offset_from_static_kHz": -63.0,
+    "pump_frequency_MHz": 987.610221499198,
+    "amplitude_Phi0": 0.02,
+    "duration_requested_us": 1.081,
+    "ramp_periods": 8.0,
+    "preliminary_40grid": {
+      "process_overlap": 0.9999867580652252,
+      "A_to_B": 0.9999740803053969,
+      "B_to_A": 0.9999740805399657,
+      "conditional_phase_rad": 0.0021068921498110563,
+      "final_max_logical_leakage": 1.8612122953953758e-8,
+      "sampled_max_coupler_population": 0.005925639885497307
+    },
+    "common_duration_high_resolution": {
+      "actual_duration_us": 1.0810017050174894,
+      "grid_120": {
+        "A_to_B": 0.9999625324453854,
+        "process_overlap": 0.9999809645625403,
+        "conditional_phase_rad": 0.002186702660243544
+      },
+      "grid_240": {
+        "A_to_B": 0.9999613999178815,
+        "process_overlap": 0.999980396067656,
+        "conditional_phase_rad": 0.0021939434549211653
+      },
+      "grid_480": {
+        "status": "pending; resume from included checkpoint"
+      },
+      "two_grid_provisional_richardson": {
+        "process_overlap": 0.9999802065693613,
+        "conditional_phase_rad": 0.002196357053147039,
+        "not_final": true
+      }
+    },
+    "decision": "promising_phase_reduction_but_not_accepted; 240-grid process_overlap_below_stage6_and_transfer_lower"
+  },
+  "limitations": [
+    "closed-system model only",
+    "bias shift is evaluated in fixed five-level coupler basis, not re-quantized at each bias",
+    "nominal capacitances and SQUID parameters are assumptions, not layout extraction",
+    "no measured flux-line transfer or crosstalk",
+    "no T1/T2, thermal population, quasiparticles or fabrication disorder"
+  ]
+}

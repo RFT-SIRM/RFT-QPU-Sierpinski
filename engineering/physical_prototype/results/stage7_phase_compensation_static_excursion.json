@@ -1,0 +1,49 @@
+{
+  "stage": 7,
+  "status": "static_ZZ_compensation_excursion_rejected",
+  "hardware_ready": false,
+  "model_dimension": 125,
+  "gate_baseline": {
+    "steps_per_period": 120,
+    "pump_frequency_MHz": 987.5136797993163,
+    "fundamental_amplitude_Phi0": 0.02,
+    "duration_us": 1.0625675587737073,
+    "conditional_phase_rad": 0.017469689793363694,
+    "projected_process_overlap_after_local_Z": 0.9999807956385128
+  },
+  "compensation_point": {
+    "flux_Phi0": 0.25,
+    "static_ZZ_MHz": 0.03561534986329207,
+    "static_logical_min_overlap": 0.9981787217528416,
+    "naive_hold_ns": 78.06711138787789
+  },
+  "trials": [
+    {
+      "ramp_ns": 10.0,
+      "hold_ns": 78.06711138787789,
+      "conditional_phase_after_rad": -0.0008239482154855046,
+      "process_overlap_after_local_Z": 0.9996288513293051,
+      "average_logical_fidelity_including_leakage": 0.9996288961314856,
+      "A_to_B_transfer": 0.9999997075761998,
+      "B_to_A_transfer": 0.9999998248061915,
+      "max_final_logical_leakage": 0.0014835446028875765,
+      "max_transient_logical_leakage": 0.0036900117534061083,
+      "max_coupler_excited_probability": 0.011125153657534423,
+      "norm_error": 1.3219891847882081e-10
+    },
+    {
+      "ramp_ns": 25.0,
+      "hold_ns": 78.06711138787789,
+      "conditional_phase_after_rad": -0.0022889423918743827,
+      "process_overlap_after_local_Z": 0.9998098471945417,
+      "average_logical_fidelity_including_leakage": 0.9998099337521212,
+      "A_to_B_transfer": 0.9999997541721997,
+      "B_to_A_transfer": 0.999999828774131,
+      "max_final_logical_leakage": 0.0007587767357212227,
+      "max_transient_logical_leakage": 0.0029038201062666635,
+      "max_coupler_excited_probability": 0.010198982458485046,
+      "norm_error": 1.414004469069141e-10
+    }
+  ],
+  "decision": "reject simple static-ZZ idle compensation; optimize complete dynamic excursion if revisited"
+}
