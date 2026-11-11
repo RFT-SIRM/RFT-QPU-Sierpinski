@@ -6,7 +6,7 @@
 [![Prototype](https://img.shields.io/badge/prototype-v0.1-2563eb?style=flat-square)](engineering/physical_prototype/README.md)
 [![Geometry](https://img.shields.io/badge/graph-SG%281%29-4777bd?style=flat-square)](#level-1-transmon-tile)
 [![Hardware mapping](https://img.shields.io/badge/mapping-12%20transmons-168f83?style=flat-square)](#level-1-transmon-tile)
-[![Status](https://img.shields.io/badge/status-pre--experimental-d97706?style=flat-square)](#research-status)
+[![Status](https://img.shields.io/badge/status-closed%20pre--release%20v0.4--rc1-d97706?style=flat-square)](#research-status)
 [![License](https://img.shields.io/badge/license-Business%201.0-303846?style=flat-square)](LICENSE.md)
 
 ---
@@ -197,33 +197,69 @@ The top-level `qpu_core.py` is a compact research reference. The full finite-lev
 
 ---
 
-## Engineering Prototype v0.3 research update
+## Closed engineering pre-release candidate v0.4-rc1 — 2026-11-11
 
-The standalone numerical and engineering package is maintained in
-[engineering/physical_prototype](engineering/physical_prototype/README.md).
+**Release channel: closed/internal engineering pre-release candidate.** This checkpoint consolidates the Stage 1–11A numerical work so it can be reproduced and extended from a single repository state. It is a software/model pre-release, **not** a fabrication release, foundry package, tape-out authorization, or experimental hardware claim.
 
-The level-1 topology schematic is shown above; the generated coefficient map contains 22 nonzero effective exchange channels. The current model also includes a two-cell, 24-mode projected interaction.
+The standalone model and engineering package is maintained in [engineering/physical_prototype](engineering/physical_prototype/README.md). The stages are deliberately separated by evidence level:
 
-Reproducibility status: 42 package tests pass in the current local development package; the merged main baseline CI passed. The new qutrit/Floquet screening changes are in PR validation. Numerical values below are model outputs, not measurements:
+| Stage | Work recorded | Evidence boundary |
+|---|---|---|
+| 1–3 | Effective three-mode stress model, parameter sweeps, and Stage-3 charge-basis circuit assumptions | Declared circuit assumptions; not layout-extracted parameters |
+| 4–6 | Four-state logical gate propagation, local-Z frame fitting, full-matrix temporal convergence, and common-duration checks | Closed-system calculation in the retained Stage-5 local coupler basis |
+| 7–8 | Harmonic, chirp, and envelope exploration | Exploratory candidates; no waveform promoted solely from coarse-grid gains |
+| 9–10 | Shifted-bias and local frequency/duration refinement | Converged 120/240/480 candidate in the Stage-5 fixed local coupler basis |
+| 11A | Explicit local SQUID-coupler re-quantization at shifted DC flux, with charge-cutoff and retained-subspace comparisons | Local coupler audit only; full three-mode driven gate has not yet been rebuilt in this new basis |
 
-| Quantity | Numerical result |
+### Best currently converged full-gate candidate — Stage 10
+
+| Quantity | Result |
 |---|---:|
-| Level-1 modeled modes / proposed transmon mapping | 12 |
-| Ground-doublet splitting divided by J | `1.61 × 10^-15` |
-| Gap to the next level divided by J | `1.3937126931` |
-| Best local projected-control coefficient | `0.1770433` |
-| Two-cell modeled modes / proposed transmon mapping | 24 |
-| Projected nonlocal interaction coefficient divided by χ | `0.00783608327` |
-| Idealized gate time at assumed χ/(2π) = 10 MHz | `6.38074 μs` |
+| DC flux | `0.259343676252 Φ₀` |
+| Pump frequency | `987.609221499 MHz` |
+| Pump offset from shifted static detuning | `-64.000 kHz` |
+| Flux amplitude | `0.020000 Φ₀` |
+| Common physical pulse duration | `1.081002799582 μs` |
+| Raised-cosine ramp | `8.0` pump periods |
+| A → B probability, 480 grid | `0.999983152623` |
+| B → A probability, 480 grid | `0.999983152074` |
+| Projected process overlap after fitted local Z, 480 grid | `0.999991271648` |
+| Conditional iSWAP phase, 480 grid | `0.0021957288 rad` |
+| Richardson conditional phase | `0.0021963301 rad` |
 
-The near-zero doublet splitting is a floating-point numerical result,
-not a formal proof of exact degeneracy. The two-cell gate time is an
-idealized projected-model estimate, not a calibrated or measured gate.
+These are projected, closed-system numerical metrics. The process-overlap figure is not an experimental gate fidelity and does not include T1/T2, thermal population, flux-line distortion, crosstalk, calibration uncertainty, or fabrication spread.
 
-This package is not a fabrication-ready design. The resonant complex-Z hopping phase is the immediate pre-tape-out blocker. Multilevel circuit-QED modeling, electromagnetic validation, coupler parasitics, and open-system noise and control analysis also remain outstanding.
+### Stage 11A — local coupler re-quantization audit
 
-These calculations concern the SU(2) RFT-QPU model. They must not be
-conflated with the distinct signed-Z2 operator family studied in Phi-Genesis.
+At charge cutoff 12 with five retained local levels, the coupler f01 changes from 5007.500000 MHz to 5075.910813 MHz (Δ +68.410813 MHz); the minimum matched-state overlap probability is 0.9989682 and the minimum retained-subspace singular value is 0.9995692.
+
+The Stage 11A report also includes the 8/10/12 charge-cutoff × 3/4/5 retained-level study, aligned operator matrices, overlap matrices, CSV and JSON outputs. This does **not** establish full-gate convergence with the re-quantized coupler. Stage 11B (rebuild the complete three-mode Hamiltonian and rerun the driven four-state gate in the new basis) remains open.
+
+### Reproducibility snapshot
+
+- Local interpreter: `Python 3.14.2`.
+- Complete repository + prototype test command: `python -m pytest -q tests engineering/physical_prototype/tests`.
+- Captured local result during this pre-release preparation: **75 passed in 1.33s**.
+- Pre-release base commit: `d9b374c1dbd7e24050a33b13acf21f57858ff775`.
+- Stage reports, scripts, tests, JSON/CSV data and complex-matrix NPZ archives are retained under `engineering/physical_prototype/`.
+
+GitHub Actions on the release-candidate pull request is the required CI check. A local pass is not a substitute for the Python 3.11 CI run.
+
+### Release blockers — explicitly not closed
+
+1. Rebuild and converge the full driven three-mode gate with the Stage 11A re-quantized coupler basis (Stage 11B).
+2. Complete robust sweeps using the rebuilt model; derive parameter tolerances from worst-case behavior, not a single optimum.
+3. Add measured or target flux-line transfer functions, bandwidth, delay, distortion, pump phase noise and channel crosstalk.
+4. Add open-system dynamics (T1/T2, thermal occupation, relaxation/dephasing, leakage and spectator channels).
+5. Replace assumed capacitances/Josephson parameters with layout extraction and independent circuit-QED review.
+6. Resolve the graph-wide simultaneous nine-tone Floquet collision warnings before simultaneous operation or tape-out.
+7. Obtain fabrication, EM, packaging, readout, calibration and independent hardware review.
+
+The graph-wide first-order screen remains uncleared: the existing audit reports 73 primary pump/sideband warnings within 10 MHz and 653 conditional harmonic/intermodulation warnings. These are possible resonance scenarios, not measured error rates.
+
+**Status:** closed/internal engineering pre-release candidate v0.4-rc1 for continued numerical and circuit-design work. It is not a fabricated or experimentally validated device, not a foundry-ready design, and not permission to proceed directly to tape-out.
+
+---
 
 ## Companion theorem repository
 
@@ -259,7 +295,7 @@ The current public status distinguishes the machine-checked graph infrastructure
 
 ## Research Status
 
-**Status: research architecture / pre-experimental.**
+**Status: closed/internal engineering pre-release candidate v0.4-rc1 (software/model checkpoint); physical hardware remains pre-experimental.**
 
 No statement in this repository should be read as a claim of demonstrated fault tolerance, universal error correction, arbitrary-noise immunity, commercial fabrication readiness, or experimentally measured qubit performance.
 

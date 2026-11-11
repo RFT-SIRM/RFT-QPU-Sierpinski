@@ -1,55 +1,65 @@
-# RFT-QPU-Sierpinski prototype package — validation record
+# Pre-release validation record — v0.4-rc1
 
-Validation date: 2026-11-10 (UTC session)
+Date: 2026-11-11
+Channel: closed/internal engineering pre-release candidate
+Base commit: `d9b374c1dbd7e24050a33b13acf21f57858ff775`
+Local interpreter: `Python 3.14.2`
 
-## Package integrity
-
-- 44 project files copied from the original generated package.
-- ZIP archive integrity checked with `unzip -t`.
-- Both standalone topology assets are present: SVG source and 1200x800 PNG preview.
-
-## Executed checks
+## Executed local checks
 
 Command:
 
 ```bash
-PYTHONPATH=src python -m pytest -q
+python -m compileall -q engineering/physical_prototype/src engineering/physical_prototype/scripts engineering/physical_prototype/tests
+python -m pytest -q tests engineering/physical_prototype/tests
 ```
 
-Result:
+Recorded test result during release-candidate preparation: **75 passed in 1.33s**.
 
-```text
-20 passed in 1.98s
-```
+The GitHub Actions pull-request run (repository Python 3.11 workflow) is a separate mandatory release check; it must be green before merging.
 
-Reproduction command:
+## Stage 10 converged candidate
 
-```bash
-python -m rft_qpu.cli \
-  --level 1 \
-  --J-MHz 10 \
-  --temperature-mK 10 \
-  --disorder-samples 250 \
-  --output results/level1_prototype_report.json \
-  --hardware-dir hardware/level1
-```
+Parameters:
 
-Independently rerun summary:
+- DC flux: `0.259343676252320 Phi0`
+- Pump frequency: `987.609221499191 MHz`
+- Pump offset from shifted static detuning: `-64.000000 kHz`
+- Flux amplitude: `0.02000000 Phi0`
+- Common duration: `1.081002799581705 us`
+- Ramp periods: `8.0`
 
-- graph sites: 6
-- graph edges: 9
-- logical-mode / transmon count: 12
-- ground-doublet splitting / J: 3.2751579226442118e-15
-- gap to next level / J: 1.3937126930868375
-- best local projected-control scale: 0.17704330851507563
-- thermal benchmark at J/(2 pi)=10 MHz and T=10 mK: exp(-Delta/kBT)=0.935300267173145
+At 480 steps/period:
 
-Two-cell projected-interaction calculation was rerun:
+- A→B: `0.999983152623462`
+- B→A: `0.999983152073742`
+- Projected process overlap after local-Z fitting: `0.999991271647941`
+- Conditional iSWAP phase: `0.002195728776 rad`
+- Richardson phase estimate: `0.002196330137 rad`
 
-- physical modes: 24 transmons
-- projected ZZ coefficient / chi: 0.007836083272491063
-- idealized maximally-entangling time at chi/(2 pi)=10 MHz: 6.3807387263899225 microseconds
+These are closed-system model metrics, not measured gate fidelity.
 
-## Interpretation boundary
+## Stage 11A local coupler requantization
 
-These checks establish that the numerical software package runs and reproduces its stated finite-dimensional model outputs. They do NOT establish a fabricated chip, measured spectra, measured coupler phases, coherence, gate fidelity, open-system leakage, thermal occupation, or a functioning quantum computer. The present package is a computational prototype and proposed hardware mapping, not a foundry-ready layout or tape-out package.
+At charge cutoff 12 with five retained local levels, the coupler f01 changes from 5007.500000 MHz to 5075.910813 MHz (Δ +68.410813 MHz); the minimum matched-state overlap probability is 0.9989682 and the minimum retained-subspace singular value is 0.9995692.
+
+Truncations evaluated: charge cutoffs `[8, 10, 12]`, retained levels `[3, 4, 5]`. The report archives matched eigenstate/operator data and overlap matrices. This stage re-quantizes the **local coupler only**; it does not rebuild or reconverge the full three-mode driven gate.
+
+## Included evidence
+
+- Stage 1–4 circuit-derived coupler source, tests, reports and checkpoint from the merged baseline.
+- Stage 5–10 source, scripts, tests, convergence reports, sweeps and complex logical matrices.
+- Stage 11A local coupler re-quantization source, tests, report, CSV and NPZ matrices.
+- Updated pre-release scope, validation gates and risk register.
+
+## Not established
+
+- No fabricated or measured chip.
+- No measured capacitance matrix or extracted layout parasitics.
+- No fully rebuilt Stage 11B gate in the new coupler basis.
+- No measured flux-line transfer function, pump crosstalk or phase-noise budget.
+- No T1/T2, thermal-bath or open-system gate fidelity.
+- No fabrication yield/disorder qualification.
+- The nine-tone graph-wide schedule remains uncleared; current screen reports 73 primary and 653 conditional warnings.
+
+A green software suite establishes reproducibility of the encoded numerical model only. It does not establish hardware readiness, tape-out readiness or experimental gate performance.

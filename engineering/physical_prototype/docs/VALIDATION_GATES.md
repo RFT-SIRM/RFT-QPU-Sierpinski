@@ -56,3 +56,19 @@
 - [ ] Publish full hardware data, uncertainty budgets and independent reproduction instructions.
 
 A green numerical test suite is Gate 0 only. A successful one-cell chip is Gate 2 only. Neither is, by itself, a universal or fault-tolerant quantum computer.
+
+## Closed engineering pre-release candidate v0.4-rc1
+
+This is a **software/model release checkpoint**, not a hardware validation gate. It can be closed independently while the following physical gates remain open.
+
+- [x] Stages 1–10 source, reports, tests and numerical outputs consolidated.
+- [x] Stage 10 full logical matrix calculated at 120/240/480 steps per period with a common physical pulse duration.
+- [x] Stage 11A local SQUID coupler re-quantization audit executed for charge cutoffs [8, 10, 12] and retained levels [3, 4, 5].
+- [x] Local compile and full test suite recorded as **75 passed in 1.33s** on Python 3.14.2.
+- [ ] Release-candidate GitHub Actions run on Python 3.11 must pass before merge.
+- [ ] Stage 11B: rebuild the complete three-mode Hamiltonian and driven gate using the re-quantized coupler basis; reconverge full matrices at 120/240/480.
+- [ ] Re-run robust bias/frequency/amplitude/duration sweeps with the Stage 11B model.
+- [ ] Add flux-line transfer, phase noise, crosstalk and open-system T1/T2/thermal models.
+- [ ] Replace declared circuit assumptions with layout-extracted parameters and independent circuit-QED/EM review.
+
+**Interpretation:** passing the software pre-release gate does not close Gate 1 circuit feasibility, Gate 2 fabrication, Gate 3 two-cell gate, or any fault-tolerance/scaling gate above.

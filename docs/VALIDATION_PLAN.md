@@ -2,7 +2,7 @@
 
 ## Current baseline
 
-The repository now contains the level-1 numerical and hardware-mapping prototype in `engineering/physical_prototype/`. Its package test suite reported 20 passing tests locally on 10 November 2026. The post-merge GitHub Actions run on `main` completed successfully and reproduced the configured level-1 calculation.
+The repository contains a closed/internal engineering pre-release candidate v0.4-rc1. Stages 1–10 record the circuit-derived coupler and full logical-gate numerical study; Stage 11A adds a separate local SQUID-coupler re-quantization audit. The local release-preparation run used Python 3.14.2 and recorded **75 passed in 1.33s**. The release-candidate pull request must also pass GitHub Actions on Python 3.11 before merge.
 
 A green numerical test suite verifies the implemented model and code paths. It does not validate a fabricated device.
 
@@ -47,6 +47,31 @@ Acceptance for future changes: exact regression checks on graph counts, link ass
 **Status: implemented; current frequency assignment fails.** The first-order primary-tone screen finds 0 MHz minimum margin and 73 warnings within 10 MHz. Conditional harmonics and pairwise intermodulation scenarios raise the count to 653. This is a resonance-candidate screen, not a full Floquet solution or measured device failure.
 
 Do not approve simultaneous nine-tone operation until the frame plan is redesigned and actual channel isolation is measured.
+
+## Gate 2C — Circuit-derived driven-coupler numerical pre-release
+
+**Status: Stage 10 full-gate candidate converged in the Stage-5 fixed local coupler basis; Stage 11A local coupler re-quantization audit complete; Stage 11B full-gate integration open.**
+
+Stage 10 reference at 480 steps/period:
+
+- DC flux: `0.259343676252 Phi0`.
+- Pump frequency: `987.609221499 MHz`.
+- Flux amplitude: `0.020000 Phi0`.
+- Common duration: `1.081002799582 us`.
+- A→B / B→A: `0.999983152623` / `0.999983152074`.
+- Projected process overlap after local-Z fitting: `0.999991271648`.
+- Conditional iSWAP phase: `0.0021957288 rad`.
+
+These are closed-system projected metrics, not measured gate fidelity. Stages 5–10 use the retained Stage-5 local coupler basis while the flux-dependent coupler Hamiltonian is projected into it.
+
+Stage 11A explicitly re-diagonalizes the local SQUID Hamiltonian at the shifted DC flux and tracks local eigenstates/operator matrices across charge cutoffs `[8, 10, 12]` and retained levels `[3, 4, 5]`. At charge cutoff 12 with five retained local levels, the coupler f01 changes from 5007.500000 MHz to 5075.910813 MHz (Δ +68.410813 MHz); the minimum matched-state overlap probability is 0.9989682 and the minimum retained-subspace singular value is 0.9995692. This is a local-basis audit, not a new full driven-gate result.
+
+Required before this gate can be considered circuit-qualified:
+
+- [ ] Rebuild the complete three-mode Hamiltonian and driven four-state gate using the Stage-11A re-quantized coupler basis.
+- [ ] Re-run common-duration 120/240/480 convergence of the full logical matrices.
+- [ ] Repeat robust bias/frequency/amplitude/duration sweeps in the rebuilt model.
+- [ ] Add flux-line transfer, pump phase noise, crosstalk and open-system T1/T2/thermal effects.
 
 ## Gate 3 — Physical single-cell demonstrator
 
