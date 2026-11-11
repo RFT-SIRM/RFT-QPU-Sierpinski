@@ -37,8 +37,6 @@ H = D ⊗ I₂ − Σ(a,b) [ |a⟩⟨b| ⊗ Uₐᵦ + h.c. ],
 
 with SU(2) transport Uₐᵦ = exp(−i θ σₐₓᵢₛ / 2) and nominal connection angle θ = π/2. The candidate logical qubit is a selected two-dimensional low-energy subspace. Physical controls are projected into that subspace and must be calibrated and tested independently.
 
-![Architecture flow](docs/assets/rft-architecture-flow.svg)
-
 The hardware mapping uses pairs of transmon modes at graph sites. Parametric exchange is proposed for complex hopping phases. In the current degree-based frequency plan, the active Z edge is resonant and requires complex diagonal amplitudes. A single real static coupler cannot implement those phases. A phase-engineered multi-path or auxiliary Floquet implementation, or a revised frequency/rotating-frame plan, is therefore a **pre-tape-out blocker**.
 
 Detailed hardware definitions: [Architecture](docs/ARCHITECTURE.md) · [Physical realization](engineering/physical_prototype/docs/PHYSICAL_REALIZATION.md) · [Industrial architecture](engineering/physical_prototype/docs/INDUSTRIAL_ARCHITECTURE.md).
