@@ -1,0 +1,139 @@
+{
+  "stage": "11B",
+  "status": "requantized_full_gate_120_240_480_convergence_complete",
+  "model": {
+    "charge_cutoff": 10,
+    "levels_kept_per_mode": 5,
+    "product_hilbert_dimension": 125,
+    "bias_flux_Phi0": 0.25934367625232047,
+    "local_mode_frequencies_MHz": [
+      5500.000000000007,
+      5075.910813271501,
+      4515.000000000293
+    ],
+    "local_mode_anharmonicities_MHz": [
+      -277.8805247846449,
+      -343.24718900586595,
+      -286.4273024796348
+    ],
+    "bare_state_logical_indices_ground_A_B_AB": [
+      0,
+      3,
+      1,
+      7
+    ],
+    "bare_product_overlaps_ground_A_B_AB": [
+      0.9999872812899999,
+      0.9963143705299803,
+      0.9980102142772249,
+      0.9942737557637804
+    ],
+    "dressed_A_frequency_MHz": 5501.50290602208,
+    "dressed_B_frequency_MHz": 4513.829671005721,
+    "dressed_AB_detuning_MHz": 987.6732350163593,
+    "static_ZZ_MHz": -0.0007677064562709723
+  },
+  "pulse": {
+    "source_candidate": "Stage 10 unchanged",
+    "pump_frequency_MHz": 987.6092214991908,
+    "offset_from_rebuilt_detuning_kHz": -64.01351716851877,
+    "flux_amplitude_Phi0": 0.02,
+    "common_actual_duration_us": 1.081002799581705,
+    "ramp_periods": 8
+  },
+  "grid_results": [
+    {
+      "steps_per_period": 120,
+      "time_steps": 128113,
+      "transfer_A_to_B": 0.9999851061930949,
+      "transfer_B_to_A": 0.9999851056009665,
+      "projected_process_overlap_after_local_Z": 0.9999922440786144,
+      "conditional_phase_iSWAP_rad": 0.0022073808558802136,
+      "max_logical_leakage_sampled": [
+        0.0002378791438252259,
+        0.0003226944487471073,
+        0.00032235888885379094,
+        0.00033006124754220156
+      ],
+      "max_coupler_excited_probability_sampled": [
+        0.00025041486120706304,
+        0.005546691151012691,
+        0.005535977427900101,
+        0.006035520431817008
+      ],
+      "final_norm_error": 2.1566193275646128e-10
+    },
+    {
+      "steps_per_period": 240,
+      "time_steps": 256226,
+      "transfer_A_to_B": 0.9999843870126258,
+      "transfer_B_to_A": 0.9999843863174014,
+      "projected_process_overlap_after_local_Z": 0.999991882154332,
+      "conditional_phase_iSWAP_rad": 0.0022147436138275404,
+      "max_logical_leakage_sampled": [
+        0.0002353771620637879,
+        0.00032275794446545714,
+        0.0003224197160246467,
+        0.00033013347676147387
+      ],
+      "max_coupler_excited_probability_sampled": [
+        0.0002479076673828223,
+        0.005542868087645164,
+        0.005531706271044052,
+        0.0060331034262878155
+      ],
+      "final_norm_error": 1.5247514362215497e-10
+    },
+    {
+      "steps_per_period": 480,
+      "time_steps": 512452,
+      "transfer_A_to_B": 0.9999842058610798,
+      "transfer_B_to_A": 0.9999842051403309,
+      "projected_process_overlap_after_local_Z": 0.9999917910819566,
+      "conditional_phase_iSWAP_rad": 0.0022165779567539837,
+      "max_logical_leakage_sampled": [
+        0.00023475866414113256,
+        0.00032277496976829134,
+        0.00032243583457336467,
+        0.00033015419218540565
+      ],
+      "max_coupler_excited_probability_sampled": [
+        0.00024728770520355344,
+        0.005540475768332662,
+        0.005534696401591472,
+        0.00603251270712492
+      ],
+      "final_norm_error": 9.366092346141386e-10
+    }
+  ],
+  "adjacent_grid_matrix_comparisons": [
+    {
+      "coarse_steps_per_period": 120,
+      "fine_steps_per_period": 240,
+      "phase_aligned_frobenius_difference": 0.00013021273250250984,
+      "phase_aligned_max_element_difference": 0.00009203684390893012
+    },
+    {
+      "coarse_steps_per_period": 240,
+      "fine_steps_per_period": 480,
+      "phase_aligned_frobenius_difference": 0.00003238558630332954,
+      "phase_aligned_max_element_difference": 0.00002289072247974159
+    }
+  ],
+  "richardson_conditional_phase_rad_second_order": 0.0022171894043961317,
+  "numerical_method": {
+    "integrator": "symmetric Strang split",
+    "grid_480_drive_exponential": "sixth-order Taylor polynomial in the 5x5 coupler space; compared with scipy.linalg.expm at 301 sampled pulse times",
+    "grid_480_max_sampled_single_step_drive_exponential_abs_error": 1.1123893155135927e-16,
+    "grid_480_2000_step_state_difference_vs_scipy_expm": 3.745666090146335e-15
+  },
+  "hardware_ready": false,
+  "limitations": [
+    "Nominal Stage-3 capacitances and Josephson parameters remain assumptions, not layout extraction.",
+    "Closed-system only; no T1/T2, thermal bath, flux-line transfer, pump phase noise, delay, distortion or crosstalk.",
+    "Transient extrema are sampled, not bounded continuously in time.",
+    "Only the Stage-10 pulse was evaluated; robust re-optimization in the re-quantized model remains open.",
+    "Full-gate charge-cutoff and retained-level convergence remain open."
+  ],
+  "matrices_archive": "stage11b_requantized_gate_matrices.npz"
+}

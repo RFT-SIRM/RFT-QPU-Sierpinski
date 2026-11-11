@@ -4,7 +4,7 @@
 
 ## Scope
 
-This package includes the level-1 Sierpiński SU(2) graph model and proposed 12-transmon mapping, the two-cell projected-interaction study, the graph-wide Floquet collision audit, the circuit-derived three-mode SQUID coupler work (Stages 1–4), and the subsequent full logical-gate exploration (Stages 5–11A).
+This package includes the level-1 Sierpiński SU(2) graph model and proposed 12-transmon mapping, the two-cell projected-interaction study, the graph-wide Floquet collision audit, the circuit-derived three-mode SQUID coupler work (Stages 1–4), and the subsequent full logical-gate exploration (Stages 5–11B baseline).
 
 ## Reproduce the complete test suite
 
@@ -29,7 +29,7 @@ Local pre-release preparation used Python 3.14.2 and recorded **75 passed in 1.3
 | 7–8 | Harmonic/chirp/envelope control exploration | Recorded; no coarse-grid-only candidate promoted |
 | 9–10 | Shifted-bias candidate refinement and 120/240/480 convergence | Recorded; retained Stage-5 fixed local coupler basis |
 | 11A | Local coupler re-quantization at shifted DC flux | Recorded; local audit only |
-| 11B | Rebuild and reconverge full driven gate using the re-quantized basis | **Open** |
+| 11B | Full three-mode rebuild and four-state gate rerun in the re-quantized basis on 120/240/480 grids | Initial nominal baseline complete; robust retuning and truncation convergence open |
 
 ## Current Stage 10 reference point
 
@@ -43,7 +43,7 @@ These are closed-system projected calculations, not measured gate fidelity.
 
 ## Important model boundary
 
-Stages 5–10 use the Stage-5 fixed-DC local coupler basis, with the flux-dependent coupler Hamiltonian projected into that retained basis. Stage 11A independently diagonalizes the local SQUID at the shifted bias and compares spectra, operators, state overlaps and retained-subspace overlap over charge cutoffs 8/10/12 and retained levels 3/4/5. Stage 11A has not yet been integrated into the full driven three-mode gate. Do not describe Stage 10 as a fully re-quantized shifted-bias gate.
+Stages 5–10 use the Stage-5 fixed-DC local coupler basis. Stage 11A independently diagonalizes the local SQUID at the shifted bias; the first Stage 11B baseline then rebuilds the full three-mode Hamiltonian and driven four-state gate in that new local basis, with 120/240/480 time-grid convergence. Stage 10 remains the fixed-basis reference and must not be mislabeled as the re-quantized gate. Robust retuning and full-gate truncation convergence remain open.
 
 ## Output layout
 
@@ -56,8 +56,8 @@ Stages 5–10 use the Stage-5 fixed-DC local coupler basis, with the flux-depend
 
 ## Open requirements before physical design release
 
-1. Stage 11B full-gate rebuild with re-quantized coupler basis.
-2. Robust parameter maps and uncertainty budgets using that rebuilt model.
+1. Robustly re-optimize bias, frequency, amplitude and duration in the re-quantized model; build parameter maps and uncertainty budgets.
+2. Check full-gate convergence against charge cutoff and retained-level choices.
 3. Flux-line bandwidth/delay/distortion/phase-noise/crosstalk characterization.
 4. Open-system T1/T2, thermal, leakage and spectator modeling.
 5. Layout-extracted capacitances/parasitics and independent EM/circuit-QED review.

@@ -45,18 +45,25 @@ At charge cutoff 12 with five retained local levels, the coupler f01 changes fro
 
 Truncations evaluated: charge cutoffs `[8, 10, 12]`, retained levels `[3, 4, 5]`. The report archives matched eigenstate/operator data and overlap matrices. This stage re-quantizes the **local coupler only**; it does not rebuild or reconverge the full three-mode driven gate.
 
+## Stage 11B initial re-quantized full-gate baseline
+
+The full 125-dimensional A–coupler–B product Hamiltonian was rebuilt at the shifted DC flux in the new local SQUID eigenbasis (charge cutoff 10, five retained levels per mode). The unchanged Stage-10 pulse was propagated at 120/240/480 steps per period. At 480 steps/period: A→B `0.999984205861`, B→A `0.999984205140`, projected process overlap after local-Z fitting `0.999991791082`, conditional phase `0.002216577957 rad`; second-order Richardson phase `0.002217189404 rad`. Full complex matrices and diagnostics are archived in `results/stage11b_requantized_gate_matrices.npz` and `results/stage11b_requantized_gate.json`.
+
+The 480-grid small drive exponential used a sixth-order Taylor polynomial; 301 sampled time points agreed with `scipy.linalg.expm` to a maximum absolute matrix difference of `1.12e-16`, and a 2,000-step state comparison differed by `3.75e-15`. The committed reproducibility runner uses the standard `scipy.linalg.expm` implementation.
+
 ## Included evidence
 
 - Stage 1–4 circuit-derived coupler source, tests, reports and checkpoint from the merged baseline.
 - Stage 5–10 source, scripts, tests, convergence reports, sweeps and complex logical matrices.
 - Stage 11A local coupler re-quantization source, tests, report, CSV and NPZ matrices.
+- Stage 11B re-quantized three-mode model builder, tests, full-gate runner, 120/240/480 logical matrices and convergence report.
 - Updated pre-release scope, validation gates and risk register.
 
 ## Not established
 
 - No fabricated or measured chip.
 - No measured capacitance matrix or extracted layout parasitics.
-- No fully rebuilt Stage 11B gate in the new coupler basis.
+- No robust Stage-11B pulse retuning or full-gate charge-cutoff/retained-level convergence.
 - No measured flux-line transfer function, pump crosstalk or phase-noise budget.
 - No T1/T2, thermal-bath or open-system gate fidelity.
 - No fabrication yield/disorder qualification.

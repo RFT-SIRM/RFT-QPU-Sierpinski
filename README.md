@@ -209,7 +209,8 @@ The standalone model and engineering package is maintained in [engineering/physi
 | 4–6 | Four-state logical gate propagation, local-Z frame fitting, full-matrix temporal convergence, and common-duration checks | Closed-system calculation in the retained Stage-5 local coupler basis |
 | 7–8 | Harmonic, chirp, and envelope exploration | Exploratory candidates; no waveform promoted solely from coarse-grid gains |
 | 9–10 | Shifted-bias and local frequency/duration refinement | Converged 120/240/480 candidate in the Stage-5 fixed local coupler basis |
-| 11A | Explicit local SQUID-coupler re-quantization at shifted DC flux, with charge-cutoff and retained-subspace comparisons | Local coupler audit only; full three-mode driven gate has not yet been rebuilt in this new basis |
+| 11A | Explicit local SQUID-coupler re-quantization at shifted DC flux, with charge-cutoff and retained-subspace comparisons | Local coupler audit; the first full-gate integration is recorded separately in Stage 11B |
+| 11B | Full three-mode Hamiltonian rebuilt in the shifted coupler basis; four-state gate rerun on 120/240/480 grids | Initial nominal baseline complete; robust retuning, truncation convergence and hardware effects remain open |
 
 ### Best currently converged full-gate candidate — Stage 10
 
@@ -233,7 +234,7 @@ These are projected, closed-system numerical metrics. The process-overlap figure
 
 At charge cutoff 12 with five retained local levels, the coupler f01 changes from 5007.500000 MHz to 5075.910813 MHz (Δ +68.410813 MHz); the minimum matched-state overlap probability is 0.9989682 and the minimum retained-subspace singular value is 0.9995692.
 
-The Stage 11A report also includes the 8/10/12 charge-cutoff × 3/4/5 retained-level study, aligned operator matrices, overlap matrices, CSV and JSON outputs. This does **not** establish full-gate convergence with the re-quantized coupler. Stage 11B (rebuild the complete three-mode Hamiltonian and rerun the driven four-state gate in the new basis) remains open.
+The Stage 11A report includes the 8/10/12 charge-cutoff × 3/4/5 retained-level local-coupler study. The initial Stage 11B baseline now rebuilds the 125-dimensional three-mode Hamiltonian in the shifted local coupler basis and reruns the four-state gate with 120/240/480 time-grid convergence. Robust pulse retuning, full-gate truncation convergence and hardware effects remain open; see [the Stage 11B report](engineering/physical_prototype/docs/STAGE11B_REQUANTIZED_GATE.md).
 
 ### Reproducibility snapshot
 
