@@ -1,0 +1,525 @@
+{
+  "title": "Circuit-quantized three-node static model \u2014 Stage 3",
+  "model_boundary": "Charge-basis quantization of three capacitively coupled Josephson modes with an asymmetric SQUID coupler. Capacitances and Josephson energies are declared assumptions, not extracted layout values. No driven-gate fidelity, dissipation, flux-line transfer, or fabrication disorder is included.",
+  "nominal_assumptions": {
+    "target_frequencies_MHz": [
+      5500.0,
+      5007.5,
+      4515.0
+    ],
+    "nominal_EC_MHz": [
+      250.0,
+      300.0,
+      250.0
+    ],
+    "C_AC_fF": 0.7,
+    "C_CB_fF": 0.75,
+    "C_AB_parasitic_fF": 0.03,
+    "EJ_C_sum_over_h_MHz": 18000.0,
+    "SQUID_asymmetry": 0.05
+  },
+  "nominal_point": {
+    "capacitances_fF": {
+      "C_matrix": [
+        [
+          78.2109172986365,
+          -0.7,
+          -0.03
+        ],
+        [
+          -0.7,
+          66.01743108219709,
+          -0.75
+        ],
+        [
+          -0.03,
+          -0.75,
+          78.2609172986365
+        ]
+      ],
+      "C_AC": 0.7,
+      "C_CB": 0.75,
+      "C_AB_parasitic": 0.03
+    },
+    "charging_matrix_MHz": [
+      [
+        247.69013047044373,
+        2.627687655339126,
+        0.120129816773582
+      ],
+      [
+        2.6276876553391264,
+        293.4706555970913,
+        2.813432680418056
+      ],
+      [
+        0.120129816773582,
+        2.813432680418056,
+        247.53534294954468
+      ]
+    ],
+    "charging_energy_diagonal_MHz": [
+      247.69013047044373,
+      293.4706555970913,
+      247.53534294954468
+    ],
+    "isolated_local_modes": {
+      "target_f01_MHz": [
+        5500.0,
+        5007.5,
+        4515.0
+      ],
+      "computed_f01_MHz": [
+        5500.000000000011,
+        5007.500000000924,
+        4515.000000000292
+      ],
+      "anharmonicity_MHz": [
+        -277.88037385080133,
+        -344.2792178857617,
+        -286.4272999332643
+      ],
+      "EJ_over_h_MHz": [
+        16742.199596839135,
+        12055.496448501171,
+        11526.001958489263
+      ],
+      "EJ_C_sum_over_h_MHz": 18000.0,
+      "SQUID_asymmetry": 0.05,
+      "SQUID_DC_flux_Phi0": 0.26684367625989,
+      "SQUID_phase_offset_rad": 0.055535599719859816
+    },
+    "derived_exchange_matrix_elements_MHz": {
+      "g_AC_01": 25.5620325234007,
+      "g_CB_01": 24.802753204441192,
+      "g_AB_direct_01": 1.2083001855021638,
+      "definition": "8 * E_C,ij/h * |<0|n_i|1>| * |<0|n_j|1>|; rotating-wave matrix element estimate"
+    },
+    "dressed_static_spectrum_MHz": {
+      "A_transition_MHz": 5501.269595287897,
+      "B_transition_MHz": 4513.694007381135,
+      "dressed_A_B_detuning_MHz": 987.5755879067619,
+      "residual_static_ZZ_MHz": -0.003279666674643522,
+      "tracked_states": {
+        "ground": {
+          "eigen_index": 0,
+          "energy_MHz": -0.12689574562682537,
+          "bare_product_overlap": 0.9999872900445569
+        },
+        "A_01": {
+          "eigen_index": 3,
+          "energy_MHz": 5501.14269954227,
+          "bare_product_overlap": 0.9972914801027726
+        },
+        "B_01": {
+          "eigen_index": 1,
+          "energy_MHz": 4513.567111635508,
+          "bare_product_overlap": 0.9974626987717423
+        },
+        "A1_B1": {
+          "eigen_index": 7,
+          "energy_MHz": 10014.83342725673,
+          "bare_product_overlap": 0.994745594248403
+        }
+      }
+    },
+    "flux_to_frequency_calibration": {
+      "0.005": {
+        "flux_amplitude_Phi0": 0.005,
+        "frequency_at_negative_peak_MHz": 5053.368372177271,
+        "frequency_at_positive_peak_MHz": 4960.574021754073,
+        "negative_peak_shift_MHz": 45.86837217727134,
+        "positive_peak_shift_MHz": -46.92597824592667
+      },
+      "0.01": {
+        "flux_amplitude_Phi0": 0.01,
+        "frequency_at_negative_peak_MHz": 5098.194564452001,
+        "frequency_at_positive_peak_MHz": 4912.574024043806,
+        "negative_peak_shift_MHz": 90.69456445200103,
+        "positive_peak_shift_MHz": -94.92597595619372
+      },
+      "0.02": {
+        "flux_amplitude_Phi0": 0.02,
+        "frequency_at_negative_peak_MHz": 5184.777587044277,
+        "frequency_at_positive_peak_MHz": 4813.280920362267,
+        "negative_peak_shift_MHz": 177.27758704427742,
+        "positive_peak_shift_MHz": -194.21907963773265
+      },
+      "0.03": {
+        "flux_amplitude_Phi0": 0.03,
+        "frequency_at_negative_peak_MHz": 5267.355220762407,
+        "frequency_at_positive_peak_MHz": 4709.466585832193,
+        "negative_peak_shift_MHz": 259.85522076240704,
+        "positive_peak_shift_MHz": -298.03341416780677
+      },
+      "df01_dflux_MHz_per_Phi0": -9278.905076371302
+    },
+    "truncation": {
+      "charge_cutoff": 8,
+      "local_levels_kept": 3,
+      "product_hilbert_dimension": 27
+    }
+  },
+  "capacitance_scan": [
+    {
+      "C_AC_fF": 0.4,
+      "C_CB_fF": 0.4,
+      "g_AC_01_MHz": 14.706473390439035,
+      "g_CB_01_MHz": 13.323364940601204,
+      "g_AB_direct_01_MHz": 1.03727624508194,
+      "dressed_A_B_detuning_MHz": 985.7989678207305,
+      "residual_static_ZZ_MHz": -0.001359264482744038,
+      "minimum_bare_product_overlap": 0.9983671967841271
+    },
+    {
+      "C_AC_fF": 0.4,
+      "C_CB_fF": 0.55,
+      "g_AC_01_MHz": 14.691964485115182,
+      "g_CB_01_MHz": 18.279189607214885,
+      "g_AB_direct_01_MHz": 1.0653636053290514,
+      "dressed_A_B_detuning_MHz": 986.1310700073809,
+      "residual_static_ZZ_MHz": -0.0015436466019309592,
+      "minimum_bare_product_overlap": 0.9977212610739177
+    },
+    {
+      "C_AC_fF": 0.4,
+      "C_CB_fF": 0.7,
+      "g_AC_01_MHz": 14.67756222593825,
+      "g_CB_01_MHz": 23.214218309594994,
+      "g_AB_direct_01_MHz": 1.0932708737013281,
+      "dressed_A_B_detuning_MHz": 986.5649315144583,
+      "residual_static_ZZ_MHz": -0.0017752777639543638,
+      "minimum_bare_product_overlap": 0.9968794422250711
+    },
+    {
+      "C_AC_fF": 0.4,
+      "C_CB_fF": 0.85,
+      "g_AC_01_MHz": 14.663265425277945,
+      "g_CB_01_MHz": 28.12858178305263,
+      "g_AB_direct_01_MHz": 1.1209998497387355,
+      "dressed_A_B_detuning_MHz": 987.0987840588241,
+      "residual_static_ZZ_MHz": -0.002050886942015495,
+      "minimum_bare_product_overlap": 0.9958471427046632
+    },
+    {
+      "C_AC_fF": 0.4,
+      "C_CB_fF": 1.0,
+      "g_AC_01_MHz": 14.64907291323469,
+      "g_CB_01_MHz": 33.022409675791316,
+      "g_AB_direct_01_MHz": 1.1485523081989932,
+      "dressed_A_B_detuning_MHz": 987.7307793145737,
+      "residual_static_ZZ_MHz": -0.0023666483320994303,
+      "minimum_bare_product_overlap": 0.9946302903332592
+    },
+    {
+      "C_AC_fF": 0.4,
+      "C_CB_fF": 1.15,
+      "g_AC_01_MHz": 14.634983537308953,
+      "g_CB_01_MHz": 37.8958305598461,
+      "g_AB_direct_01_MHz": 1.1759299994957877,
+      "dressed_A_B_detuning_MHz": 988.4589962672362,
+      "residual_static_ZZ_MHz": -0.0027181950499652885,
+      "minimum_bare_product_overlap": 0.9932352801189529
+    },
+    {
+      "C_AC_fF": 0.55,
+      "C_CB_fF": 0.4,
+      "g_AC_01_MHz": 20.176755963199366,
+      "g_CB_01_MHz": 13.310220563142543,
+      "g_AB_direct_01_MHz": 1.0653630800718639,
+      "dressed_A_B_detuning_MHz": 986.1677566450671,
+      "residual_static_ZZ_MHz": -0.0015468941346625797,
+      "minimum_bare_product_overlap": 0.9975819442557372
+    },
+    {
+      "C_AC_fF": 0.55,
+      "C_CB_fF": 0.55,
+      "g_AC_01_MHz": 20.15611452469499,
+      "g_CB_01_MHz": 18.260489437709435,
+      "g_AB_direct_01_MHz": 1.104196124556209,
+      "dressed_A_B_detuning_MHz": 986.4986241186452,
+      "residual_static_ZZ_MHz": -0.001887118585727876,
+      "minimum_bare_product_overlap": 0.9969360773302475
+    },
+    {
+      "C_AC_fF": 0.55,
+      "C_CB_fF": 0.7,
+      "g_AC_01_MHz": 20.13562365536222,
+      "g_CB_01_MHz": 23.190010940967312,
+      "g_AB_direct_01_MHz": 1.1427802502214381,
+      "dressed_A_B_detuning_MHz": 986.9311079207146,
+      "residual_static_ZZ_MHz": -0.0023165621169027872,
+      "minimum_bare_product_overlap": 0.9960936690254146
+    },
+    {
+      "C_AC_fF": 0.55,
+      "C_CB_fF": 0.85,
+      "g_AC_01_MHz": 20.11528168701092,
+      "g_CB_01_MHz": 28.098915334883397,
+      "g_AB_direct_01_MHz": 1.1811179436955985,
+      "dressed_A_B_detuning_MHz": 987.4634444708536,
+      "residual_static_ZZ_MHz": -0.002828864355251426,
+      "minimum_bare_product_overlap": 0.9950601114453823
+    },
+    {
+      "C_AC_fF": 0.55,
+      "C_CB_fF": 1.0,
+      "g_AC_01_MHz": 20.095086976269847,
+      "g_CB_01_MHz": 32.987331799629274,
+      "g_AB_direct_01_MHz": 1.219211657373332,
+      "dressed_A_B_detuning_MHz": 988.0937904047605,
+      "residual_static_ZZ_MHz": -0.0034166443183494266,
+      "minimum_bare_product_overlap": 0.9938413168839015
+    },
+    {
+      "C_AC_fF": 0.55,
+      "C_CB_fF": 1.15,
+      "g_AC_01_MHz": 20.075037904124944,
+      "g_CB_01_MHz": 37.85538844445728,
+      "g_AB_direct_01_MHz": 1.257063810020959,
+      "dressed_A_B_detuning_MHz": 988.8202298957222,
+      "residual_static_ZZ_MHz": -0.004071527906489791,
+      "minimum_bare_product_overlap": 0.9924436592866035
+    },
+    {
+      "C_AC_fF": 0.7,
+      "C_CB_fF": 0.4,
+      "g_AC_01_MHz": 25.624078524823027,
+      "g_CB_01_MHz": 13.297172802014948,
+      "g_AB_direct_01_MHz": 1.0932698028893004,
+      "dressed_A_B_detuning_MHz": 986.6492533783021,
+      "residual_static_ZZ_MHz": -0.0017881847161334008,
+      "minimum_bare_product_overlap": 0.996559943554487
+    },
+    {
+      "C_AC_fF": 0.7,
+      "C_CB_fF": 0.55,
+      "g_AC_01_MHz": 25.59735819606372,
+      "g_CB_01_MHz": 18.241925676768457,
+      "g_AB_direct_01_MHz": 1.1427796943373294,
+      "dressed_A_B_detuning_MHz": 986.9787170502204,
+      "residual_static_ZZ_MHz": -0.002331604358914774,
+      "minimum_bare_product_overlap": 0.9959136467439912
+    },
+    {
+      "C_AC_fF": 0.7,
+      "C_CB_fF": 0.7,
+      "g_AC_01_MHz": 25.570831883895156,
+      "g_CB_01_MHz": 23.165979342296456,
+      "g_AB_direct_01_MHz": 1.1919724992288703,
+      "dressed_A_B_detuning_MHz": 987.4096799687868,
+      "residual_static_ZZ_MHz": -0.00301983149984153,
+      "minimum_bare_product_overlap": 0.9950698391326834
+    },
+    {
+      "C_AC_fF": 0.7,
+      "C_CB_fF": 0.85,
+      "g_AC_01_MHz": 25.544497445784,
+      "g_CB_01_MHz": 28.06946359218017,
+      "g_AB_direct_01_MHz": 1.2408513826984027,
+      "dressed_A_B_detuning_MHz": 987.9403826012276,
+      "residual_static_ZZ_MHz": -0.0038424497142841574,
+      "minimum_bare_product_overlap": 0.9940339070973296
+    },
+    {
+      "C_AC_fF": 0.7,
+      "C_CB_fF": 1.0,
+      "g_AC_01_MHz": 25.5183527709983,
+      "g_CB_01_MHz": 32.952507143455655,
+      "g_AB_direct_01_MHz": 1.2894194663395406,
+      "dressed_A_B_detuning_MHz": 988.5689858702754,
+      "residual_static_ZZ_MHz": -0.004787429395946674,
+      "minimum_bare_product_overlap": 0.9928117512999521
+    },
+    {
+      "C_AC_fF": 0.7,
+      "C_CB_fF": 1.15,
+      "g_AC_01_MHz": 25.492395780016782,
+      "g_CB_01_MHz": 37.81523764742769,
+      "g_AB_direct_01_MHz": 1.3376798289739744,
+      "dressed_A_B_detuning_MHz": 989.2935784464862,
+      "residual_static_ZZ_MHz": -0.005841172969667241,
+      "minimum_bare_product_overlap": 0.9914097275750344
+    },
+    {
+      "C_AC_fF": 0.85,
+      "C_CB_fF": 0.4,
+      "g_AC_01_MHz": 31.048585519266528,
+      "g_CB_01_MHz": 13.284220581281964,
+      "g_AB_direct_01_MHz": 1.1209982137318164,
+      "dressed_A_B_detuning_MHz": 987.2413144139864,
+      "residual_static_ZZ_MHz": -0.0020843819111178163,
+      "minimum_bare_product_overlap": 0.9953085662073169
+    },
+    {
+      "C_AC_fF": 0.85,
+      "C_CB_fF": 0.55,
+      "g_AC_01_MHz": 31.015839420433437,
+      "g_CB_01_MHz": 18.22349681309045,
+      "g_AB_direct_01_MHz": 1.1811168022616056,
+      "dressed_A_B_detuning_MHz": 987.5692106980787,
+      "residual_static_ZZ_MHz": -0.0028797594641218893,
+      "minimum_bare_product_overlap": 0.9946613688346372
+    },
+    {
+      "C_AC_fF": 0.85,
+      "C_CB_fF": 0.7,
+      "g_AC_01_MHz": 30.983330315479392,
+      "g_CB_01_MHz": 23.142121572547513,
+      "g_AB_direct_01_MHz": 1.2408507871209093,
+      "dressed_A_B_detuning_MHz": 987.998514300969,
+      "residual_static_ZZ_MHz": -0.0038896911246411037,
+      "minimum_bare_product_overlap": 0.9938153977842489
+    },
+    {
+      "C_AC_fF": 0.85,
+      "C_CB_fF": 0.85,
+      "g_AC_01_MHz": 30.95105559366407,
+      "g_CB_01_MHz": 28.04022418973337,
+      "g_AB_direct_01_MHz": 1.3002040035011102,
+      "dressed_A_B_detuning_MHz": 988.5274691023515,
+      "residual_static_ZZ_MHz": -0.005098766872833949,
+      "minimum_bare_product_overlap": 0.9927760386904126
+    },
+    {
+      "C_AC_fF": 0.85,
+      "C_CB_fF": 1.0,
+      "g_AC_01_MHz": 30.91901268292662,
+      "g_CB_01_MHz": 32.91793292337271,
+      "g_AB_direct_01_MHz": 1.3591802338864116,
+      "dressed_A_B_detuning_MHz": 989.154239655938,
+      "residual_static_ZZ_MHz": -0.006489253864856437,
+      "minimum_bare_product_overlap": 0.9915491850121573
+    },
+    {
+      "C_AC_fF": 0.85,
+      "C_CB_fF": 1.15,
+      "g_AC_01_MHz": 30.887199049167933,
+      "g_CB_01_MHz": 37.7753749715869,
+      "g_AB_direct_01_MHz": 1.4177832089837712,
+      "dressed_A_B_detuning_MHz": 989.876918457885,
+      "residual_static_ZZ_MHz": -0.008041165197937516,
+      "minimum_bare_product_overlap": 0.9901411781584064
+    },
+    {
+      "C_AC_fF": 1.0,
+      "C_CB_fF": 0.4,
+      "g_AC_01_MHz": 36.450420186493446,
+      "g_CB_01_MHz": 13.271362841070271,
+      "g_AB_direct_01_MHz": 1.1485500879935622,
+      "dressed_A_B_detuning_MHz": 987.941673997102,
+      "residual_static_ZZ_MHz": -0.0024372976731683593,
+      "minimum_bare_product_overlap": 0.9938359590511187
+    },
+    {
+      "C_AC_fF": 1.0,
+      "C_CB_fF": 0.55,
+      "g_AC_01_MHz": 36.411700920897346,
+      "g_CB_01_MHz": 18.205201357858588,
+      "g_AB_direct_01_MHz": 1.2192099016540905,
+      "dressed_A_B_detuning_MHz": 988.2678452041328,
+      "residual_static_ZZ_MHz": -0.0035352875966054853,
+      "minimum_bare_product_overlap": 0.9931874201658155
+    },
+    {
+      "C_AC_fF": 1.0,
+      "C_CB_fF": 0.7,
+      "g_AC_01_MHz": 36.37326116174459,
+      "g_CB_01_MHz": 23.118435719496087,
+      "g_AB_direct_01_MHz": 1.2894182367137577,
+      "dressed_A_B_detuning_MHz": 988.6953561634509,
+      "residual_static_ZZ_MHz": -0.004932419800752541,
+      "minimum_bare_product_overlap": 0.9923385706481755
+    },
+    {
+      "C_AC_fF": 1.0,
+      "C_CB_fF": 0.85,
+      "g_AC_01_MHz": 36.3350978361444,
+      "g_CB_01_MHz": 28.01119479737515,
+      "g_AB_direct_01_MHz": 1.3591795901008958,
+      "dressed_A_B_detuning_MHz": 989.2224535507303,
+      "residual_static_ZZ_MHz": -0.0066073809830413666,
+      "minimum_bare_product_overlap": 0.9912948008070889
+    },
+    {
+      "C_AC_fF": 1.0,
+      "C_CB_fF": 1.0,
+      "g_AC_01_MHz": 36.29720791666035,
+      "g_CB_01_MHz": 32.8836063966624,
+      "g_AB_direct_01_MHz": 1.4284983970090601,
+      "dressed_A_B_detuning_MHz": 989.8473049145068,
+      "residual_static_ZZ_MHz": -0.008535719487554161,
+      "minimum_bare_product_overlap": 0.990062001968473
+    },
+    {
+      "C_AC_fF": 1.0,
+      "C_CB_fF": 1.15,
+      "g_AC_01_MHz": 36.25958842046859,
+      "g_CB_01_MHz": 37.735797266990176,
+      "g_AB_direct_01_MHz": 1.4973790319851077,
+      "dressed_A_B_detuning_MHz": 990.5680059230581,
+      "residual_static_ZZ_MHz": -0.0106899428392353,
+      "minimum_bare_product_overlap": 0.9886465056682936
+    },
+    {
+      "C_AC_fF": 1.15,
+      "C_CB_fF": 0.4,
+      "g_AC_01_MHz": 41.82972457469504,
+      "g_CB_01_MHz": 13.258598537270181,
+      "g_AB_direct_01_MHz": 1.1759271767042938,
+      "dressed_A_B_detuning_MHz": 988.7479561045839,
+      "residual_static_ZZ_MHz": -0.002849221320502693,
+      "minimum_bare_product_overlap": 0.992150949066177
+    },
+    {
+      "C_AC_fF": 1.15,
+      "C_CB_fF": 0.55,
+      "g_AC_01_MHz": 41.78508423458056,
+      "g_CB_01_MHz": 18.187037844322596,
+      "g_AB_direct_01_MHz": 1.2570614121819372,
+      "dressed_A_B_detuning_MHz": 989.0722507878127,
+      "residual_static_ZZ_MHz": -0.004302773624658585,
+      "minimum_bare_product_overlap": 0.9915006584561298
+    },
+    {
+      "C_AC_fF": 1.15,
+      "C_CB_fF": 0.7,
+      "g_AC_01_MHz": 41.74076545408902,
+      "g_CB_01_MHz": 23.094919899193215,
+      "g_AB_direct_01_MHz": 1.337677928012999,
+      "dressed_A_B_detuning_MHz": 989.4978411943994,
+      "residual_static_ZZ_MHz": -0.006155700222734595,
+      "minimum_bare_product_overlap": 0.9906482667853562
+    },
+    {
+      "C_AC_fF": 1.15,
+      "C_CB_fF": 0.85,
+      "g_AC_01_MHz": 41.69676470415697,
+      "g_CB_01_MHz": 27.982373119329303,
+      "g_AB_direct_01_MHz": 1.417781874669944,
+      "dressed_A_B_detuning_MHz": 990.0229761993869,
+      "residual_static_ZZ_MHz": -0.008379900711588562,
+      "minimum_bare_product_overlap": 0.9895991749498688
+    },
+    {
+      "C_AC_fF": 1.15,
+      "C_CB_fF": 1.0,
+      "g_AC_01_MHz": 41.65307850784899,
+      "g_CB_01_MHz": 32.849524861023525,
+      "g_AB_direct_01_MHz": 1.497378331999189,
+      "dressed_A_B_detuning_MHz": 990.6458257288286,
+      "residual_static_ZZ_MHz": -0.010943225730443373,
+      "minimum_bare_product_overlap": 0.9883592779335921
+    },
+    {
+      "C_AC_fF": 1.15,
+      "C_CB_fF": 1.15,
+      "g_AC_01_MHz": 41.60970343939324,
+      "g_CB_01_MHz": 37.69650143004452,
+      "g_AB_direct_01_MHz": 1.5764723104645,
+      "dressed_A_B_detuning_MHz": 991.364487988656,
+      "residual_static_ZZ_MHz": -0.013809611067699734,
+      "minimum_bare_product_overlap": 0.9869349029160214
+    }
+  ]
+}

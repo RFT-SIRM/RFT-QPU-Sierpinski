@@ -38,6 +38,16 @@ Acceptance for future changes: exact regression checks on graph counts, link ass
 
 **Tape-out blocker:** a single real static coupler does not reproduce the current complex Z-link amplitudes.
 
+## Gate 2A — Isolated phase-conjugate Z-link screen
+
+**Status: implemented in a reduced effective two-/four-qutrit model.** The concurrent block gives process overlap 0.999609. This is a reduced-block trace overlap, not an average two-qubit gate fidelity.
+
+## Gate 2B — Nine-tone spectral collision screen
+
+**Status: implemented; current frequency assignment fails.** The first-order primary-tone screen finds 0 MHz minimum margin and 73 warnings within 10 MHz. Conditional harmonics and pairwise intermodulation scenarios raise the count to 653. This is a resonance-candidate screen, not a full Floquet solution or measured device failure.
+
+Do not approve simultaneous nine-tone operation until the frame plan is redesigned and actual channel isolation is measured.
+
 ## Gate 3 — Physical single-cell demonstrator
 
 **Status: not fabricated or measured.**

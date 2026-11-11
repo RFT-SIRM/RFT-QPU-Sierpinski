@@ -80,17 +80,21 @@ For \(\theta=\pi/2\), the X and Y links require off-diagonal spin-mixing channel
 
 The coefficient export in `hardware/level1/couplers.csv` records the intended complex channel amplitudes and the degree-based endpoint-frequency plan.
 
-### Immediate blocker: the resonant complex-Z link
+### Complex-Z link: isolated reduced-model candidate; full schedule not cleared
 
-In the current level-1 frequency plan, the active Z edge connects two degree-4 sites and is resonant. Its diagonal hopping amplitudes are non-real. A single real static coupler cannot implement those phases.
+The active Z edge connects equal-degree sites, so its target onsite detuning is zero. Its diagonal hopping coefficients have phases +135° and −135°. The isolated-link candidate uses a signed rotating-frame difference of −245 MHz, a 245 MHz parametric reference and phase-conjugate drives.
 
-Before tape-out, this needs a concrete circuit-level solution, such as:
+A two-Duffing-qutrit model and a four-qutrit block propagate both channels concurrently. The reduced block reports one-excitation process overlap 0.999609 and N=2 population outside the computational qutrit subspace 1.17×10⁻⁵. These are effective-Hamiltonian simulation outputs, not physical gate fidelities.
 
-1. a multi-path static-flux coupler with a controllable complex phase;
-2. an auxiliary Floquet/parametric path with phase-locked pumping; or
-3. a revised rotating-frame/frequency plan that preserves the target effective Hamiltonian.
+**The full nine-tone schedule currently fails the first-order collision screen.** It finds a zero primary resonance margin and 73 pump/sideband transition warnings within 10 MHz across the 22 channel rows. Conditional harmonics/intermodulation products raise the warning count to 653. These are possible resonances if cross-coupling exists; their amplitudes are not measured. The isolated 245 MHz Z result does not authorize simultaneous activation of all nine graph-edge pumps.
 
-The selected solution must be checked for residual ZZ, spectator interactions, pump sidebands, phase drift, leakage to higher transmon levels and calibration cross-talk. The current CSV is a coefficient map, **not a foundry-ready netlist**.
+Before tape-out:
+1. redesign the six local rotating-frame offsets with a declared collision guard band;
+2. measure/extract the complex 22×22 pump-channel transfer matrix;
+3. build an explicit data–coupler–data circuit model;
+4. run full multitone Floquet, residual-ZZ, spectator, leakage, EM and open-system validation.
+
+The current CSV is a coefficient map, **not a foundry-ready netlist**. See [the collision audit](../engineering/physical_prototype/docs/FLOQUET_COLLISION_AUDIT.md).
 
 ## 4. Candidate logical subspace and controls
 

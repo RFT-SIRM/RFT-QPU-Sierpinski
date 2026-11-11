@@ -197,14 +197,14 @@ The top-level `qpu_core.py` is a compact research reference. The full finite-lev
 
 ---
 
-## Engineering Prototype v0.1
+## Engineering Prototype v0.3 research update
 
 The standalone numerical and engineering package is maintained in
 [engineering/physical_prototype](engineering/physical_prototype/README.md).
 
 The level-1 topology schematic is shown above; the generated coefficient map contains 22 nonzero effective exchange channels. The current model also includes a two-cell, 24-mode projected interaction.
 
-Reproducibility status: 20 package tests passed locally on 10 November 2026; the post-merge GitHub Actions run on `main` passed all configured steps. Numerical values below are model outputs, not measurements:
+Reproducibility status: 42 package tests pass in the current local development package; the merged main baseline CI passed. The new qutrit/Floquet screening changes are in PR validation. Numerical values below are model outputs, not measurements:
 
 | Quantity | Numerical result |
 |---|---:|
@@ -264,3 +264,10 @@ The current public status distinguishes the machine-checked graph infrastructure
 No statement in this repository should be read as a claim of demonstrated fault tolerance, universal error correction, arbitrary-noise immunity, commercial fabrication readiness, or experimentally measured qubit performance.
 
 The purpose of this repository is to make the proposed architecture precise enough to be independently simulated, challenged, refined, and eventually tested.
+
+
+## Nine-tone pump collision screen — 11 November 2026
+
+The isolated 245 MHz phase-conjugate Z link has a reduced four-qutrit process overlap of 0.999609. However, the first-order graph-wide screen of the nine-tone schedule finds a 0 MHz minimum primary resonance margin and 73 primary pump/sideband warnings within 10 MHz across the 22 channel rows. Conditional second/third harmonics and pairwise intermodulation scenarios raise the warning count to 653. These are possible resonances if cross-coupling exists, not measured error probabilities.
+
+The current schedule is **not cleared for simultaneous nine-tone operation**. Reproduce the audit from the engineering package with `PYTHONPATH=src python scripts/run_floquet_audit.py`. See [the detailed audit](engineering/physical_prototype/docs/FLOQUET_COLLISION_AUDIT.md). A redesigned frame assignment, measured 22×22 channel-transfer matrix and explicit data–coupler–data circuit model remain required.

@@ -40,3 +40,14 @@ jobs:
             --disorder-samples 250 \
             --output "$RUNNER_TEMP/level1.json" \
             --hardware-dir "$RUNNER_TEMP/hardware"
+
+      - name: Reproduce two-cell projected interaction
+        working-directory: engineering/physical_prototype
+        run: python scripts/run_two_cell.py
+
+      - name: Reproduce graph-wide qutrit Floquet collision audit
+        working-directory: engineering/physical_prototype
+        run: |
+          PYTHONPATH=src python scripts/run_floquet_audit.py \
+            --hardware-dir "$RUNNER_TEMP/hardware" \
+            --output "$RUNNER_TEMP/floquet_collision_audit.json"

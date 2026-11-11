@@ -14,6 +14,7 @@ This file separates established mathematical results, numerical model outputs, p
 | Level-1 best local projected-control coefficient | \(g_{\mathrm{eff}}=0.1770433\), vertex 5 | Model-dependent numerical result |
 | Level-5 reference control coefficient | \(g_{\mathrm{eff}}\approx0.015085\) | Different refinement/model point |
 | 12-transmon level-1 mapping and 22 exchange channels | Coefficient export exists; complex-Z realization unresolved | Proposed engineering |
+| Nine-tone simultaneous pump schedule | First-order screen: 0 MHz primary margin; 73 primary warnings ≤10 MHz | Not cleared; resonance candidates only |
 | Two-cell projected interaction | \(0.00783608327\chi\); ideal estimate 6.38074 μs at assumed \(\chi/(2\pi)=10\) MHz | Static numerical projection |
 | Physical QPU fabrication or measurement | Not demonstrated | Not claimed |
 | Arbitrary-noise immunity or fault tolerance | Not established | Not claimed |
@@ -29,3 +30,6 @@ This file separates established mathematical results, numerical model outputs, p
 6. The resonant complex-Z link is an open pre-tape-out blocker. The coefficient CSV is not a foundry-ready netlist.
 
 The detailed hardware acceptance criteria are maintained in [Validation Plan](VALIDATION_PLAN.md) and [Physical Realization](../engineering/physical_prototype/docs/PHYSICAL_REALIZATION.md).
+
+
+The four-qutrit phase-conjugate block is an effective-exchange simulation, not a physical tunable-coupler demonstration. The collision audit identifies possible off-target resonances conditional on drive/coupler cross-coupling; it does not calculate their probabilities. Harmonic/intermodulation products are conditional model scenarios, not measured spectral components.
