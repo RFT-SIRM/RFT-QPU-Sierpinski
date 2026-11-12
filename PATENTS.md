@@ -7,7 +7,7 @@
 
 ## 1. Supplemental patent grant
 
-Subject to the terms of the applicable source licence for the Licensed Work, the Licensor grants each recipient a perpetual, worldwide, non-exclusive, no-charge, royalty-free patent licence to make, have made, use, offer to sell, sell, import and otherwise transfer the Licensed Work and derivative works of the Licensed Work.
+Subject to the terms of the applicable source licence for the Licensed Work, the Licensor grants each recipient a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as provided in Section 2) patent licence to make, have made, use, offer to sell, sell, import and otherwise transfer the Licensed Work and derivative works of the Licensed Work.
 
 This grant applies only to those patent claims that:
 1. are licensable by the Licensor;
