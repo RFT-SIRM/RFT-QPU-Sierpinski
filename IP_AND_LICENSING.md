@@ -7,7 +7,7 @@
 
 ## 1. Public research record
 
-The repository is being prepared for public technical inspection, reproducibility, independent review and collaboration. It contains the finite Sierpiński graph model, SU(2) Hamiltonian, numerical analyses, proposed transmon mapping, coefficient tables, circuit-model studies, scripts, tests, reports and selected numerical archives.
+The repository is publicly available for technical inspection, reproducibility, independent review and collaboration. It contains the finite Sierpiński graph model, SU(2) Hamiltonian, numerical analyses, proposed transmon mapping, coefficient tables, circuit-model studies, scripts, tests, reports and selected numerical archives.
 
 Publication is intentional. The repository is not presented as a fabricated or experimentally validated quantum processor. See [README](README.md), [evidence boundary](docs/DISCLOSURE_BOUNDARY.md) and [validation plan](docs/VALIDATION_PLAN.md).
 

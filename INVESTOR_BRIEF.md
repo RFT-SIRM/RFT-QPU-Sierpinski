@@ -71,7 +71,7 @@ A credible next-stage partner would contribute some combination of superconducti
 
 ## IP, licensing and collaboration
 
-The repository is being prepared as a public technical record under Business Source License 1.1 (BUSL-1.1) accompanied by a separate, limited patent grant. The source licence permits non-production use under its terms; commercial production or manufacture requires a separate written agreement. The initial BUSL term is source-available, not OSI-approved open source. The Change Date is 12 November 2030, or the fourth anniversary of first public distribution of the relevant version if earlier; the Change License is GPL-2.0-only.
+The repository is publicly available as a technical record under Business Source License 1.1 (BUSL-1.1), accompanied by a separate, limited patent grant. The source licence permits non-production use under its terms; commercial production or manufacture requires a separate written agreement. The initial BUSL term is source-available, not OSI-approved open source. The Change Date is 12 November 2030, or the fourth anniversary of first public distribution of the relevant version if earlier; the Change License is GPL-2.0-only.
 
 The supplemental patent grant is limited to patent claims the Licensor actually owns or lawfully controls and that are necessarily infringed by the Licensor's contributions. It does not create a patent or extend production rights beyond the source licence. No patent application number, filing date, office or grant is recorded in the repository; this is a repository-only observation. Public disclosure may affect patent novelty and filing options by jurisdiction. See [LICENSE](LICENSE), [PATENTS.md](PATENTS.md) and [IP_AND_LICENSING.md](IP_AND_LICENSING.md).
 

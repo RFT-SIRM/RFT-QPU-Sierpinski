@@ -78,4 +78,5 @@ A passing software suite validates the encoded computation and tests only. It do
 - [Public technical disclosure](PATENT_SPEC.md)
 - [Evidence boundary](docs/DISCLOSURE_BOUNDARY.md)
 - [Validation plan](docs/VALIDATION_PLAN.md)
+- [Public branch map](docs/BRANCH_STATUS.md)
 - [Engineering package](engineering/physical_prototype/README.md)

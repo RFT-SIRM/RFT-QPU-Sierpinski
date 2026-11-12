@@ -153,9 +153,9 @@ Historical local pre-release preparation recorded 75 passing tests on Python 3.1
 | [PATENT_SPEC.md](PATENT_SPEC.md) | Public technical disclosure and patent-counsel reference |
 | [IP_AND_LICENSING.md](IP_AND_LICENSING.md) | Authorship, licensing, patent grant and commercial terms |
 | [PATENTS.md](PATENTS.md) | Supplemental patent grant and disclosure notice |
-| [REPOSITORY_STATUS.md](REPOSITORY_STATUS.md) | Audited project status |
+| [REPOSITORY_STATUS.md](REPOSITORY_STATUS.md) | Audited project status |\n| [docs/BRANCH_STATUS.md](docs/BRANCH_STATUS.md) | Public branch map and canonical-main guidance |
 | [docs/VALIDATION_PLAN.md](docs/VALIDATION_PLAN.md) | Staged evidence and hardware acceptance plan |
 | [engineering/physical_prototype/README.md](engineering/physical_prototype/README.md) | Numerical package and stage map |
 | [engineering/physical_prototype/results/RESULT_SUMMARY.md](engineering/physical_prototype/results/RESULT_SUMMARY.md) | Finite-level and two-cell result summary |
 
-**Status:** v0.4-rc1 public research baseline prepared for repository publication. Numerical-model checkpoint only; not a fabrication release, tape-out package or experimentally validated QPU.
+**Status:** v0.4-rc1 public research baseline. Numerical-model checkpoint only; not a fabrication release, tape-out package or experimentally validated QPU.
