@@ -1,7 +1,7 @@
-# Validation record — engineering pre-release v0.4-rc1
+# Validation record — engineering model v0.4-rc1
 
-**Date:** 11 November 2026  
-**Channel:** closed/internal software and model checkpoint  
+**Date:** 12 November 2026  
+**Channel:** public numerical-model record; not hardware qualification  
 **Project author attribution:** Evgeny Zaprudnov
 
 ## Recorded software checks
@@ -13,7 +13,7 @@ Historical local preparation recorded:
 
 Result: **75 passed in 1.33 s** on Python 3.14.2.
 
-The merged Stage 11B PR #5 has a successful GitHub Actions run #23 (run ID 42976933542) on reviewed head 7ce294c54de0c0b046a4503aede9db714ca747ac. The repository workflow uses Python 3.11. These records refer to the merged engineering checkpoint and precede the documentation-only branch.
+The merged Stage 11B PR #5 has a successful GitHub Actions run #23 (run ID 42976933542) on reviewed head 7ce294c54de0c0b046a4503aede9db714ca747ac. The subsequent public-release baseline commit db606c428183aab0b637ce449d08b604d260e0e4 passed GitHub Actions run #29 on Python 3.11: **78 tests passed**, and the level-1 device calculation, two-cell projected interaction, and graph-wide qutrit/Floquet collision audit all completed successfully. Run #29 is a model/software check, not physical hardware validation.
 
 ## Stage 10 fixed-basis reference
 

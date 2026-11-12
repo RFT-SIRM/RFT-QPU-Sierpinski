@@ -2,7 +2,7 @@
 
 **Purpose:** maintain a dated record of disclosures that may affect patent novelty, trade-secret status or partner confidentiality.
 
-This log is not complete. After the maintainer changes repository visibility to public, enter the exact UTC time, visible commit SHA and repository URL. Do not record public availability as having happened before the GitHub setting has actually changed.
+This log is not complete. GitHub repository metadata confirmed public visibility on 12 November 2026. The metadata available during this audit does not expose the exact first-public UTC timestamp; do not invent a time. The visible main baseline at the audit was commit db606c428183aab0b637ce449d08b604d260e0e4.
 
 ## Entry fields
 
@@ -23,7 +23,7 @@ This log is not complete. After the maintainer changes repository visibility to 
 
 | Date | Material/version | Recipient/channel | Confidentiality / NDA | Scope and evidence |
 |---|---|---|---|---|
-| Pending maintainer action | RFT-QPU-Sierpinski public GitHub repository | Record exact UTC time, visible commit SHA and repository URL after switching visibility to public | Public | Reminder only; does not mean that publication has already occurred |
+| 2026-11-12 (exact first-public UTC time unavailable) | RFT-QPU-Sierpinski; visible main baseline db606c428183aab0b637ce449d08b604d260e0e4 | Public GitHub repository: https://github.com/RFT-SIRM/RFT-QPU-Sierpinski | Public | Public visibility confirmed by repository metadata during the review; first-public minute not recoverable from the inspected metadata |
 | Not entered | Earlier disclosures | Review prior repositories, tags, websites, talks, preprints, emails, demonstrations and partner communications | Unknown | No complete historical disclosure chronology has been verified in this repository |
 
 ## Immediate review checklist

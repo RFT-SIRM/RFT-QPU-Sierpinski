@@ -142,7 +142,7 @@ The Stage 11B baseline runner is:
 
     python engineering/physical_prototype/scripts/run_stage11b_requantized_gate.py
 
-The historical pre-release preparation recorded 75 passing tests locally on Python 3.14.2. The merged Stage 11B PR #5 also has a successful GitHub Actions run #23 on the reviewed head. These records predate this documentation-only branch; the documentation branch itself still requires its own CI check.
+Historical local pre-release preparation recorded 75 passing tests on Python 3.14.2. The public-release baseline commit db606c428183aab0b637ce449d08b604d260e0e4 then passed [GitHub Actions run #29](https://github.com/RFT-SIRM/RFT-QPU-Sierpinski/actions/runs/43134406595): 78 tests passed, and the level-1 device calculation, two-cell projected-interaction calculation, and graph-wide qutrit/Floquet collision audit all completed successfully on Python 3.11. These checks validate the encoded software/model workflow, not physical hardware.
 
 ## Repository map
 
@@ -151,7 +151,8 @@ The historical pre-release preparation recorded 75 passing tests locally on Pyth
 | [COMPARISON.md](COMPARISON.md) | Architecture and noise-evidence comparison |
 | [INVESTOR_BRIEF.md](INVESTOR_BRIEF.md) | Research and strategic-partner brief |
 | [PATENT_SPEC.md](PATENT_SPEC.md) | Public technical disclosure and patent-counsel reference |
-| [IP_AND_LICENSING.md](IP_AND_LICENSING.md) | Authorship, licensing, patent grant and commercial terms |\n| [PATENTS.md](PATENTS.md) | Supplemental patent grant and disclosure notice |
+| [IP_AND_LICENSING.md](IP_AND_LICENSING.md) | Authorship, licensing, patent grant and commercial terms |
+| [PATENTS.md](PATENTS.md) | Supplemental patent grant and disclosure notice |
 | [REPOSITORY_STATUS.md](REPOSITORY_STATUS.md) | Audited project status |
 | [docs/VALIDATION_PLAN.md](docs/VALIDATION_PLAN.md) | Staged evidence and hardware acceptance plan |
 | [engineering/physical_prototype/README.md](engineering/physical_prototype/README.md) | Numerical package and stage map |

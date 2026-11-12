@@ -29,7 +29,7 @@ The Change Date and Change License are material licence terms. At the Change Dat
 
 [PATENTS.md](PATENTS.md) contains a separate patent grant intended to accompany BUSL-1.1. It is non-exclusive, worldwide and royalty-free, but only covers patent claims that the Licensor actually owns or legally controls and that are necessarily infringed by the Licensor's contribution(s) alone or in combination with the Licensed Work.
 
-The patent grant is coextensive with the activity scope of the source licence. It does not override BUSL-1.1's non-production restriction and is not an Additional Use Grant. Production or manufacturing requires a separate written commercial agreement.
+The patent grant is coextensive with the activity scope of the source licence during its initial term; after the Change Date, it may also cover production uses permitted by GPL-2.0-only. It does not override BUSL-1.1's initial non-production restriction and is not an Additional Use Grant. Because the grant is perpetual and irrevocable except for defensive termination, it may pre-license qualifying claims that the Licensor later obtains or controls. This is a patent grant to recipients, not a reservation that preserves exclusivity; see PATENTS.md and obtain patent-counsel review before relying on it.
 
 ## 4. Patent status and public disclosure
 

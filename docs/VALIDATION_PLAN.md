@@ -28,7 +28,7 @@ A passing numerical test suite verifies the code and mathematical model represen
 - [x] Historical local test record: 75 passed.
 - [x] Merged Stage 11B PR #5 CI: run #23 succeeded on its reviewed head.
 
-The public-release documentation commit requires its own CI result; earlier successful runs do not certify this commit.
+The public-release baseline at db606c428183aab0b637ce449d08b604d260e0e4 passed GitHub Actions run #29: 78 tests passed, followed by successful level-1, two-cell, and graph-wide qutrit/Floquet reproductions. Later code changes require their own CI result.
 
 ## Gate 1 — finite graph and proposed hardware coefficient map
 

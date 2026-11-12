@@ -1,12 +1,12 @@
-# Closed engineering pre-release candidate v0.4-rc1
+# Engineering model pre-release candidate v0.4-rc1 — public research baseline
 
-**Review update:** 11 November 2026  
+**Review update:** 12 November 2026  
 **Original pre-release base commit:** d9b374c1dbd7e24050a33b13acf21f57858ff775  
-**Current reviewed engineering baseline before this documentation update:** 39c55368d3b3f76ccf0e5116ced0bb0d66dcf9fd
+**Public-release documentation baseline:** db606c428183aab0b637ce449d08b604d260e0e4
 
 ## Release intent
 
-This is a closed/internal engineering-software and numerical-model checkpoint. It is not a fabrication release, foundry package, tape-out authorization, or experimental hardware claim.
+This document records a public research and numerical-model checkpoint. It is not a fabrication release, foundry package, tape-out authorization, or experimental hardware claim.
 
 The current repository record includes Stages 1–11B. Stage 11B has an initial full three-mode rebuild in the shifted, re-quantized SQUID-coupler basis and a separate local pulse-retuning result. These must be kept distinct.
 
@@ -71,7 +71,7 @@ At the same point, the six-level 480-grid process overlap is 0.999999967757. The
 - Historical local interpreter: Python 3.14.2.
 - Historical local full test suite: 75 passed in 1.33 s.
 - Merged Stage 11B PR #5: GitHub Actions run #23 (ID 42976933542) completed successfully on the reviewed PR head.
-- The documentation-only branch created for this review requires its own CI run; it is not implied by the earlier PR result.
+- Public-release baseline db606c428183aab0b637ce449d08b604d260e0e4 passed GitHub Actions run #29: 78 tests passed, and the level-1, two-cell, and graph-wide qutrit/Floquet reproduction steps succeeded.
 
 ## Remaining engineering gates
 
@@ -87,4 +87,4 @@ At the same point, the six-level 480-grid process overlap is 0.999999967757. The
 
 ## Release decision and boundary
 
-Retain v0.4-rc1 as a closed/internal software and numerical-model checkpoint. It is suitable as a research baseline for continued engineering work. Do not label it fabrication-ready, foundry-ready, experimentally validated, noise-protected or fault tolerant.
+Retain v0.4-rc1 as a public research and numerical-model baseline for continued engineering work. Do not label it fabrication-ready, foundry-ready, experimentally validated, noise-protected or fault tolerant.

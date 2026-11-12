@@ -1,30 +1,36 @@
 # Site publication status
 
-## Repository and Pages are separate
+## Current state
 
-The architecture overview is maintained at [index.html](index.html), with SVG assets under [assets](assets/). It is a static, self-contained overview and can be reviewed from a local repository checkout.
+The repository is **public**. The repository metadata currently reports `has_pages=false` and an empty Homepage field. There is no Pages deployment workflow in `.github/workflows/`; the existing workflow runs tests and numerical reproductions only.
 
-The source repository is being prepared for public visibility. This is separate from enabling GitHub Pages: **the site is not confirmed as deployed**, and no live website URL should be advertised until deployment is enabled and verified.
+`docs/index.html` is a static, self-contained architecture presentation. It is stored in the repository as source material; GitHub does not automatically publish or execute it merely because the file exists. Its seven local SVG references were checked against the current tree and all are present. The page has embedded CSS, no JavaScript runtime and no external stylesheet dependency.
 
-Making the repository public does not, by itself, turn on Pages or prove that the page is reachable at a public URL.
+**The website is not currently deployed.** The expected project-site address, once Pages is enabled and verified, is:
 
-## Licence and content status
+`https://rft-sirm.github.io/RFT-QPU-Sierpinski/`
 
-The architecture page is an overview. The root README, engineering reports, LICENSE, PATENTS.md and evidence-boundary documents are the canonical source for current status and permissions.
+Do not advertise this as a live site until it loads successfully over HTTPS and the asset paths are verified in the browser.
+
+## How to publish this page
+
+If the maintainer wants the HTML page to be the public landing page:
+
+1. Open the repository's **Settings → Pages**.
+2. Under **Build and deployment**, choose **Deploy from a branch**.
+3. Select branch `main` and folder `/docs`.
+4. Save, then open the expected URL above and test the page, every diagram, mobile layout and accessibility.
+
+The entry file is already at the top level of the selected `/docs` folder, and its image references are relative to that folder. No custom build pipeline is required for this static page.
+
+## Keep the repository and site distinct
+
+The README is the canonical technical entry point. The HTML page is a visual summary only; it must not replace the README, technical reports, LICENSE, PATENTS.md or evidence-boundary documents. It must continue to distinguish model outputs from fabricated or measured hardware.
 
 Before enabling Pages:
-- verify the selected Pages source and deployment workflow;
-- confirm the deployed URL and relative asset paths;
-- test mobile layout and accessibility;
-- confirm that every displayed numerical value matches the current repository baseline;
-- ensure the page distinguishes numerical model outputs from fabricated or measured hardware;
-- make sure the site footer links to the current LICENSE and PATENTS.md.
+- confirm that every displayed number matches the current model evidence;
+- keep the complex Z-link and nine-tone schedule blockers visible;
+- label numerical process overlap and state fidelity as closed-system model outputs, not measured device fidelity;
+- ensure the footer links to the repository and current licensing documents.
 
-## Activation checklist
-
-1. Enable GitHub Pages only when the maintainer intends to host the page.
-2. Configure the Pages source and deployment permissions.
-3. Verify the deployed URL, page assets, mobile layout and accessibility.
-4. Update README badges or the repository Homepage field only after successful verification.
-
-Until those steps pass, link to the repository README rather than advertising an unverified live site.
+Until deployment is verified, link to the repository README rather than advertising the expected Pages URL as live.

@@ -6,3 +6,15 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+
+# Local secrets and credentials — do not commit real values
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+credentials*.json
+service-account*.json
+secrets/

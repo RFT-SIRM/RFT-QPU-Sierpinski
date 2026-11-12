@@ -44,6 +44,6 @@ The technical record is intentionally prepared for public release. A public GitH
 
 The repository contains no recorded patent application number, filing date, patent office or grant. This is a repository-only observation. The technical disclosure in PATENT_SPEC.md is intended to be public, not confidential.
 
-After the maintainer changes repository visibility, record the exact UTC time, commit SHA and URL of first public availability in [the disclosure log](DISCLOSURE_LOG_TEMPLATE.md). Review older repositories, mirrors, websites, talks, preprints, emails, demonstrations and partner discussions before reaching conclusions about novelty. See [IP and Licensing](../IP_AND_LICENSING.md) and [Patent notice](../PATENTS.md).
+Public visibility was confirmed in GitHub repository metadata on 12 November 2026. The exact first-public UTC timestamp is not available from the repository data inspected; this limitation is recorded in [the disclosure log](DISCLOSURE_LOG_TEMPLATE.md). Review older repositories, mirrors, websites, talks, preprints, emails, demonstrations and partner discussions before reaching conclusions about novelty. See [IP and Licensing](../IP_AND_LICENSING.md) and [Patent notice](../PATENTS.md).
 
 The Stage 11B evidence is distinguished in [the tracked baseline report](../engineering/physical_prototype/docs/STAGE11B_REQUANTIZED_GATE.md) and [the local retune note](../engineering/physical_prototype/docs/STAGE11B_LOCAL_RETUNE_NOTE.md).

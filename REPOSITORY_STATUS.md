@@ -9,11 +9,11 @@
 
 ## Publication and licence
 
-This documentation update prepares the repository for public technical inspection and collaboration. GitHub metadata reported the repository as private at the time of this update; the visibility setting is separate and has not been changed by this commit.
+GitHub repository metadata was rechecked on 12 November 2026 and reports this repository as **public**. The first-public timestamp is not exposed by the repository metadata available in this audit; see the disclosure log for the date and verified public baseline.
 
 The source licence is BUSL-1.1 with no Additional Use Grant. It permits non-production use, copying, modification and redistribution under its terms. Production use requires a separate written commercial agreement. The Change Date is 12 November 2030, or the fourth anniversary of first public distribution of the relevant version if earlier; the Change License is GPL-2.0-only.
 
-A separate patent grant accompanies BUSL-1.1. It is limited to claims the Licensor actually owns or legally controls and that are necessarily infringed by the Licensor's contributions. It does not create a patent, assert an application has been filed, or expand production rights beyond BUSL-1.1. See LICENSE and PATENTS.md.
+A separate, perpetual and irrevocable (subject to defensive termination) patent grant accompanies BUSL-1.1. It only covers claims the Licensor actually owns or legally controls and that are necessarily infringed by the Licensor's contributions, and it is coextensive with the source-licence scope. This grant is a licence to recipients, not patent protection for the Licensor; qualifying future claims may be pre-licensed non-exclusively. See PATENTS.md before making any patent or exclusivity assumptions.
 
 ## Engineering scope
 
@@ -52,7 +52,7 @@ At five retained levels and 480 steps per period, the reported projected process
 - Historical local preparation: Python 3.14.2, 75 tests passed.
 - Merged Stage 11B PR #5: GitHub Actions run #23 succeeded on its reviewed PR head.
 - Previous documentation PR #6 and its post-merge workflow completed successfully.
-- The present public-release documentation commit requires its own post-commit CI result; earlier runs do not certify it.
+- Public-release baseline db606c428183aab0b637ce449d08b604d260e0e4 passed GitHub Actions run #29: 78 tests plus the level-1, two-cell and graph-wide qutrit/Floquet reproduction steps succeeded.
 
 A passing software suite validates the encoded computation and tests only. It does not establish physical feasibility, yield, hardware fidelity, fault tolerance or tape-out readiness.
 

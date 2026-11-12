@@ -15,7 +15,7 @@ From the repository root:
     python -m pip install -e 'engineering/physical_prototype[test]'
     python -m pytest -q tests engineering/physical_prototype/tests
 
-Historical local pre-release preparation used Python 3.14.2 and recorded 75 passing tests. The merged Stage 11B pull request has a successful GitHub Actions run #23 on its reviewed head. The public-release documentation commit requires its own CI result; earlier successful runs do not certify later commits.
+Historical local pre-release preparation used Python 3.14.2 and recorded 75 passing tests. The public-release baseline commit db606c428183aab0b637ce449d08b604d260e0e4 passed GitHub Actions run #29 on Python 3.11: 78 tests passed, and the level-1 device, two-cell interaction, and graph-wide qutrit/Floquet reproductions all succeeded. This is software/model verification, not hardware qualification.
 
 ## Stage map
 

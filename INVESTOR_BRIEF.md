@@ -26,6 +26,7 @@ The proposition is not that a fault-tolerant quantum computer already exists. Th
 
 **Software reproducibility**
 - The merged Stage 11B engineering checkpoint passed GitHub Actions run #23 on its reviewed PR head.
+- The public-release baseline commit db606c428183aab0b637ce449d08b604d260e0e4 passed [GitHub Actions run #29](https://github.com/RFT-SIRM/RFT-QPU-Sierpinski/actions/runs/43134406595): 78 tests and three reproducible calculation steps succeeded.
 - The historical local pre-release record reports 75 passing tests.
 - The original Stage 11B baseline JSON and matrix archive are tracked; the later local retune's raw JSON/NPZ outputs are not yet tracked.
 
