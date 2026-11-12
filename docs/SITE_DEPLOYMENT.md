@@ -1,28 +1,30 @@
 # Site publication status
 
-## Current state
+## Repository and Pages are separate
 
-The responsive architecture presentation is maintained at [index.html](index.html), with self-contained SVG assets under `docs/assets/`. It is intended to be reviewable from the repository checkout and contains no external JavaScript, font, analytics or image dependency.
+The architecture overview is maintained at [index.html](index.html), with SVG assets under [assets](assets/). It is a static, self-contained overview and can be reviewed from a local repository checkout.
 
-**The site is not currently deployed.** The repository is private and GitHub Pages is not enabled for it. The former `rft-sirm.github.io/RFT-QPU-Sierpinski/` homepage URL therefore must not be advertised as a live website.
+The source repository is being prepared for public visibility. This is separate from enabling GitHub Pages: **the site is not confirmed as deployed**, and no live website URL should be advertised until deployment is enabled and verified.
 
-## Publication boundary
+Making the repository public does not, by itself, turn on Pages or prove that the page is reachable at a public URL.
 
-Do not make this repository public merely to turn on Pages. The repository contains proprietary implementation material, a Business 1.0 license, patent-oriented working documents, detailed coupler coefficient exports and hardware planning data.
+## Licence and content status
 
-The safe publication route is a separate, curated public site release containing only content explicitly cleared for disclosure. The source repository should remain private. The release bundle should be reviewed for:
+The architecture page is an overview. The root README, engineering reports, LICENSE, PATENTS.md and evidence-boundary documents are the canonical source for current status and permissions.
 
-- patent-counsel disclosure timing and any planned filing;
-- ownership, licensing and third-party reference requirements;
-- absence of internal netlists, detailed coefficients, private analysis and non-public working documents;
-- consistency between every public numerical claim and the evidence boundary.
+Before enabling Pages:
+- verify the selected Pages source and deployment workflow;
+- confirm the deployed URL and relative asset paths;
+- test mobile layout and accessibility;
+- confirm that every displayed numerical value matches the current repository baseline;
+- ensure the page distinguishes numerical model outputs from fabricated or measured hardware;
+- make sure the site footer links to the current LICENSE and PATENTS.md.
 
 ## Activation checklist
 
-1. Prepare and review a curated public export of the site and approved SVG artwork.
-2. Choose a hosting repository/account and confirm that public publication is authorized.
-3. Configure the hosting source and deployment permissions there.
-4. Verify the deployed URL, relative asset paths, mobile layout and accessibility.
-5. Only after a successful deployment, replace the README architecture-brief badge with a live-site badge and set the repository Homepage field to the verified URL.
+1. Enable GitHub Pages only when the maintainer intends to host the page.
+2. Configure the Pages source and deployment permissions.
+3. Verify the deployed URL, page assets, mobile layout and accessibility.
+4. Update README badges or the repository Homepage field only after successful verification.
 
-Until those steps pass, the README links to the architecture documentation and the old Live Demo badge remains removed.
+Until those steps pass, link to the repository README rather than advertising an unverified live site.

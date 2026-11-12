@@ -1,129 +1,90 @@
-# IP, ownership, confidentiality and licensing framework
+# IP, ownership, public disclosure and licensing
 
-**Internal working document · 11 November 2026 · Project author attribution: Evgeny Zaprudnov**
+**Project:** RFT-QPU-Sierpinski  
+**Project author attribution:** Evgeny Zaprudnov  
+**Review date:** 12 November 2026  
+**Status:** public-release documentation; not legal advice
 
-This document organises the project's IP diligence. It does not create a patent right, prove ownership, replace an assignment, or grant a commercial licence.
+## 1. Public research record
 
-## 1. Repository audit at this review point
+The repository is being prepared for public technical inspection, reproducibility, independent review and collaboration. It contains the finite Sierpiński graph model, SU(2) Hamiltonian, numerical analyses, proposed transmon mapping, coefficient tables, circuit-model studies, scripts, tests, reports and selected numerical archives.
 
-The Sierpinski repository is private. The repository contains an attribution placeholder in its former citation metadata, a broad proprietary notice, a patent-oriented technical specification and engineering records. This revision corrects the attribution to Evgeny Zaprudnov and separates authorship, copyright, patent rights and trade-secret controls.
+Publication is intentional. The repository is not presented as a fabricated or experimentally validated quantum processor. See [README](README.md), [evidence boundary](docs/DISCLOSURE_BOUNDARY.md) and [validation plan](docs/VALIDATION_PLAN.md).
 
-The following items are **not recorded in this repository** as of 11 November 2026:
+## 2. Source licence — BUSL-1.1
 
-- patent application number, filing date, patent office or priority claim;
-- granted patent or published patent application;
-- signed invention assignment, contributor assignment or employment/consulting IP agreement;
-- signed NDA register or disclosure chronology;
-- signed commercial licence, option, term sheet or evaluation agreement.
+The root [LICENSE](LICENSE) applies Business Source License 1.1 (BUSL-1.1) to the original project materials that the Licensor owns or is authorised to license.
 
-These are repository findings only. They do not prove that no such documents exist outside the repository.
+- **Current permissions:** copying, modification, derivative works, redistribution and non-production use, subject to the exact licence terms.
+- **Additional Use Grant:** None.
+- **Production use:** not granted during the BUSL-1.1 initial term; requires a separate written commercial licence.
+- **Change Date:** 12 November 2030, or the fourth anniversary of first public distribution of the relevant version if earlier.
+- **Change License:** GNU GPL version 2.0 only (GPL-2.0-only).
 
-## 2. Keep the repository private
+BUSL-1.1 is source-available, not an OSI-approved open-source licence during its initial term. It permits independent study, reproduction, experimentation and collaboration within its non-production scope. It does not grant trademark rights. The exact root LICENSE controls if this summary differs from the licence text.
 
-Maintain private visibility while counsel reviews filing options and ownership. Before sharing access, review GitHub collaborators, teams, tokens, connected applications, forks and mirrors. Use individual accounts with multi-factor authentication, least-privilege access and a documented access list. Keep dated backups of the repository and source artifacts.
+The Change Date and Change License are material licence terms. At the Change Date, or the fourth anniversary of first public distribution if earlier, the rights granted under BUSL-1.1 for that version terminate and rights under the stated Change License take effect. Each later release may have its own BUSL parameters.
 
-Private repository settings are a useful access control, not a substitute for an NDA, an invention assignment or patent filing. The repository's current private status does not establish that no earlier public or non-confidential disclosure occurred.
+## 3. Supplemental patent grant
 
-Do not distribute enabling technical details, raw coupling maps, claim concepts, full circuit drawings or source code to prospective partners until the disclosure boundary and agreement are approved.
+[PATENTS.md](PATENTS.md) contains a separate patent grant intended to accompany BUSL-1.1. It is non-exclusive, worldwide and royalty-free, but only covers patent claims that the Licensor actually owns or legally controls and that are necessarily infringed by the Licensor's contribution(s) alone or in combination with the Licensed Work.
 
-## 3. Separate the different rights
+The patent grant is coextensive with the activity scope of the source licence. It does not override BUSL-1.1's non-production restriction and is not an Additional Use Grant. Production or manufacturing requires a separate written commercial agreement.
 
-| Rights category | What it can cover | What it does not establish |
+## 4. Patent status and public disclosure
+
+No patent application number, filing date, patent office, published application or granted patent for this project was identified in this repository as of 12 November 2026. This is a repository audit observation only; it does not prove that no document exists outside the repository.
+
+Public disclosure can affect patent novelty and filing options. The legal effect depends on jurisdiction, date, content and enabling character. Grace periods vary and must not be assumed. A later filing cannot make a prior public disclosure confidential again. Anyone considering a filing should obtain jurisdiction-specific advice before relying on any novelty or priority position.
+
+## 5. Separate legal concepts
+
+| Rights category | What it may cover | What it does not establish |
 |---|---|---|
-| Authorship attribution | Who is credited for the project materials | Legal ownership of every work or invention |
-| Copyright | Original source code, prose, diagrams, graphics and qualifying selection/arrangement | A monopoly over abstract mathematical facts, ideas, methods or system concepts |
-| Patent rights | Only the subject matter within valid claims of an application/patent, if granted | Protection merely because a technical disclosure or claim concept is written in this repository |
-| Trade secrets / know-how | Confidential technical information maintained under effective secrecy controls | Protection after unrestricted public disclosure; ownership without a title chain |
-| Trademark / brand | Project or product names and marks, subject to applicable law | Rights in the technical architecture itself |
+| Authorship attribution | Credit for original project materials | Patent inventorship or ownership of every contribution |
+| Copyright | Original code, prose, diagrams, graphics and protected selection/arrangement | A monopoly over abstract mathematical ideas, facts, equations, methods or concepts as such |
+| Patent rights | Only valid claims, in jurisdictions and for the term in which they exist | Protection merely because an idea or technical note appears in this repository |
+| Know-how / trade secrets | Information kept confidential under legally sufficient controls | Secrecy after unrestricted public disclosure |
+| Trademark / brand | Project names and marks, subject to applicable law | Rights in the underlying technical architecture |
 
-The old wording that attempted to prohibit copying of mathematical parameters or the architecture as such has been removed. A repository notice should not imply that copyright alone protects abstract equations, ideas or methods. Patent and trade-secret protection are separate legal questions.
+## 6. Authorship, inventorship and chain of title
 
-## 4. Authorship, inventorship and chain of title
+Project materials use the requested attribution **Evgeny Zaprudnov**. Patent inventorship is a separate legal determination that depends on the actual conception of each proposed claim. Coding, testing, funding, repository administration or general project leadership does not automatically resolve inventorship.
 
-Project documents should credit **Evgeny Zaprudnov** as the project author, as requested. Inventorship is a separate legal determination. Counsel should identify the actual human contributor(s) to the conception of each proposed patent claim; authorship of the repository, coding, testing or funding alone does not automatically resolve inventorship.
+Before any commercial licence, assignment, option or patent filing, the relevant parties should confirm:
+1. original notebooks, dated design records and source history;
+2. all human contributors and their actual contributions;
+3. applicable employment, contractor, university, grant or consultancy obligations;
+4. signed assignments and permissions where required;
+5. third-party software, data, images, fonts and other asset licences;
+6. the correct individual or legal entity authorised to act as licensor or applicant.
 
-Before licensing or assigning rights, assemble a chain-of-title file:
+The GitHub repository owner and the project-author attribution do not, by themselves, prove the complete chain of title. Third-party components remain governed by their own licences and notices.
 
-1. dated notebooks, source history and original design records;
-2. names and contributions of all collaborators;
-3. employment, contractor, university, grant and consultancy terms that may allocate IP;
-4. signed assignments from relevant inventors/authors where required;
-5. third-party software, libraries, fonts, images, data and other licence obligations;
-6. confirmation that RFT-SIRM is authorised to act as owner, licensor or applicant if rights are to be held or exercised through that organisation.
+## 7. Research collaboration
 
-The GitHub account or repository owner is not, by itself, proof of ownership of every invention or work in the repository.
+The project welcomes technically substantive review, reproducibility checks, mathematical discussion, circuit-QED review, control engineering and proposals for a physical demonstrator. Useful collaboration areas include:
+- implementation of the non-commuting SU(2) link network;
+- resolution of the resonant complex Z-link requirement;
+- redesign and validation of the graph-wide pump/frequency allocation;
+- open-system, thermal, flux-line and crosstalk modelling;
+- layout extraction, EM simulation, fabrication and cryogenic measurement;
+- independent review of the one-cell and two-cell demonstrator path.
 
-## 5. Patent strategy — questions for counsel
+Use GitHub Issues for public technical discussion and pull requests for documented corrections. Do not publish secrets, credentials, third-party confidential materials or personal data in public issues.
 
-The highest-value patent review is likely to focus on specific technical embodiments rather than the abstract Sierpinski graph or the spectral-moment formula alone. Candidate areas for counsel to investigate are:
+## 8. Commercial discussions
 
-- a physical mode-pair and coupler network implementing a specified graph Hamiltonian with non-commuting SU(2) links;
-- a concrete phase-engineered exchange implementation that resolves the resonant complex Z edge;
-- calibration and phase-consistency methods for a multi-channel parametric network;
-- preparation, control and readout of the selected two-dimensional subspace;
-- a realizable two-cell differential-density interaction and its control sequence;
-- measurement-based validation of the effective Hamiltonian, projected controls and leakage criteria.
+Separate written agreements may cover production deployment, hardware manufacture, integration, sale, patent rights (if and when valid rights exist and the Licensor controls them), defined know-how, territory, field of use, sublicensing, exclusivity, royalties, milestones, and ownership/licensing of improvements.
 
-The current complex Z link remains unresolved. Do not draft a claim as if the single-real-static-coupler problem has already been solved. The Stage 11B A–coupler–B gate model is a separate three-mode simulation, not proof of the full twelve-mode tile.
+No exclusivity, valuation, licence, option, assignment, funding commitment or partner agreement is represented as already agreed. Repository access alone grants no commercial production right.
 
-The European Patent Office's 2026 guidance distinguishes abstract mathematical methods from technical implementations and assesses whether a mathematical method contributes to technical character. Novelty, inventive step, industrial applicability and sufficiency still need examination. Counsel must select the filing jurisdiction and claim strategy.
+## 9. References
 
-## 6. Confidentiality and disclosure chronology
+- [Business Source License 1.1 — SPDX](https://spdx.org/licenses/BUSL-1.1.html)
+- [Business Source License 1.1 — MariaDB](https://mariadb.com/bsl11/)
+- [GitHub: Licensing a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
+- [WIPO: Patent FAQs](https://www.wipo.int/en/web/patents/faq_patents)
+- [EPO: 2026 Guidelines — state of the art](https://www.epo.org/en/legal/guidelines-epc/2026/g_iv_1.html)
 
-Create a dated record for every external disclosure, including:
-
-- preprints, articles, posters, conference talks and competitions;
-- websites, GitHub Pages, public source mirrors and downloadable archives;
-- demonstrations, investor meetings, pitch decks and technical calls;
-- emails, messaging threads and attachments;
-- disclosure to suppliers, universities, foundries or engineering contractors;
-- access by people not bound by confidentiality.
-
-For each disclosure, retain the material version, date, recipient, channel, whether it was public, NDA status and supporting evidence. Use [the disclosure log template](docs/DISCLOSURE_LOG_TEMPLATE.md).
-
-Before filing, WIPO recommends avoiding non-confidential pre-filing disclosure; any grace period depends on jurisdiction and the type of disclosure. For unavoidable investor or partner disclosure, obtain a signed NDA before providing enabling detail. An NDA does not replace a patent filing or grant a licence.
-
-## 7. Partner access model
-
-1. **Non-confidential overview:** use a short, sanitised brief that explains the problem, proposed architecture class, evidence categories and development milestones without exposing enabling implementation detail.
-2. **Confidential discussion:** execute an NDA signed by the correct legal parties before sharing technical detail.
-3. **Controlled technical evaluation:** define the permitted purpose, access persons, data-room rules, no-publication obligations, reverse-engineering restrictions where enforceable, return/deletion obligations and ownership of feedback or improvements.
-4. **Commercial negotiation:** identify background IP, foreground IP, improvements, territories, fields of use, sublicensing and patent cost responsibilities.
-5. **Definitive agreement:** execute only after rights-holder and inventorship checks.
-
-## 8. Commercial licensing structure
-
-A future licence can be structured separately for:
-
-- **software and documentation:** source access, internal evaluation, modification, derivative works, redistribution and support;
-- **patent rights:** only claims and territories actually owned or controlled;
-- **know-how:** defined confidential packages and controlled access;
-- **hardware implementation:** manufacturing, integration, field of use, territory and sublicensing;
-- **improvements:** ownership, disclosure, licence-back and prosecution responsibilities.
-
-Possible commercial terms include an evaluation fee, milestone payments, field-of-use exclusivity, annual minimums, royalties, sublicensing rights, audit rights, patent cost allocation and termination/return obligations. No commercial term should be presented as already agreed.
-
-## 9. Counsel checklist before external circulation
-
-- [ ] Confirm the legal name and contact details of the intended author/applicant/rights holder.
-- [ ] Confirm all actual inventors claim by claim.
-- [ ] Review original source records and the chain of title.
-- [ ] Inventory third-party dependencies and assets.
-- [ ] Search prior art and freedom to operate.
-- [ ] Review novelty and technical character in intended jurisdictions.
-- [ ] Review whether the written disclosure enables each proposed technical embodiment.
-- [ ] Resolve or bound the complex Z-link implementation.
-- [ ] Verify all prior disclosure dates and recipients.
-- [ ] Decide filing route, filing date, priority strategy and international budget.
-- [ ] Approve NDA and technical-evaluation templates.
-- [ ] Approve a sanitized external brief and a controlled technical data room.
-
-## 10. Official references
-
-- WIPO — How to Protect Inventions through Patents: https://www.wipo.int/en/web/patents/protection
-- WIPO — Patent FAQs: https://www.wipo.int/en/web/patents/faq_patents
-- WIPO — Technology Transfer FAQs: https://www.wipo.int/en/web/technology-transfer/faq
-- EPO — 2026 Guidelines, mathematical methods: https://www.epo.org/en/legal/guidelines-epc/2026/g_ii_3_3.html
-- EPO — 2026 Guidelines, simulation/design/modelling: https://www.epo.org/en/legal/guidelines-epc/2026/g_ii_3_3_2.html
-
-**Decision recorded for this repository:** keep the repository private. Do not treat the current patent specification or proprietary notice as evidence of a filed patent or completed chain of title.
+This document is informational and is not a legal opinion. Patent inventorship, ownership, licence authority and the effect of public disclosure require review by qualified counsel in the relevant jurisdictions.

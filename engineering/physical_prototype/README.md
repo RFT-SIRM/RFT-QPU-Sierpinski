@@ -1,6 +1,8 @@
 # RFT-QPU-Sierpinski — engineering model package v0.4-rc1
 
-**Channel:** closed/internal engineering pre-release candidate. This package is a reproducible numerical and circuit-model baseline, not a fabricated device, foundry package, tape-out release or experimental hardware result.
+**Release channel:** public research and engineering baseline under BUSL-1.1 with a supplemental patent grant. This package is a numerical and circuit-model record, not a fabricated device, foundry package, tape-out release or experimental hardware result.
+
+The source licence permits non-production use under its terms. Production or manufacturing requires a separate written commercial agreement. The supplemental patent grant is limited to claims the Licensor actually controls and does not enlarge the source-licence scope. See the root [LICENSE](../../LICENSE), [PATENTS.md](../../PATENTS.md) and [IP and licensing](../../IP_AND_LICENSING.md).
 
 ## Scope
 
@@ -13,7 +15,7 @@ From the repository root:
     python -m pip install -e 'engineering/physical_prototype[test]'
     python -m pytest -q tests engineering/physical_prototype/tests
 
-Historical local pre-release preparation used Python 3.14.2 and recorded 75 passing tests. The merged Stage 11B pull request has a successful GitHub Actions run #23 on its reviewed head. A new documentation branch still needs its own CI run.
+Historical local pre-release preparation used Python 3.14.2 and recorded 75 passing tests. The merged Stage 11B pull request has a successful GitHub Actions run #23 on its reviewed head. The public-release documentation commit requires its own CI result; earlier successful runs do not certify later commits.
 
 ## Stage map
 

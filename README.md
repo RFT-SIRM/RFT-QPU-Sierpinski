@@ -3,11 +3,11 @@
 > **A research architecture for a self-similar quantum-processing element with non-Abelian SU(2) transport.**
 
 **Project author attribution:** Evgeny Zaprudnov  
-**Programme:** RFT-SIRM · **Engineering checkpoint:** v0.4-rc1 · **Review date:** 11 November 2026
+**Programme:** RFT-SIRM · **Engineering checkpoint:** v0.4-rc1 · **Review date:** 12 November 2026
 
 ![RFT-QPU architecture pathway](docs/assets/rft-architecture-flow.svg)
 
-This repository is maintained as a **private research and engineering record**. It documents a numerical architecture and a proposed superconducting-transmon implementation. It does not claim that a quantum processor has been fabricated, measured, or made fault tolerant.
+This repository is prepared as a **public research and engineering record** for technical inspection, reproducibility, independent review and collaboration. It documents a numerical architecture and a proposed superconducting-transmon implementation. It does not claim that a quantum processor has been fabricated, measured, or made fault tolerant.
 
 ---
 
@@ -115,18 +115,21 @@ See [Evidence boundary](docs/DISCLOSURE_BOUNDARY.md), [Risk register](engineerin
 
 A green software workflow is a model-integrity result, not a hardware-validation gate.
 
-## IP, attribution and confidentiality
+## IP, attribution, licensing and patent grant
 
-**Project author attribution: Evgeny Zaprudnov.** The citation metadata is corrected to this name. Authorship attribution does not, by itself, establish patent inventorship or the chain of legal title.
+**Project author attribution: Evgeny Zaprudnov.** Authorship attribution is distinct from patent inventorship and does not, by itself, prove the chain of legal title for every contribution or third-party component.
 
-The repository contains a patent-oriented technical disclosure for review by qualified patent counsel. It is **not** a patent application, legal opinion, novelty search or grant. At this review date, this repository records no patent application number, filing date, patent office or granted patent. This is a repository audit statement, not proof about documents held outside the repository.
+The source materials are offered under **Business Source License 1.1 (BUSL-1.1)**. During its initial term, BUSL-1.1 permits copying, modification, derivative works, redistribution and non-production use under its terms. It is a **source-available** licence, not an OSI-approved open-source licence during that initial term. No Additional Use Grant is made: production deployment, manufacture or other production use requires a separate written commercial agreement. The Change Date is 12 November 2030, or the fourth anniversary of first public distribution of this version if earlier; the Change License is GNU GPL version 2.0 only. See [LICENSE](LICENSE).
 
-The repository remains private. Do not publish the technical disclosure, detailed coupling maps, source code or enabling diagrams, or share them with prospective partners, before confidentiality and filing strategy have been reviewed. See:
+A separate [patent grant](PATENTS.md) accompanies the source licence. It grants a non-exclusive, worldwide, royalty-free patent licence only to the extent the licensor actually owns or controls patent claims that are necessarily infringed by the licensed contributions, and only within the use scope permitted by the applicable source licence. It does **not** create a patent, represent that a patent has been filed or extend permission to production use beyond BUSL-1.1.
 
-- [Patent-oriented technical disclosure](PATENT_SPEC.md)
-- [IP, ownership and licensing framework](IP_AND_LICENSING.md)
-- [Proprietary rights notice](LICENSE.md)
-- [Disclosure log template](docs/DISCLOSURE_LOG_TEMPLATE.md)
+No patent application number, filing date, patent office or granted patent for this project is recorded in this repository. This is a repository audit observation, not proof about documents held outside it. Public disclosure is intentional and may affect later patent filings depending on jurisdiction, timing and the enabling content disclosed. See [PATENTS.md](PATENTS.md) and [technical disclosure](PATENT_SPEC.md).
+
+The full technical record is being made available to invite external scrutiny and collaboration. Important engineering gates remain open: the complex Z-link implementation, graph-wide pump schedule, open-system validation, and physical demonstration. These limitations are recorded rather than hidden.
+
+## Collaboration and contact
+
+Researchers, superconducting-circuit engineers, quantum-control specialists and potential strategic partners are invited to review the work. For technical questions, reproducibility reports, suggested corrections or collaboration proposals, open a GitHub Issue or use the contact route on the [RFT-SIRM GitHub profile](https://github.com/RFT-SIRM). Use pull requests for documented corrections. Do not post credentials, private third-party information or confidential material in public issues.
 
 ## Reproducibility
 
@@ -146,12 +149,12 @@ The historical pre-release preparation recorded 75 passing tests locally on Pyth
 | Document | Purpose |
 |---|---|
 | [COMPARISON.md](COMPARISON.md) | Architecture and noise-evidence comparison |
-| [INVESTOR_BRIEF.md](INVESTOR_BRIEF.md) | Internal strategic-partner brief |
-| [PATENT_SPEC.md](PATENT_SPEC.md) | Technical disclosure for patent counsel |
-| [IP_AND_LICENSING.md](IP_AND_LICENSING.md) | Authorship, title, patent strategy and commercial licensing |
+| [INVESTOR_BRIEF.md](INVESTOR_BRIEF.md) | Research and strategic-partner brief |
+| [PATENT_SPEC.md](PATENT_SPEC.md) | Public technical disclosure and patent-counsel reference |
+| [IP_AND_LICENSING.md](IP_AND_LICENSING.md) | Authorship, licensing, patent grant and commercial terms |\n| [PATENTS.md](PATENTS.md) | Supplemental patent grant and disclosure notice |
 | [REPOSITORY_STATUS.md](REPOSITORY_STATUS.md) | Audited project status |
 | [docs/VALIDATION_PLAN.md](docs/VALIDATION_PLAN.md) | Staged evidence and hardware acceptance plan |
 | [engineering/physical_prototype/README.md](engineering/physical_prototype/README.md) | Numerical package and stage map |
 | [engineering/physical_prototype/results/RESULT_SUMMARY.md](engineering/physical_prototype/results/RESULT_SUMMARY.md) | Finite-level and two-cell result summary |
 
-**Status:** closed/internal software and model pre-release candidate v0.4-rc1. Private repository. Not a fabrication release, tape-out package or experimentally validated QPU.
+**Status:** v0.4-rc1 public research baseline prepared for repository publication. Numerical-model checkpoint only; not a fabrication release, tape-out package or experimentally validated QPU.

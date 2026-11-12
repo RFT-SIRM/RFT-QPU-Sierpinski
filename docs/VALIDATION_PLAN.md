@@ -1,7 +1,7 @@
 # Validation plan — current state and acceptance gates
 
-**Review date:** 11 November 2026  
-**Engineering checkpoint:** closed/internal model pre-release candidate v0.4-rc1.
+**Review date:** 12 November 2026  
+**Engineering checkpoint:** v0.4-rc1 public research baseline; numerical model only, not a hardware release.
 
 ## Current baseline
 
@@ -13,7 +13,7 @@ Stages 1–11B are recorded in this repository. Stage 11B has:
 
 The local retune raw JSON/NPZ artifacts are not tracked. The selected point is recorded in the root README and in the Stage 11B local-retune note. It must be archived with a reproducing runner before it is treated as a fully reproducible numerical release artifact.
 
-A passing numerical test suite verifies the code and mathematical model represented by the tests. It does not validate a fabricated device.
+A passing numerical test suite verifies the code and mathematical model represented by the tests. It does not validate a fabricated device. Public release invites independent scrutiny; it does not imply that the remaining engineering gates have passed.
 
 ## Gate 0 — software/model integrity
 
@@ -28,7 +28,7 @@ A passing numerical test suite verifies the code and mathematical model represen
 - [x] Historical local test record: 75 passed.
 - [x] Merged Stage 11B PR #5 CI: run #23 succeeded on its reviewed head.
 
-The documentation branch created from this review still requires its own CI run.
+The public-release documentation commit requires its own CI result; earlier successful runs do not certify this commit.
 
 ## Gate 1 — finite graph and proposed hardware coefficient map
 

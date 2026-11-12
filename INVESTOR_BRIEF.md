@@ -1,8 +1,8 @@
-# RFT-QPU-Sierpinski — internal strategic-partner brief
+# RFT-QPU-Sierpinski — research and strategic-partner brief
 
 **Project author attribution:** Evgeny Zaprudnov  
-**Date:** 11 November 2026  
-**Handling:** private internal working draft; not approved for external distribution before IP review.
+**Date:** 12 November 2026  
+**Handling:** public non-confidential technical and collaboration brief.
 
 ## Investment thesis
 
@@ -68,8 +68,12 @@ No claim is made that the design outperforms IBM, Google, Quantinuum or any othe
 
 A credible next-stage partner would contribute some combination of superconducting-circuit design, tunable-coupler engineering, cryogenic packaging, EM/layout extraction, phase-coherent microwave control, calibration, readout, fabrication, circuit-QED measurement and independent benchmarking.
 
-## IP and confidentiality
+## IP, licensing and collaboration
 
-The repository remains private. The patent-oriented technical specification is a disclosure draft for counsel, not a patent application or legal opinion. The repository records no filing number or date. Before enabling technical disclosure to a potential partner, confirm the inventorship and chain of title, review prior disclosure history and execute an NDA with the correct legal parties.
+The repository is being prepared as a public technical record under Business Source License 1.1 (BUSL-1.1) accompanied by a separate, limited patent grant. The source licence permits non-production use under its terms; commercial production or manufacture requires a separate written agreement. The initial BUSL term is source-available, not OSI-approved open source. The Change Date is 12 November 2030, or the fourth anniversary of first public distribution of the relevant version if earlier; the Change License is GPL-2.0-only.
 
-**This brief is for internal planning only. A non-confidential investor version must be separately sanitised and approved by patent counsel.**
+The supplemental patent grant is limited to patent claims the Licensor actually owns or lawfully controls and that are necessarily infringed by the Licensor's contributions. It does not create a patent or extend production rights beyond the source licence. No patent application number, filing date, office or grant is recorded in the repository; this is a repository-only observation. Public disclosure may affect patent novelty and filing options by jurisdiction. See [LICENSE](LICENSE), [PATENTS.md](PATENTS.md) and [IP_AND_LICENSING.md](IP_AND_LICENSING.md).
+
+The project is open to technical review, research collaboration and discussions with groups capable of helping to resolve the circuit and experimental gates. No valuation, exclusivity, licence, funding commitment or partner agreement is implied by this brief.
+
+This document is a factual summary of the present evidence, not an investment offer, securities solicitation, patentability opinion or representation of experimental performance.

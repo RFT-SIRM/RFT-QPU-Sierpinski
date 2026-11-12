@@ -1,6 +1,6 @@
 # Evidence and disclosure boundary
 
-**Review date:** 11 November 2026. This file separates mathematical-model results, numerical outputs, proposed hardware, local reports without tracked raw artifacts and experimental evidence.
+**Review date:** 12 November 2026. This file separates mathematical-model results, numerical outputs, proposed hardware, local reports without tracked raw artifacts and experimental evidence.
 
 ## Evidence ledger
 
@@ -40,8 +40,10 @@
 
 ## Disclosure handling
 
-The repository metadata indicates that the GitHub repository is private. This alone does not prove that the information has never been disclosed elsewhere. Check older repositories, mirrors, sites, talks, preprints, emails, demonstrations and partner discussions before drawing a patent novelty conclusion.
+The technical record is intentionally prepared for public release. A public GitHub repository makes its content accessible for inspection, copying and forking subject to GitHub's terms and the repository licence. Public availability does not prove that the material is new, patentable or legally owned by the person named in the attribution.
 
-The current patent-oriented disclosure is a private working document for counsel review. No filing number or date is recorded in this repository. See [IP and Licensing](../IP_AND_LICENSING.md) and [Disclosure Log](DISCLOSURE_LOG_TEMPLATE.md).
+The repository contains no recorded patent application number, filing date, patent office or grant. This is a repository-only observation. The technical disclosure in PATENT_SPEC.md is intended to be public, not confidential.
 
-The Stage 11B outputs are distinguished in [the tracked baseline report](../engineering/physical_prototype/docs/STAGE11B_REQUANTIZED_GATE.md) and [the local retune note](../engineering/physical_prototype/docs/STAGE11B_LOCAL_RETUNE_NOTE.md).
+After the maintainer changes repository visibility, record the exact UTC time, commit SHA and URL of first public availability in [the disclosure log](DISCLOSURE_LOG_TEMPLATE.md). Review older repositories, mirrors, websites, talks, preprints, emails, demonstrations and partner discussions before reaching conclusions about novelty. See [IP and Licensing](../IP_AND_LICENSING.md) and [Patent notice](../PATENTS.md).
+
+The Stage 11B evidence is distinguished in [the tracked baseline report](../engineering/physical_prototype/docs/STAGE11B_REQUANTIZED_GATE.md) and [the local retune note](../engineering/physical_prototype/docs/STAGE11B_LOCAL_RETUNE_NOTE.md).

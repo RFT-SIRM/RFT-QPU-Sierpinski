@@ -1,11 +1,13 @@
-# RFT-QPU-Sierpinski — technical disclosure for patent-counsel review
+# RFT-QPU-Sierpinski — public technical disclosure for research and patent-counsel review
 
-**Handling:** private / confidential working document  
-**Review date:** 11 November 2026  
+**Handling:** public technical document  
+**Review date:** 12 November 2026  
 **Project author attribution:** Evgeny Zaprudnov  
-**Status:** technical disclosure draft; not a patent application, legal opinion, novelty search or grant.
+**Status:** technical disclosure; not a patent application, legal opinion, novelty search or grant.
 
-This document consolidates technical subject matter already recorded in the RFT-QPU-Sierpinski repository. It is intended to help qualified patent counsel decide whether there are concrete, patentable technical embodiments and what additional disclosure or experimental work is required. It does not assert that the mathematical construction is patentable or that any patent has been filed.
+This document is intentionally included in the public research record. It describes technical subject matter present in the repository to enable independent technical review and potential collaboration. Public release may affect patent novelty or filing options; the result depends on jurisdiction, timing and the enabling content disclosed. No patent application or grant is asserted. See [PATENTS.md](PATENTS.md) for the supplemental patent grant and status.
+
+This document consolidates technical subject matter already recorded in the RFT-QPU-Sierpinski repository. It may help qualified patent counsel assess whether there are concrete technical embodiments and what additional disclosure or experimental work is required. It does not establish that any subject matter is patentable. It does not assert that the mathematical construction is patentable or that any patent has been filed.
 
 ## 1. Invention area and technical problem
 
