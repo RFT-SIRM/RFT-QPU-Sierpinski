@@ -2,7 +2,7 @@
 
 > **A research architecture for a self-similar quantum-processing element with non-Abelian SU(2) transport.**
 
-**Project author attribution:** Evgeniy Zaprudnov  
+**Project author attribution:** Evgeny Zaprudnov  
 **Programme:** RFT-SIRM · **Engineering checkpoint:** v0.4-rc1 · **Review date:** 12 November 2026
 
 ![RFT-QPU architecture pathway](docs/assets/rft-architecture-flow.svg)
